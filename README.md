@@ -4,9 +4,8 @@ An offline browser for Switch 2 system-module NPDM metadata and the IPC
 service graph. It is a static, dependency-free research tool: no server, no
 build required to view it, and no network requests.
 
-> **Status:** early research tool. The dataset is included provisionally while
-> permission is confirmed; see [DATA-PROVENANCE.md](DATA-PROVENANCE.md). If the
-> data owner asks for removal, it will be removed.
+> **Status:** early research tool. The dataset is community-shared metadata;
+> see [DATA-PROVENANCE.md](DATA-PROVENANCE.md). Removal requests are honored.
 
 ## Views
 
@@ -49,9 +48,9 @@ NPDM metadata from the r/switch2hacks `#dev-research` forum (2026-10-24). It
 contains module names, program IDs, permission masks, service names, syscalls,
 maps, and IRQs — **not** NPDM binaries, NCAs, keys, game dumps, or save data.
 
-The data is included **provisionally** while permission is confirmed. It is not
-licensed by this project, and it will be removed if the data owner requests it.
-See [DATA-PROVENANCE.md](DATA-PROVENANCE.md).
+The dataset is community-shared metadata. This project does not assert a
+license over the underlying data, and removal requests are honored. See
+[DATA-PROVENANCE.md](DATA-PROVENANCE.md).
 
 ### Regenerating from your own dump
 
@@ -102,7 +101,7 @@ credits can be added with permission.
 
 - Code: MIT — see [LICENSE](LICENSE).
 - Documentation: CC BY 4.0 — see [LICENSE-DOCS.md](LICENSE-DOCS.md).
-- Data: no license asserted while permission is pending; see
+- Data: no license asserted over the underlying dataset; see
   [DATA-PROVENANCE.md](DATA-PROVENANCE.md).
 
 ## Disclaimer

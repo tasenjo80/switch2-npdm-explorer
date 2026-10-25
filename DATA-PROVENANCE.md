@@ -15,15 +15,14 @@ The file does **not** contain:
 - game dumps or save data
 - console-specific identifiers or personal data
 
-## Permission status
+## Status and removal policy
 
-The dataset is included **provisionally** while permission from the data owner
-and/or the community maintainers is confirmed. This project does not assert a
-license over the underlying data. The MIT license in `LICENSE` covers the
-software only.
+The dataset is community-shared research metadata. It is included with the
+community's understanding that it can be used in this research tool. This
+project does not assert a license over the underlying data; the MIT license
+covers the software only.
 
-If permission is not granted, the dataset will be removed from the repository.
-The app can still be used with a dataset generated from your own console dump.
+The app can also be used with a dataset generated from your own console dump.
 
 ## Removal requests
 

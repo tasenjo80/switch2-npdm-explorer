@@ -22,7 +22,7 @@ FAMILIES_CSV = REPO_ROOT / "exports" / "npdm-service-families.csv"
 
 SOURCE = (
     "Community NPDM metadata dump from r/switch2hacks #dev-research "
-    "(Miru, 2026-10-24), included provisionally; see DATA-PROVENANCE.md."
+    "(Miru, 2026-10-24); see DATA-PROVENANCE.md."
 )
 
 # Curated research priorities and short notes. Notes marked "Miru" come from
