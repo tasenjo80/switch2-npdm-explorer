@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Node / editors / OS
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
+.env
+
+# Local run artifacts
+runs/
+
+# Never commit console dumps, keys, or credentials
+*.npdm
+*.nca
+*.nsp
+*.xci
+*.nro
+*.nso
+prod.keys
+dev.keys
+*.keys
+settings.toml
+
+# Generated files are committed intentionally for the static demo:
+#   site/data.js
+#   exports/*.csv

@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>NPDM Explorer — Switch 2 system modules</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div>
+        <p class="eyebrow">Switch 2 research · NPDM metadata</p>
+        <h1>NPDM Explorer</h1>
+        <p class="subtitle">
+          Browse the 64 system modules and <span id="header-service-count">319</span> IPC services dumped from firmware 23.0.1.
+          Sort by attack surface, filter by service, permission, or tag, and track what you have reviewed.
+        </p>
+      </div>
+      <div class="header-actions">
+        <button id="copy-view" class="btn" type="button">Copy view link</button>
+        <button id="export-csv" class="btn" type="button">Export filtered CSV</button>
+      </div>
+    </header>
+
+    <nav class="view-tabs" role="tablist" aria-label="Views">
+      <button id="view-modules" class="view-tab active" type="button" role="tab" aria-selected="true" data-view="modules">Modules</button>
+      <button id="view-services" class="view-tab" type="button" role="tab" aria-selected="false" data-view="services">Services</button>
+      <button id="view-insights" class="view-tab" type="button" role="tab" aria-selected="false" data-view="insights">Insights</button>
+      <button id="view-compare" class="view-tab" type="button" role="tab" aria-selected="false" data-view="compare">Compare</button>
+      <button id="view-graph" class="view-tab" type="button" role="tab" aria-selected="false" data-view="graph">Graph</button>
+    </nav>
+
+    <section id="modules-view">
+    <section id="summary" class="summary" aria-label="Summary"></section>
+
+    <section class="controls" aria-label="Filters">
+      <div class="search-wrap">
+        <label for="search" class="sr-only">Search modules</label>
+        <input id="search" type="search" placeholder="Search name, program ID, service, tag, note…  (press /)" autocomplete="off">
+        <button id="clear-search" class="icon-btn" type="button" aria-label="Clear search" hidden>×</button>
+      </div>
+      <div class="filter-row">
+        <label class="check"><input id="focus-only" type="checkbox"> Focus only</label>
+        <label class="check"><input id="fs-only" type="checkbox"> Has FS permissions</label>
+        <label class="check"><input id="hosts-only" type="checkbox"> Provides services</label>
+        <label class="check"><input id="debug-only" type="checkbox"> Debug metadata</label>
+        <label class="select-label">Tag
+          <select id="tag"><option value="">All tags</option></select>
+        </label>
+        <label class="range-label">Min surface
+          <input id="min-surface" type="range" min="0" max="100" step="5" value="0">
+          <output id="min-surface-value">0</output>
+        </label>
+        <button id="reset-filters" class="btn btn-ghost" type="button">Reset</button>
+        <button id="export-status" class="btn btn-ghost" type="button">Export status</button>
+        <button id="import-status" class="btn btn-ghost" type="button">Import status</button>
+        <input id="status-file" type="file" accept="application/json,.json" hidden>
+      </div>
+      <div class="result-meta">
+        <span id="result-count"></span>
+        <span id="sort-meta"></span>
+      </div>
+    </section>
+
+    <main class="layout">
+      <section class="table-wrap" aria-label="System modules">
+        <table id="module-table">
+          <thead>
+            <tr>
+              <th><button type="button" data-sort="name">Module</button></th>
+              <th><button type="button" data-sort="programId">Program ID</button></th>
+              <th><button type="button" data-sort="surface">Surface</button></th>
+              <th><button type="button" data-sort="syscallCount">Syscalls</button></th>
+              <th><button type="button" data-sort="hostCount">Hosts</button></th>
+              <th><button type="button" data-sort="useCount">Uses</button></th>
+              <th><button type="button" data-sort="mapCount">Maps</button></th>
+              <th><button type="button" data-sort="irqCount">IRQs</button></th>
+              <th><button type="button" data-sort="fsPermissions">FS perms</button></th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="module-body"></tbody>
+        </table>
+        <div id="empty" class="empty" hidden>No modules match these filters.</div>
+      </section>
+
+      <aside id="detail" class="detail" aria-live="polite"></aside>
+    </main>
+    </section>
+
+    <section id="services-view" hidden>
+      <section id="service-summary" class="summary compact" aria-label="Service summary"></section>
+
+      <section class="controls" aria-label="Service filters">
+        <div class="search-wrap">
+          <label for="service-search" class="sr-only">Search services</label>
+          <input id="service-search" type="search" placeholder="Search service, family, host, user, note…  (press /)" autocomplete="off">
+          <button id="clear-service-search" class="icon-btn" type="button" aria-label="Clear service search" hidden>×</button>
+        </div>
+        <div class="filter-row">
+          <label class="check"><input id="service-key-only" type="checkbox"> Key services</label>
+          <label class="check"><input id="service-hosted-only" type="checkbox"> Has host in dump</label>
+          <label class="check"><input id="service-nohost-only" type="checkbox"> No host (built-in?)</label>
+          <label class="select-label">Family
+            <select id="service-family"><option value="">All families</option></select>
+          </label>
+          <label class="check"><input id="service-group" type="checkbox"> Group by family</label>
+          <label class="range-label">Min users
+            <input id="service-min-users" type="range" min="0" max="57" step="1" value="0">
+            <output id="service-min-users-value">0</output>
+          </label>
+          <button id="service-reset" class="btn btn-ghost" type="button">Reset</button>
+        </div>
+        <div class="result-meta">
+          <span id="service-result-count"></span>
+          <span id="service-sort-meta"></span>
+        </div>
+      </section>
+
+      <main class="layout">
+        <section id="service-table-wrap" class="table-wrap" aria-label="Services">
+          <table id="service-table">
+            <thead>
+              <tr>
+                <th><button type="button" data-ssort="name">Service</button></th>
+                <th><button type="button" data-ssort="family">Family</button></th>
+                <th><button type="button" data-ssort="hostCount">Hosts</button></th>
+                <th><button type="button" data-ssort="useCount">Users</button></th>
+                <th><button type="button" data-ssort="totalCount">Total</button></th>
+                <th>Key</th>
+              </tr>
+            </thead>
+            <tbody id="service-body"></tbody>
+          </table>
+          <div id="service-empty" class="empty" hidden>No services match these filters.</div>
+        </section>
+
+        <section id="family-table-wrap" class="table-wrap" aria-label="Service families" hidden>
+          <table id="family-table">
+            <thead>
+              <tr>
+                <th><button type="button" data-fsort="name">Family</button></th>
+                <th><button type="button" data-fsort="serviceCount">Services</button></th>
+                <th><button type="button" data-fsort="hostCount">Hosts</button></th>
+                <th><button type="button" data-fsort="useCount">Users</button></th>
+                <th><button type="button" data-fsort="totalCount">Total</button></th>
+                <th>Tag</th>
+              </tr>
+            </thead>
+            <tbody id="family-body"></tbody>
+          </table>
+          <div id="family-empty" class="empty" hidden>No families match these filters.</div>
+        </section>
+
+        <aside id="service-detail" class="detail" aria-live="polite"></aside>
+      </main>
+    </section>
+
+    <section id="insights-view" hidden>
+      <header class="insights-intro">
+        <p class="eyebrow">Auto-generated from the dump</p>
+        <h2>Research insights</h2>
+        <p>
+          These cards are computed from the module/service graph. They are leads for
+          sysmodule and IPC research, not conclusions about exploitability.
+        </p>
+      </header>
+      <section id="insights-grid" class="insights-grid" aria-label="Research insights"></section>
+    </section>
+
+    <section id="compare-view" hidden>
+      <header class="insights-intro">
+        <p class="eyebrow">Module diff</p>
+        <h2>Compare modules</h2>
+        <p>
+          Pick two modules to compare surface, permissions, services, syscalls,
+          maps, and IRQs. Differences are A minus B.
+        </p>
+      </header>
+      <div class="compare-controls">
+        <label class="select-label">Module A
+          <select id="compare-a"></select>
+        </label>
+        <label class="select-label">Module B
+          <select id="compare-b"></select>
+        </label>
+        <button id="compare-swap" class="btn btn-ghost" type="button">Swap</button>
+      </div>
+      <div id="compare-output" class="compare-output"></div>
+    </section>
+
+    <section id="graph-view" hidden>
+      <header class="insights-intro">
+        <p class="eyebrow">Connection graph</p>
+        <h2>Focus graph</h2>
+        <p>
+          Center on a module or service to see its direct IPC neighborhood. Caps
+          keep the graph readable; the detail views show the full lists.
+        </p>
+      </header>
+      <div class="compare-controls">
+        <label class="select-label">Mode
+          <select id="graph-mode">
+            <option value="module">Module</option>
+            <option value="service">Service</option>
+          </select>
+        </label>
+        <label class="select-label">Focus
+          <select id="graph-entity"></select>
+        </label>
+      </div>
+      <div id="graph-canvas" class="graph-wrap"></div>
+      <p class="graph-legend">
+        <span><span class="legend-box module"></span>Module</span>
+        <span><span class="legend-box service"></span>Service</span>
+        <span><span class="legend-box focus"></span>Focus / key</span>
+        <span>Click a node to open its detail view.</span>
+      </p>
+    </section>
+
+    <footer class="footer">
+      <p><strong>Source:</strong> <span id="source"></span>. Data is a community dump; verify before relying on it.</p>
+      <p>
+        Surface heuristic: 3×hosts + 1×uses + 0.5×syscalls + 0.5×maps + 0.5×min(IRQs,10)
+        + 5 if FS permissions + 5 if debug metadata, normalized to 0–100 across this dataset.
+        Focus flags are curated research priorities, not vulnerability claims.
+      </p>
+      <p>Services with no host in the dump are usually built-in sysmodules/KIPs (fs, ldr, sm, pm, spl). No external requests. Statuses are stored in your browser's localStorage. Keep research-channel material inside the server.</p>
+    </footer>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

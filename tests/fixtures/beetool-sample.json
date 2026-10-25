@@ -1,0 +1,58 @@
+{
+  "name": "ns",
+  "title_id": 288230376151711775,
+  "is_64_bit": true,
+  "address_space_type": 3,
+  "main_thread_priority": 49,
+  "default_cpu_id": 63,
+  "main_thread_stack_size": 16384,
+  "version": 1543504896,
+  "filesystem_access": {
+    "permissions": "0x000000140c215859"
+  },
+  "service_host": [
+    "ns:am2",
+    "ns:dev"
+  ],
+  "service_access": [
+    "fsp-srv",
+    "set:sys"
+  ],
+  "kernel_capabilities": [
+    {
+      "syscalls": {
+        "svc_1": 1,
+        "svc_2": 2
+      }
+    },
+    {
+      "map_page": 4096
+    },
+    {
+      "map": {
+        "address": 4096,
+        "size": 4096,
+        "is_ro": false,
+        "is_io": false
+      }
+    },
+    {
+      "irq_pair": [
+        94,
+        null
+      ]
+    },
+    {
+      "handle_table_size": 256
+    },
+    {
+      "application_type": 1
+    },
+    {
+      "debug_flags": {
+        "allow_debug": false,
+        "force_debug": true
+      }
+    }
+  ]
+}
