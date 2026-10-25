@@ -69,6 +69,15 @@ binaries, so you keep control of the raw dump.
 Do not commit NPDM/NCA/NSP/XCI files, keys, saves, or game data. See
 [CONTRIBUTING.md](CONTRIBUTING.md).
 
+## Research status
+
+Dated community notes as of 2026-10-25: [docs/status-2026-10-25.md](docs/status-2026-10-25.md).
+
+- 23.0.1 was still current; no newer firmware observed.
+- The WebKit port was still private/unreleased.
+- System-title ExeFS dumping was available via `kurumuz/ns2jb`; system ROMFS and `.kips` were not public yet.
+- No new NPDM metadata appeared, so the dataset remains the 2026-10-24 snapshot.
+
 ## Development
 
 ```powershell

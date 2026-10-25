@@ -24,6 +24,12 @@ covers the software only.
 
 The app can also be used with a dataset generated from your own console dump.
 
+## Data freshness
+
+The current dataset is the 2026-10-24 snapshot. An incremental review of the
+source Discord channels through 2026-10-25 found no newer NPDM metadata dump.
+Future updates will be added only when a new dataset with provenance appears.
+
 ## Removal requests
 
 If you are the data owner or a maintainer and want this dataset removed:
