@@ -71,11 +71,17 @@ Do not commit NPDM/NCA/NSP/XCI files, keys, saves, or game data. See
 
 ## Research status
 
-Dated community notes as of 2026-10-25: [docs/status-2026-10-25.md](docs/status-2026-10-25.md).
+Latest dated community notes (2026-10-26): [docs/status-2026-10-26.md](docs/status-2026-10-26.md).
+Earlier notes: [docs/status-2026-10-25.md](docs/status-2026-10-25.md).
 
-- 23.0.1 was still current; no newer firmware observed.
-- The WebKit port was still private/unreleased.
-- System-title ExeFS dumping was available via `kurumuz/ns2jb`; system ROMFS and `.kips` were not public yet.
+- **OunceCake** (GPLv2) is the first public game dumper: unencrypted romFS and
+  exeFS for games, updates, and DLC on a jailbroken console.
+  <https://github.com/misshexa66/OunceCake>
+- It is read-only game-file access, not system NPDM access, and it provides no
+  keys or offline NCA4 decryption.
+- 23.0.1 was still current; the WebKit port was still private/unreleased.
+- Community reports describe a browser/update "supernag" that can disable web
+  applets and may affect a future browser-based entry point.
 - No new NPDM metadata appeared, so the dataset remains the 2026-10-24 snapshot.
 
 ## Development

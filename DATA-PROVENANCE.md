@@ -27,8 +27,10 @@ The app can also be used with a dataset generated from your own console dump.
 ## Data freshness
 
 The current dataset is the 2026-10-24 snapshot. An incremental review of the
-source Discord channels through 2026-10-25 found no newer NPDM metadata dump.
-Future updates will be added only when a new dataset with provenance appears.
+source Discord channels through 2026-10-26 found no newer NPDM metadata dump.
+The first public game dumper (OunceCake) targets game romFS/exeFS, not system
+NPDM metadata. Future updates will be added only when a new dataset with
+provenance appears.
 
 ## Removal requests
 
