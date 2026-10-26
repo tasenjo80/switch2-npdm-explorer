@@ -80,8 +80,12 @@ Earlier notes: [docs/status-2026-10-25.md](docs/status-2026-10-25.md).
 - It is read-only game-file access, not system NPDM access, and it provides no
   keys or offline NCA4 decryption.
 - 23.0.1 was still current; the WebKit port was still private/unreleased.
-- Community reports describe a browser/update "supernag" that can disable web
-  applets and may affect a future browser-based entry point.
+- Community reports distinguish a recoverable browser **normal nag** on current
+  firmware from a true **supernag** on older firmware with a pending update.
+  90DNS does not prevent either; no 23.0.2 was observed.
+- A partial evening export also reported private Artemis-engine save-exploit
+  chatter, an OunceCake transfer fix, and a staff warning about fake
+  emulator/recomp malware. These are unverified community reports.
 - No new NPDM metadata appeared, so the dataset remains the 2026-10-24 snapshot.
 
 ## Development
@@ -92,7 +96,7 @@ node --check site/app.js
 ```
 
 CI runs the build, JS syntax check, and tests. GitHub Pages deploys `site/` on
-pushes to `main`.
+pushes to `main` or `master`.
 
 Repository layout:
 
