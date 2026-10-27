@@ -71,22 +71,23 @@ Do not commit NPDM/NCA/NSP/XCI files, keys, saves, or game data. See
 
 ## Research status
 
-Latest dated community notes (2026-10-26): [docs/status-2026-10-26.md](docs/status-2026-10-26.md).
-Earlier notes: [docs/status-2026-10-25.md](docs/status-2026-10-25.md).
+Latest dated community notes (2026-10-27): [docs/status-2026-10-27.md](docs/status-2026-10-27.md).
+Earlier notes: [2026-10-26](docs/status-2026-10-26.md),
+[2026-10-25](docs/status-2026-10-25.md).
 
-- **OunceCake** (GPLv2) is the first public game dumper: unencrypted romFS and
-  exeFS for games, updates, and DLC on a jailbroken console.
-  <https://github.com/misshexa66/OunceCake>
-- It is read-only game-file access, not system NPDM access, and it provides no
-  keys or offline NCA4 decryption.
-- 23.0.1 was still current; the WebKit port was still private/unreleased.
-- Community reports distinguish a recoverable browser **normal nag** on current
-  firmware from a true **supernag** on older firmware with a pending update.
-  90DNS does not prevent either; no 23.0.2 was observed.
-- A partial evening export also reported private Artemis-engine save-exploit
-  chatter, an OunceCake transfer fix, and a staff warning about fake
-  emulator/recomp malware. These are unverified community reports.
-- No new NPDM metadata appeared, so the dataset remains the 2026-10-24 snapshot.
+- **23.0.1 remained current**; no 23.0.2 was observed. Community analysis puts
+  the WebKit applet gate change at 21.0.0, with 20.5.0-and-lower consoles able
+  to use the older access method. Staff advised lower-firmware users not to
+  update.
+- **Artemis Engine** demos are being stockpiled as a possible secondary,
+  semi-untethered entry point, but the actual Switch 2 Artemis exploit/tool is
+  not public.
+- The official WebKit port remained **private/unreleased**. Independent JSC
+  crash/read-write research was reported but not released as an exploit.
+- A **UFS interposer** project is researching hardware NAND backup/restore.
+  It is high-risk and not a jailbreak.
+- **OunceCake** remains read-only game-file access, not system NPDM access.
+  No new NPDM metadata appeared, so the dataset remains the 2026-10-24 snapshot.
 
 ## Development
 
