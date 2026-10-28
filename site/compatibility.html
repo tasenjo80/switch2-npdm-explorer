@@ -115,10 +115,10 @@
             <tbody>
               <tr>
                 <th scope="row"><code>ns2jb</code></th>
-                <td>Tethered userland/fs exploit. The public package is an FS demo, not CFW or a full homebrew environment.</td>
-                <td>Full SmileBASIC 4.4.9 on Switch 2; the SmileBASIC demo is reported not to work. Ethernet, docked mode, and a cold boot are common reliability tips.</td>
+                <td>Tethered userland/fs exploit. The author reports native code as ordinary sysmodules, save backup, game modding, and MMIO access; the public package is an FS demo, not CFW or a full homebrew environment.</td>
+                <td>Full SmileBASIC 4.4.9 on Switch 2; the game was delisted from the eShop on 2026-10-22, so existing owners are the practical audience. The SmileBASIC demo is reported not to work. Ethernet, docked mode, and a cold boot are common reliability tips.</td>
                 <td><span class="badge badge-builtin">Public</span><br>but unreliable; stage 2/4 is the usual failure point.</td>
-                <td><span class="chip">Community report</span><br>2026-10-25/27</td>
+                <td><a href="https://pepsipu.com/blog/2026-10-switch2-jailbreak-ns2jb/" target="_blank" rel="noopener">Author write-up</a><br><span class="chip">Public release</span><br>2026-10-22</td>
               </tr>
               <tr>
                 <th scope="row">Artemis Engine<br><span class="muted">Seedsow save path</span></th>
@@ -188,11 +188,11 @@
               <tr>
                 <th scope="row"><code>ns2jb</code></th>
                 <td>Tethered userland/fs exploit.</td>
-                <td>Full SmileBASIC 4.4.9; see entry points.</td>
-                <td>FS demo; system-title ExeFS dumping via a fork.</td>
+                <td>Full SmileBASIC 4.4.9 (delisted 2026-10-22); see entry points.</td>
+                <td>Author reports FS access, native code as ordinary sysmodules, save backup, game modding, and MMIO; the public package is an FS demo. System-title ExeFS dumping via a fork.</td>
                 <td>System-title ROMFS or <code>.kips</code> (not public), CFW, kernel exploit, emuNAND, a full homebrew environment, or reliable execution.</td>
-                <td>2026-10-27<br><span class="chip">Community report</span></td>
-                <td><a href="https://github.com/kurumuz/ns2jb" target="_blank" rel="noopener">kurumuz/ns2jb</a></td>
+                <td>2026-10-22<br><span class="chip">Public release</span></td>
+                <td><a href="https://gitlab.com/pepsipu/ns2jb" target="_blank" rel="noopener">pepsipu/ns2jb</a><br><a href="https://pepsipu.com/blog/2026-10-switch2-jailbreak-ns2jb/" target="_blank" rel="noopener">write-up</a></td>
               </tr>
               <tr>
                 <th scope="row"><code>mac2jb</code></th>
@@ -243,6 +243,12 @@
           </table>
         </div>
         <p class="compat-note">
+          SmileBASIC 4.4.9 was delisted from the eShop on 2026-10-22
+          (<a href="https://www.nintendo.com/us/store/products/smilebasic-4-switch/" target="_blank" rel="noopener">store page</a>),
+          so ns2jb is not a practical entry point for new users without an
+          existing copy.
+        </p>
+        <p class="compat-note">
           Seedsow preparation checkpoint: the editor project targets 23.0.1 on
           both consoles while it is current. If a newer firmware appears, stop
           before updating and check the project guidance.
@@ -278,6 +284,7 @@
           <li><a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/scope.md" target="_blank" rel="noopener">Scope and provenance</a></li>
           <li><a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/methodology.md" target="_blank" rel="noopener">Methodology</a></li>
           <li><a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/diff.md" target="_blank" rel="noopener">Diffing snapshots</a></li>
+          <li><a href="https://pepsipu.com/blog/2026-10-switch2-jailbreak-ns2jb/" target="_blank" rel="noopener">ns2jb author write-up</a></li>
           <li><a href="https://github.com/DialingSpoon527/seedsow-lua-editor/releases/tag/v0.1.3" target="_blank" rel="noopener">Seedsow Lua Editor v0.1.3 release</a></li>
           <li>Status notes: <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-27.md" target="_blank" rel="noopener">2026-10-27</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-26.md" target="_blank" rel="noopener">2026-10-26</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-25.md" target="_blank" rel="noopener">2026-10-25</a></li>
         </ul>

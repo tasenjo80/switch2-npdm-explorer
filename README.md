@@ -116,6 +116,10 @@ Stable compatibility and tooling page: <https://tasenjo80.github.io/switch2-npdm
   the WebKit applet gate change at 21.0.0, with 20.5.0-and-lower consoles able
   to use the older access method. Staff advised lower-firmware users not to
   update.
+- **ns2jb** requires full SmileBASIC 4.4.9, which was delisted from the eShop
+  on 2026-10-22; existing owners are the practical audience. The author
+  reports FS access, native code as ordinary sysmodules, save backup, game
+  modding, and MMIO, but it remains tethered and is not CFW.
 - **Artemis Engine/Seedsow** is being prepared as a possible secondary entry
   point, but the actual Switch 2 Artemis exploit/tool is not public. **Seedsow
   Lua Editor v0.1.3** (2026-10-28) adds a ready-built save and a 23.0.1
