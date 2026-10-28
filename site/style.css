@@ -412,6 +412,24 @@ input[type="range"] {
   font-size: 11px;
 }
 
+.service-meta-text {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+}
+
+.export-actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.export-actions .btn {
+  padding: 5px 10px;
+  font-size: 11px;
+}
+
 .layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 400px;

@@ -163,6 +163,8 @@
     serviceReset: document.getElementById('service-reset'),
     serviceResultCount: document.getElementById('service-result-count'),
     serviceSortMeta: document.getElementById('service-sort-meta'),
+    exportServices: document.getElementById('export-services'),
+    exportFamilies: document.getElementById('export-families'),
     serviceTableWrap: document.getElementById('service-table-wrap'),
     serviceTable: document.getElementById('service-table'),
     serviceBody: document.getElementById('service-body'),
@@ -1578,7 +1580,11 @@
         ? 'Export compare JSON'
         : graph
           ? 'Export graph JSON'
-          : 'Export filtered CSV';
+          : services
+            ? state.sgroup
+              ? 'Export filtered families CSV'
+              : 'Export filtered services CSV'
+            : 'Export filtered modules CSV';
   }
 
   function switchView(view) {
@@ -2266,6 +2272,8 @@
     });
 
     els.serviceReset.addEventListener('click', resetServiceFilters);
+    els.exportServices.addEventListener('click', exportServicesCsv);
+    els.exportFamilies.addEventListener('click', exportFamiliesCsv);
 
     els.table.tHead.addEventListener('click', (event) => {
       const button = event.target.closest('button[data-sort]');
