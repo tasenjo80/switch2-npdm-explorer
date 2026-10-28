@@ -32,7 +32,6 @@ body:
       placeholder: "040000000000085D"
     validations:
       required: true
-      regex: "^(0x)?[0-9a-fA-F]{16}$"
 
   - type: input
     id: title-name
@@ -59,7 +58,7 @@ body:
     id: firmware
     attributes:
       label: Firmware
-      value: "23.0.1"
+      placeholder: "23.0.1"
     validations:
       required: true
 
