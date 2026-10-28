@@ -327,7 +327,7 @@
 
   function sortValue(module, key) {
     if (key === 'fsPermissions') {
-      return module.fsPermNonzero ? parseInt(module.fsPermissions, 16) : -1;
+      return module.fsPermNonzero ? BigInt(`0x${module.fsPermissions}`) : -1n;
     }
     return module[key];
   }
@@ -335,6 +335,11 @@
   function compareModules(a, b, key) {
     const av = sortValue(a, key);
     const bv = sortValue(b, key);
+    if (typeof av === 'bigint' || typeof bv === 'bigint') {
+      const aBig = typeof av === 'bigint' ? av : BigInt(av || 0);
+      const bBig = typeof bv === 'bigint' ? bv : BigInt(bv || 0);
+      return aBig < bBig ? -1 : aBig > bBig ? 1 : 0;
+    }
     if (typeof av === 'string' || typeof bv === 'string') {
       return String(av).localeCompare(String(bv));
     }
@@ -370,7 +375,7 @@
     const fs = module.fsPermNonzero
       ? `<span class="mono" title="${esc(module.fsPermissionsHex)}">${esc(shortFs(module.fsPermissions))}</span>`
       : '<span class="muted">\u2014</span>';
-    return `<tr data-id="${esc(module.programId)}" tabindex="0" class="module-row${selected}" aria-label="${esc(module.name)} details">
+    return `<tr data-id="${esc(module.programId)}" tabindex="0" class="module-row${selected}">
       <td class="name-cell">
         <div class="name-line"><span class="module-name">${esc(module.name)}</span>${focusBadge}</div>
         ${tagsHtml(module.tags)}
@@ -1548,7 +1553,8 @@
     state.fsOnly = params.get('fs') === '1';
     state.hostsOnly = params.get('hosts') === '1';
     state.debugOnly = params.get('debug') === '1';
-    state.tag = params.get('tag') || '';
+    const requestedTag = params.get('tag') || '';
+    state.tag = MODULES.some((module) => module.tags.includes(requestedTag)) ? requestedTag : '';
     state.minSurface = clampMinSurface(params.get('min') || 0);
     const sortKey = params.get('sort') || 'default';
     state.sortKey = ALLOWED_SORTS.has(sortKey) ? sortKey : 'default';
@@ -1668,6 +1674,11 @@
     return /[",\r\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
   }
 
+  function csvCell(value) {
+    const text = value == null ? '' : String(value);
+    return csvEscape(/^[=+\-@]/.test(text) ? `'${text}` : text);
+  }
+
   const CSV_HEADER = [
     'name', 'programId', 'focus', 'tags', 'surface', 'surfaceRaw',
     'syscalls', 'hostCount', 'useCount', 'mapCount', 'irqCount',
@@ -1692,7 +1703,7 @@
       module.note,
       module.file,
     ]
-      .map(csvEscape)
+      .map(csvCell)
       .join(',');
   }
 
@@ -1714,7 +1725,7 @@
       service.users.map((ref) => `${ref.name} (${ref.programId})`).join('; '),
       service.note,
     ]
-      .map(csvEscape)
+      .map(csvCell)
       .join(',');
   }
 
@@ -1740,7 +1751,7 @@
       family.users.map((ref) => `${ref.name} (${ref.programId})`).join('; '),
       family.note,
     ]
-      .map(csvEscape)
+      .map(csvCell)
       .join(',');
   }
 
