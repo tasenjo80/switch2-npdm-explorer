@@ -1,6 +1,6 @@
 window.NPDM_DATA = {
-  "generatedAt": "2026-10-28T02:40:18+00:00",
-  "source": "Community NPDM metadata dump from r/switch2hacks #dev-research (Miru, 2026-10-24); see DATA-PROVENANCE.md.",
+  "generatedAt": "2026-10-28T03:21:19+00:00",
+  "source": "Community NPDM metadata dump from r/switch2hacks #dev-research (community contributor, 2026-10-24); see DATA-PROVENANCE.md.",
   "snapshotDate": "2026-10-24",
   "reviewedDate": "2026-10-27",
   "moduleCount": 64,
@@ -211,7 +211,7 @@ window.NPDM_DATA = {
         "network"
       ],
       "note": "GameChat: Google WebRTC stack + CUDA/TensorRT inference + StreamPlay remote HID. 17 host services, 38 used services.",
-      "noteSource": "Miru"
+      "noteSource": "Community"
     },
     {
       "name": "ns",
@@ -1406,7 +1406,7 @@ window.NPDM_DATA = {
         "streaming"
       ],
       "note": "Local Remote Play / GameShare host: H.264+JPEG game streaming over LDN/IP.",
-      "noteSource": "Miru"
+      "noteSource": "Community"
     },
     {
       "name": "gsv3",
@@ -1576,7 +1576,7 @@ window.NPDM_DATA = {
         "gpu"
       ],
       "note": "Isolated NVIDIA OpenMAX codec server (H.264/VP9/AV1/JPEG + NVENC); host1x channel + syncpt IRQ.",
-      "noteSource": "Miru"
+      "noteSource": "Community"
     },
     {
       "name": "gsv1",
@@ -1748,7 +1748,7 @@ window.NPDM_DATA = {
         "gpu"
       ],
       "note": "Isolated NVIDIA OpenMAX codec server (H.264/VP9/AV1/JPEG + NVENC); host1x channel + syncpt IRQ.",
-      "noteSource": "Miru"
+      "noteSource": "Community"
     },
     {
       "name": "camera.autogen",
@@ -1905,7 +1905,7 @@ window.NPDM_DATA = {
         "driver"
       ],
       "note": "USB Video Class camera driver + DFU camera firmware updater; over usb:hs.",
-      "noteSource": "Miru"
+      "noteSource": "Community"
     },
     {
       "name": "nvkernel",
@@ -2070,7 +2070,7 @@ window.NPDM_DATA = {
         "gpu"
       ],
       "note": "GPU kernel-mode server split out of nvservices. 69 syscalls, GPU MMIO at 0x1707_0000+, 20 MiB carveout.",
-      "noteSource": "Miru"
+      "noteSource": "Community"
     },
     {
       "name": "gsv4",
@@ -2237,7 +2237,7 @@ window.NPDM_DATA = {
         "gpu"
       ],
       "note": "Isolated NVIDIA OpenMAX codec server (H.264/VP9/AV1/JPEG + NVENC); host1x channel + syncpt IRQ.",
-      "noteSource": "Miru"
+      "noteSource": "Community"
     },
     {
       "name": "host1x",
@@ -2399,7 +2399,7 @@ window.NPDM_DATA = {
         "gpu"
       ],
       "note": "host1x controller + NVDEC/NVENC/VIC firmware & channel manager; MMIO 0x13e0_0000, IRQ 295.",
-      "noteSource": "Miru"
+      "noteSource": "Community"
     },
     {
       "name": "sdcard",
@@ -2565,7 +2565,7 @@ window.NPDM_DATA = {
         "storage"
       ],
       "note": "microSD Express driver: SDMMC1 + PCIe/NVMe; MMIO 0x0340_0000, IRQ 94.",
-      "noteSource": "Miru"
+      "noteSource": "Community"
     },
     {
       "name": "imf",
@@ -2713,7 +2713,7 @@ window.NPDM_DATA = {
         "input"
       ],
       "note": "Input Method Framework: iWnn IME (JP / zh-CN pinyin / zh-TW bopomofo).",
-      "noteSource": "Miru"
+      "noteSource": "Community"
     },
     {
       "name": "tsec.autogen",
@@ -2876,7 +2876,7 @@ window.NPDM_DATA = {
         "security"
       ],
       "note": "TSEC co-processor server, HDCP session management; MMIO 0x1550_0000, IRQ 260.",
-      "noteSource": "Miru"
+      "noteSource": "Community"
     },
     {
       "name": "adraw",
@@ -3022,7 +3022,7 @@ window.NPDM_DATA = {
         "display"
       ],
       "note": "Applet draw layer/compositor broker for system applets and GameChat video tiles.",
-      "noteSource": "Miru"
+      "noteSource": "Community"
     },
     {
       "name": "ro",
@@ -3317,7 +3317,7 @@ window.NPDM_DATA = {
         "gpu"
       ],
       "note": "Broker/registry for the gsv* multimedia server instances.",
-      "noteSource": "Miru"
+      "noteSource": "Community"
     },
     {
       "name": "creport",
@@ -3605,7 +3605,7 @@ window.NPDM_DATA = {
         "tts"
       ],
       "note": "VoiceWare/ReadSpeaker 'VTAPI' text-to-speech engine with an SSML parser; host spch:a.",
-      "noteSource": "Miru"
+      "noteSource": "Community"
     },
     {
       "name": "eth",
@@ -3752,7 +3752,7 @@ window.NPDM_DATA = {
         "network"
       ],
       "note": "USB-Ethernet (dock) NIC driver, nn::anif; over usb:hs.",
-      "noteSource": "Miru"
+      "noteSource": "Community"
     },
     {
       "name": "cmptldr",
@@ -3893,7 +3893,7 @@ window.NPDM_DATA = {
         "loader"
       ],
       "note": "Switch 1 backwards-compat per-title binary patcher; uses ldr:cmpt.",
-      "noteSource": "Miru"
+      "noteSource": "Community"
     },
     {
       "name": "bcat",

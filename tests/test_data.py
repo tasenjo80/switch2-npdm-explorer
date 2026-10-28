@@ -68,7 +68,9 @@ class DataTests(unittest.TestCase):
         found = [
             str(path.relative_to(ROOT))
             for path in ROOT.rglob("*")
-            if path.is_file() and path.suffix.lower() in forbidden
+            if path.is_file()
+            and path.suffix.lower() in forbidden
+            and not any(part in {".git", "node_modules"} for part in path.parts)
         ]
         self.assertEqual(found, [])
 

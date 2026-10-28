@@ -2,7 +2,7 @@
 """Build the NPDM Explorer data files from the community NPDM metadata dump.
 
 Source: r/switch2hacks #dev-research, "post exploit research" thread,
-Miru's npdm-metadata.json (2026-10-24).
+community-contributed npdm-metadata.json (2026-10-24).
 """
 
 from __future__ import annotations
@@ -25,108 +25,108 @@ REVIEWED_DATE = "2026-10-27"
 
 SOURCE = (
     "Community NPDM metadata dump from r/switch2hacks #dev-research "
-    "(Miru, 2026-10-24); see DATA-PROVENANCE.md."
+    "(community contributor, 2026-10-24); see DATA-PROVENANCE.md."
 )
 
-# Curated research priorities and short notes. Notes marked "Miru" come from
-# the sysmodule map posted in the same thread; "Metadata" notes are derived
-# from the NPDM fields themselves.
+# Curated research priorities and short notes. Notes marked "Community" come
+# from the sysmodule map posted in the same thread; "Metadata" notes are
+# derived from the NPDM fields themselves.
 ANNOTATIONS = {
     "chat": {
         "focus": True,
         "tags": ["app", "network", "gpu"],
         "note": "GameChat: Google WebRTC stack + CUDA/TensorRT inference + StreamPlay remote HID. 17 host services, 38 used services.",
-        "noteSource": "Miru",
+        "noteSource": "Community",
     },
     "lrp": {
         "focus": True,
         "tags": ["app", "network", "streaming"],
         "note": "Local Remote Play / GameShare host: H.264+JPEG game streaming over LDN/IP.",
-        "noteSource": "Miru",
+        "noteSource": "Community",
     },
     "nvkernel": {
         "focus": True,
         "tags": ["gpu", "driver"],
         "note": "GPU kernel-mode server split out of nvservices. 69 syscalls, GPU MMIO at 0x1707_0000+, 20 MiB carveout.",
-        "noteSource": "Miru",
+        "noteSource": "Community",
     },
     "cmptldr": {
         "focus": True,
         "tags": ["compat", "loader"],
         "note": "Switch 1 backwards-compat per-title binary patcher; uses ldr:cmpt.",
-        "noteSource": "Miru",
+        "noteSource": "Community",
     },
     "gsvm": {
         "focus": True,
         "tags": ["codec", "gpu"],
         "note": "Broker/registry for the gsv* multimedia server instances.",
-        "noteSource": "Miru",
+        "noteSource": "Community",
     },
     "gsv1": {
         "focus": True,
         "tags": ["codec", "gpu"],
         "note": "Isolated NVIDIA OpenMAX codec server (H.264/VP9/AV1/JPEG + NVENC); host1x channel + syncpt IRQ.",
-        "noteSource": "Miru",
+        "noteSource": "Community",
     },
     "gsv3": {
         "focus": True,
         "tags": ["codec", "gpu"],
         "note": "Isolated NVIDIA OpenMAX codec server (H.264/VP9/AV1/JPEG + NVENC); host1x channel + syncpt IRQ.",
-        "noteSource": "Miru",
+        "noteSource": "Community",
     },
     "gsv4": {
         "focus": True,
         "tags": ["codec", "gpu"],
         "note": "Isolated NVIDIA OpenMAX codec server (H.264/VP9/AV1/JPEG + NVENC); host1x channel + syncpt IRQ.",
-        "noteSource": "Miru",
+        "noteSource": "Community",
     },
     "speech": {
         "focus": True,
         "tags": ["audio", "tts"],
         "note": "VoiceWare/ReadSpeaker 'VTAPI' text-to-speech engine with an SSML parser; host spch:a.",
-        "noteSource": "Miru",
+        "noteSource": "Community",
     },
     "sdcard": {
         "focus": True,
         "tags": ["storage", "driver"],
         "note": "microSD Express driver: SDMMC1 + PCIe/NVMe; MMIO 0x0340_0000, IRQ 94.",
-        "noteSource": "Miru",
+        "noteSource": "Community",
     },
     "adraw": {
         "focus": True,
         "tags": ["display", "applet"],
         "note": "Applet draw layer/compositor broker for system applets and GameChat video tiles.",
-        "noteSource": "Miru",
+        "noteSource": "Community",
     },
     "imf": {
         "focus": True,
         "tags": ["input", "ime"],
         "note": "Input Method Framework: iWnn IME (JP / zh-CN pinyin / zh-TW bopomofo).",
-        "noteSource": "Miru",
+        "noteSource": "Community",
     },
     "host1x": {
         "focus": True,
         "tags": ["gpu", "driver"],
         "note": "host1x controller + NVDEC/NVENC/VIC firmware & channel manager; MMIO 0x13e0_0000, IRQ 295.",
-        "noteSource": "Miru",
+        "noteSource": "Community",
     },
     "eth": {
         "focus": True,
         "tags": ["network", "driver"],
         "note": "USB-Ethernet (dock) NIC driver, nn::anif; over usb:hs.",
-        "noteSource": "Miru",
+        "noteSource": "Community",
     },
     "camera.autogen": {
         "focus": True,
         "tags": ["camera", "driver"],
         "note": "USB Video Class camera driver + DFU camera firmware updater; over usb:hs.",
-        "noteSource": "Miru",
+        "noteSource": "Community",
     },
     "tsec.autogen": {
         "focus": True,
         "tags": ["crypto", "security"],
         "note": "TSEC co-processor server, HDCP session management; MMIO 0x1550_0000, IRQ 260.",
-        "noteSource": "Miru",
+        "noteSource": "Community",
     },
     "ns": {
         "focus": True,

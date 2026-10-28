@@ -9,8 +9,6 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: pages
@@ -26,9 +24,11 @@ jobs:
           python-version: "3.11"
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
       - name: Build site
         run: python tools/build.py --data data/npdm-metadata.json --out site --exports exports
+      - name: Verify generated files
+        run: python tools/check_generated.py
       - name: Check app syntax
         run: node --check site/app.js
       - name: Run tests
@@ -42,6 +42,9 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
     runs-on: ubuntu-latest
     needs: build
     steps:
