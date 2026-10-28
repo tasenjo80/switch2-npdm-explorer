@@ -116,9 +116,11 @@ Stable compatibility and tooling page: <https://tasenjo80.github.io/switch2-npdm
   the WebKit applet gate change at 21.0.0, with 20.5.0-and-lower consoles able
   to use the older access method. Staff advised lower-firmware users not to
   update.
-- **Artemis Engine** demos are being stockpiled as a possible secondary,
-  semi-untethered entry point, but the actual Switch 2 Artemis exploit/tool is
-  not public.
+- **Artemis Engine/Seedsow** is being prepared as a possible secondary entry
+  point, but the actual Switch 2 Artemis exploit/tool is not public. **Seedsow
+  Lua Editor v0.1.3** (2026-10-28) adds a ready-built save and a 23.0.1
+  preparation checkpoint; nearby demo-to-demo transfer needs Nintendo
+  connectivity but not the full game or NSO.
 - The official WebKit port remained **private/unreleased**. Independent JSC
   crash/read-write research was reported but not released as an exploit.
 - A **UFS interposer** project is researching hardware NAND backup/restore.

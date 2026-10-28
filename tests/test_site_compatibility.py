@@ -49,7 +49,7 @@ class CompatibilityPageTests(unittest.TestCase):
             attrs for tag, attrs in self.tags if tag == "h2" and attrs.get("id")
         ]
         self.assertGreaterEqual(len(headings), 6)
-        self.assertIn("2026-10-28", self.text)
+        self.assertIn("2026-10-29", self.text)
         self.assertIn("Community report", self.text)
 
     def test_ids_are_unique(self):

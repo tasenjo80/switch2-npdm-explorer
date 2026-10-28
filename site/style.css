@@ -1615,6 +1615,10 @@ button.chip:hover {
   font-size: 12px;
 }
 
+.compat-section > .compat-note {
+  margin-top: 10px;
+}
+
 .compat-warning {
   border-left: 3px solid var(--danger);
   border-radius: 0 8px 8px 0;
