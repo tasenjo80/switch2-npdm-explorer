@@ -15,9 +15,9 @@ build required to view it, and no network requests.
   directions.
 - **Service families** — aggregated service names (`spl`, `pm`, `gsv`, …),
   unique hosts/users, and built-in candidates.
-- **Insights** — auto-generated cards for built-in gaps, host leverage, widest
-  clients, built-in families, and GPU/codec, filesystem, network, and input
-  clusters.
+- **Insights** — auto-generated cards for host leverage, widest clients,
+  built-in families, and GPU/codec, filesystem, network, and input clusters,
+  plus a filterable hostless/built-in gap table.
 - **Compare** — module-vs-module diff of permissions, services, syscalls, maps,
   IRQs, and thread settings.
 - **Graph** — focused IPC graph for a module or service, with clickable nodes

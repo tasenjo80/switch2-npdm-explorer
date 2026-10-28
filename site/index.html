@@ -179,6 +179,49 @@
         </p>
       </header>
       <section id="insights-grid" class="insights-grid" aria-label="Research insights"></section>
+
+      <section id="builtin-gaps" class="builtin-gaps" aria-labelledby="builtin-gaps-title">
+        <header class="builtin-gaps-head">
+          <div>
+            <p class="eyebrow">Hostless services</p>
+            <h2 id="builtin-gaps-title">Built-in gap table</h2>
+            <p class="insight-sub">
+              Services with no host in this dump. “Likely built-in” is a family-level heuristic,
+              not a confirmed classification.
+            </p>
+          </div>
+          <button id="gap-export" class="btn" type="button">Export filtered CSV</button>
+        </header>
+
+        <div class="controls gap-controls">
+          <div class="search-wrap">
+            <label for="gap-search" class="sr-only">Search hostless services</label>
+            <input id="gap-search" type="search" placeholder="Search service, family, or note…" autocomplete="off">
+          </div>
+          <label class="select-label">Family
+            <select id="gap-family"><option value="">All families</option></select>
+          </label>
+          <label class="check"><input id="gap-builtin" type="checkbox"> Likely built-in only</label>
+          <span id="gap-count" class="result-meta" aria-live="polite"></span>
+        </div>
+
+        <div class="table-wrap">
+          <table id="gap-table" class="insight-table gap-table">
+            <thead>
+              <tr>
+                <th><button type="button" data-gap-sort="service">Service</button></th>
+                <th><button type="button" data-gap-sort="family">Family</button></th>
+                <th><button type="button" data-gap-sort="users">Users</button></th>
+                <th>Key</th>
+                <th>Built-in?</th>
+                <th>Note</th>
+              </tr>
+            </thead>
+            <tbody id="gap-body"></tbody>
+          </table>
+        </div>
+        <p id="gap-empty" class="muted" hidden>No hostless services match these filters.</p>
+      </section>
     </section>
 
     <section id="compare-view" hidden>

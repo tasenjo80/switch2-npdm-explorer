@@ -50,7 +50,8 @@ Family host/user counts are **unique modules**, not sums across services.
 
 ## Insights
 
-- **Built-in gaps** — hostless services sorted by client count.
+- **Built-in gaps** — hostless services sorted by client count, with the full
+  filterable table below the cards.
 - **Host leverage** — for each module, the unique clients reached by all
   services it hosts.
 - **Widest clients** — modules sorted by number of used services.

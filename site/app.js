@@ -14,6 +14,10 @@
   const SERVICE_BY_NAME = new Map(SERVICES.map((s) => [s.name, s]));
   const FAMILIES = Array.isArray(DATA.families) ? DATA.families : [];
   const FAMILY_BY_NAME = new Map(FAMILIES.map((f) => [f.name, f]));
+  const GAP_SERVICES = SERVICES.filter((service) => service.noHost);
+  const GAP_FAMILIES = [...new Set(GAP_SERVICES.map((service) => service.family))].sort((a, b) =>
+    a.localeCompare(b),
+  );
   const STATUS_KEY = 'npdm-explorer-status-v1';
   const STATUSES = ['untriaged', 'watching', 'reviewed', 'blocked'];
   const STATUS_LABEL = {
@@ -50,6 +54,12 @@
     totalCount: 'Total',
   };
   const ALLOWED_FSORTS = new Set(['default', ...Object.keys(FSORT_LABEL)]);
+  const GAP_SORT_LABEL = {
+    service: 'Service',
+    family: 'Family',
+    users: 'Users',
+  };
+  const ALLOWED_GAP_SORTS = new Set(Object.keys(GAP_SORT_LABEL));
 
   const state = {
     view: 'modules',
@@ -77,6 +87,11 @@
     fsortKey: 'useCount',
     fsortDir: -1,
     selectedFamily: null,
+    gapQ: '',
+    gapFamily: '',
+    gapBuiltinOnly: false,
+    gapSortKey: 'users',
+    gapSortDir: -1,
     compareA: '040000000000004a',
     compareB: '040000000000001f',
     graphMode: 'module',
@@ -117,6 +132,15 @@
     servicesView: document.getElementById('services-view'),
     insightsView: document.getElementById('insights-view'),
     insightsGrid: document.getElementById('insights-grid'),
+    gapSection: document.getElementById('builtin-gaps'),
+    gapSearch: document.getElementById('gap-search'),
+    gapFamily: document.getElementById('gap-family'),
+    gapBuiltin: document.getElementById('gap-builtin'),
+    gapCount: document.getElementById('gap-count'),
+    gapTable: document.getElementById('gap-table'),
+    gapBody: document.getElementById('gap-body'),
+    gapEmpty: document.getElementById('gap-empty'),
+    gapExport: document.getElementById('gap-export'),
     compareView: document.getElementById('compare-view'),
     compareA: document.getElementById('compare-a'),
     compareB: document.getElementById('compare-b'),
@@ -561,6 +585,15 @@
       option.value = name;
       option.textContent = name;
       els.serviceFamily.append(option);
+    }
+  }
+
+  function setupGapFamilies() {
+    for (const name of GAP_FAMILIES) {
+      const option = document.createElement('option');
+      option.value = name;
+      option.textContent = name;
+      els.gapFamily.append(option);
     }
   }
 
@@ -1037,27 +1070,74 @@
     );
   }
 
+  function gapLikelyBuiltin(service) {
+    return Boolean(FAMILY_BY_NAME.get(service.family)?.likelyBuiltin);
+  }
+
+  function filteredGapServices() {
+    const query = state.gapQ.trim().toLowerCase();
+    const rows = GAP_SERVICES.filter((service) => {
+      if (state.gapBuiltinOnly && !gapLikelyBuiltin(service)) return false;
+      if (state.gapFamily && service.family !== state.gapFamily) return false;
+      if (query) {
+        const haystack = `${service.name} ${service.family} ${service.note || ''}`.toLowerCase();
+        if (!haystack.includes(query)) return false;
+      }
+      return true;
+    });
+    const key = state.gapSortKey;
+    rows.sort((a, b) => {
+      let result;
+      if (key === 'users') result = a.useCount - b.useCount;
+      else if (key === 'family') result = a.family.localeCompare(b.family);
+      else result = a.name.localeCompare(b.name);
+      return state.gapSortDir * result || a.name.localeCompare(b.name);
+    });
+    return rows;
+  }
+
+  function updateGapSortIndicators() {
+    for (const th of els.gapTable.tHead.querySelectorAll('th')) {
+      const button = th.querySelector('button[data-gap-sort]');
+      if (!button) continue;
+      th.setAttribute('aria-sort', 'none');
+      if (button.dataset.gapSort === state.gapSortKey) {
+        th.setAttribute('aria-sort', state.gapSortDir === 1 ? 'ascending' : 'descending');
+      }
+    }
+  }
+
+  function renderGapTable() {
+    const rows = filteredGapServices();
+    els.gapBody.innerHTML = rows
+      .map(
+        (service) => `<tr>
+          <td>${serviceChip(service.name)}</td>
+          <td>${familyButton(service.family)}</td>
+          <td class="num">${esc(service.useCount)}</td>
+          <td>${service.key ? '<span class="badge">KEY</span>' : '<span class="muted">—</span>'}</td>
+          <td>${gapLikelyBuiltin(service) ? '<span class="badge badge-builtin">BUILT-IN?</span>' : '<span class="muted">—</span>'}</td>
+          <td><span class="gap-note" title="${esc(service.note || '')}">${esc(service.note || '')}</span></td>
+        </tr>`,
+      )
+      .join('');
+    els.gapEmpty.hidden = rows.length !== 0;
+    els.gapCount.textContent = `Showing ${rows.length} of ${GAP_SERVICES.length} hostless services`;
+    updateGapSortIndicators();
+  }
+
+  function syncGapControls() {
+    els.gapSearch.value = state.gapQ;
+    els.gapFamily.value = state.gapFamily;
+    els.gapBuiltin.checked = state.gapBuiltinOnly;
+  }
+
   function renderInsights() {
     const insights = DATA.insights;
     if (!insights) {
       els.insightsGrid.innerHTML = '<p class="muted">No insights data in this build.</p>';
       return;
     }
-
-    const gapRows = insights.builtinGaps
-      .map(
-        (service) => `<tr>
-          <td>${serviceChip(service.name)}</td>
-          <td class="num">${esc(service.useCount)}</td>
-          <td>${familyButton(service.family)}</td>
-        </tr>`,
-      )
-      .join('');
-    const gapTable = `<table class="insight-table">
-      <colgroup><col style="width:52%"><col style="width:22%"><col style="width:26%"></colgroup>
-      <thead><tr><th>Service</th><th>Users</th><th>Family</th></tr></thead>
-      <tbody>${gapRows}</tbody>
-    </table>`;
 
     const leverageRows = insights.hostLeverage
       .map(
@@ -1109,11 +1189,6 @@
 
     const cards = [
       insightCard(
-        'Built-in gaps',
-        'Services with no host in this dump, ranked by client count. These are candidate built-in KIP surfaces.',
-        gapTable,
-      ),
-      insightCard(
         'Host leverage',
         'Modules whose hosted services reach the most unique client modules.',
         leverageTable,
@@ -1151,6 +1226,7 @@
     ];
 
     els.insightsGrid.innerHTML = cards.join('');
+    renderGapTable();
   }
 
   function compareCard(module) {
@@ -1581,6 +1657,14 @@
     const selectedFamily = params.get('sfam');
     state.selectedFamily = selectedFamily && FAMILY_BY_NAME.has(selectedFamily) ? selectedFamily : null;
 
+    state.gapQ = params.get('gq') || '';
+    const gapFamily = params.get('gfam') || '';
+    state.gapFamily = GAP_FAMILIES.includes(gapFamily) ? gapFamily : '';
+    state.gapBuiltinOnly = params.get('gbuiltin') === '1';
+    const gapSortKey = params.get('gsort') || 'users';
+    state.gapSortKey = ALLOWED_GAP_SORTS.has(gapSortKey) ? gapSortKey : 'users';
+    state.gapSortDir = params.get('gdir') === '1' ? 1 : -1;
+
     const compareA = params.get('ca');
     const compareB = params.get('cb');
     if (compareA && BY_ID.has(compareA)) state.compareA = compareA;
@@ -1624,6 +1708,13 @@
     }
     if (state.selectedService) params.set('svc', state.selectedService);
     if (state.selectedFamily) params.set('sfam', state.selectedFamily);
+    if (state.gapQ) params.set('gq', state.gapQ);
+    if (state.gapFamily) params.set('gfam', state.gapFamily);
+    if (state.gapBuiltinOnly) params.set('gbuiltin', '1');
+    if (state.gapSortKey !== 'users' || state.gapSortDir !== -1) {
+      params.set('gsort', state.gapSortKey);
+      params.set('gdir', String(state.gapSortDir));
+    }
     if (state.view === 'compare') {
       params.set('ca', state.compareA);
       params.set('cb', state.compareB);
@@ -1664,6 +1755,7 @@
     els.serviceMinUsersValue.textContent = String(state.sminUsers);
     els.compareA.value = state.compareA;
     els.compareB.value = state.compareB;
+    syncGapControls();
     populateGraphEntities();
   }
 
@@ -1750,6 +1842,21 @@
       family.hosts.map((ref) => `${ref.name} (${ref.programId})`).join('; '),
       family.users.map((ref) => `${ref.name} (${ref.programId})`).join('; '),
       family.note,
+    ]
+      .map(csvCell)
+      .join(',');
+  }
+
+  const GAP_CSV_HEADER = ['service', 'family', 'users', 'key', 'likelyBuiltin', 'note'];
+
+  function gapCsvRow(service) {
+    return [
+      service.name,
+      service.family,
+      service.useCount,
+      service.key ? 'yes' : 'no',
+      gapLikelyBuiltin(service) ? 'yes' : 'no',
+      service.note,
     ]
       .map(csvCell)
       .join(',');
@@ -1850,6 +1957,18 @@
     const anchor = document.createElement('a');
     anchor.href = url;
     anchor.download = 'npdm-service-families-filtered.csv';
+    anchor.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  function exportGapCsv() {
+    const rows = filteredGapServices();
+    const csv = '\ufeff' + [GAP_CSV_HEADER.join(','), ...rows.map(gapCsvRow)].join('\r\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = 'npdm-hostless-services.csv';
     anchor.click();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
@@ -2227,6 +2346,46 @@
       selectFamily(row.dataset.family);
     });
 
+    els.gapSearch.addEventListener('input', () => {
+      state.gapQ = els.gapSearch.value;
+      render();
+    });
+
+    els.gapFamily.addEventListener('change', () => {
+      state.gapFamily = els.gapFamily.value;
+      render();
+    });
+
+    els.gapBuiltin.addEventListener('change', () => {
+      state.gapBuiltinOnly = els.gapBuiltin.checked;
+      render();
+    });
+
+    els.gapExport.addEventListener('click', exportGapCsv);
+
+    els.gapTable.tHead.addEventListener('click', (event) => {
+      const button = event.target.closest('button[data-gap-sort]');
+      if (!button) return;
+      const key = button.dataset.gapSort;
+      if (state.gapSortKey === key) {
+        state.gapSortDir *= -1;
+      } else {
+        state.gapSortKey = key;
+        state.gapSortDir = key === 'service' || key === 'family' ? 1 : -1;
+      }
+      render();
+    });
+
+    els.gapSection.addEventListener('click', (event) => {
+      const serviceButton = event.target.closest('[data-service]');
+      if (serviceButton) {
+        openService(serviceButton.dataset.service);
+        return;
+      }
+      const familyLink = event.target.closest('[data-family-open]');
+      if (familyLink) openFamily(familyLink.dataset.familyOpen);
+    });
+
     els.insightsGrid.addEventListener('click', (event) => {
       const serviceButton = event.target.closest('[data-service]');
       if (serviceButton) {
@@ -2393,6 +2552,7 @@
   function init() {
     setupTags();
     setupFamilies();
+    setupGapFamilies();
     setupCompare();
     setupGraph();
     renderSummary();
@@ -2406,11 +2566,11 @@
     els.source.textContent = DATA.source;
     const scopeLabel = document.getElementById('dataset-scope');
     if (scopeLabel) {
-      scopeLabel.textContent = `${formatNumber(MODULES.length)} full SystemPrograms · NPDM metadata only`;
+      scopeLabel.textContent = `${formatNumber(MODULES.length)} full SystemPrograms Â· NPDM metadata only`;
     }
     const freshnessLabel = document.getElementById('dataset-freshness');
     if (freshnessLabel && DATA.snapshotDate) {
-      freshnessLabel.textContent = `${DATA.snapshotDate} · reviewed ${DATA.reviewedDate || 'unknown'}`;
+      freshnessLabel.textContent = `${DATA.snapshotDate} Â· reviewed ${DATA.reviewedDate || 'unknown'}`;
     }
   }
 
