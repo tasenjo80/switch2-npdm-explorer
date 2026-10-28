@@ -36,6 +36,26 @@ class BeetoolImportTests(unittest.TestCase):
     def test_missing_title_id_is_skipped(self):
         self.assertIsNone(import_beetool.map_npdm({"name": "no-id"}))
 
+    def test_invalid_title_ids_are_skipped(self):
+        for title_id in ("zzzz", "040000000000001f00", "", None):
+            with self.subTest(title_id=title_id):
+                self.assertIsNone(import_beetool.map_npdm({"title_id": title_id}))
+
+    def test_merge_preserves_fields_beetool_does_not_emit(self):
+        raw = json.loads(FIXTURE.read_text(encoding="utf-8"))
+        imported = import_beetool.map_npdm(raw)
+        existing = {
+            **imported,
+            "systemResourceSize": 4096,
+            "acidHostsServices": ["acid:example"],
+            "futureField": "keep",
+        }
+        merged = import_beetool.merge_modules([existing], [imported])
+        self.assertEqual(len(merged), 1)
+        self.assertEqual(merged[0]["systemResourceSize"], 4096)
+        self.assertEqual(merged[0]["acidHostsServices"], ["acid:example"])
+        self.assertEqual(merged[0]["futureField"], "keep")
+
 
 if __name__ == "__main__":
     unittest.main()

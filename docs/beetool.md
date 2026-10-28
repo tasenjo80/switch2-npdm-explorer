@@ -31,10 +31,13 @@ commit keys or NPDM binaries to this repository.
 ```bash
 python tools/import_beetool.py \
   --input /path/to/beetool-json \
-  --output data/npdm-metadata.json
+  --output data/npdm-metadata.json \
+  --merge
 ```
 
-`--input` accepts JSON files or directories. The importer maps:
+`--input` accepts JSON files or directories. `--merge` preserves titles and
+fields that beetool does not emit; `--force` replaces the output instead. The
+importer maps:
 
 | Schema field | beetool JSON |
 | --- | --- |

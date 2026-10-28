@@ -71,6 +71,17 @@ A merge importer is included at `tools/import_beetool.py`; it maps beetool’s
 JSON fields to the schema used here. It accepts beetool JSON files, not NPDM
 binaries, so you keep control of the raw dump.
 
+```powershell
+python tools/import_beetool.py `
+  --input dumps/ `
+  --output data/npdm-metadata.json `
+  --merge
+```
+
+Use `--merge` when adding titles to an existing dataset; it preserves fields
+that beetool does not emit. Use `--force` only when you intentionally want to
+replace the existing dataset.
+
 Do not commit NPDM/NCA/NSP/XCI files, keys, saves, or game data. See
 [CONTRIBUTING.md](CONTRIBUTING.md).
 
@@ -105,19 +116,20 @@ post covers scope, current status, and posting rules.
 ## Development
 
 ```powershell
+python tools/check_generated.py
 python -m unittest discover -s tests -v
 node --check site/app.js
 ```
 
-CI runs the build, JS syntax check, and tests. GitHub Pages deploys `site/` on
-pushes to `main` or `master`.
+CI runs the generated-file check, build, JS syntax check, and tests. GitHub
+Pages deploys `site/` on pushes to `main` or `master`.
 
 Repository layout:
 
 ```text
 site/        static app + generated data.js
 data/        source metadata JSON + schema
-tools/       build + beetool importer
+tools/       build + generated-file check + beetool importer
 tests/       data, importer, and policy checks
 docs/        methodology and parsing notes
 exports/     generated CSV exports
