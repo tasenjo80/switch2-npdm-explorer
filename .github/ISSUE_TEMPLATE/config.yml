@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Ask a question or discuss the scene
+    url: https://github.com/tasenjo80/switch2-npdm-explorer/discussions
+    about: General questions, ideas, and research discussion.
+  - name: Read the dataset scope
+    url: https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/scope.md
+    about: What is included, what is excluded, and why SystemDataArchives are out of scope.
+  - name: Report a security or data-removal issue
+    url: https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/SECURITY.md
+    about: Read the private reporting and removal policy before posting.

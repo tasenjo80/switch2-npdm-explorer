@@ -5,8 +5,8 @@
 Use GitHub’s private vulnerability reporting for security issues. Do not open a
 public issue with credentials, keys, private data, or a working exploit.
 
-For a **data removal request**, open an issue titled “Data removal request” or
-contact the repository owner through GitHub. See
+For a **data removal request**, contact the repository owner through GitHub.
+Do not include personal data in a public issue. See
 [DATA-PROVENANCE.md](DATA-PROVENANCE.md).
 
 ## Scope
@@ -17,4 +17,4 @@ network requests at runtime.
 
 ## Supported versions
 
-Only the current `main` branch is supported.
+Only the current `master` branch is supported.

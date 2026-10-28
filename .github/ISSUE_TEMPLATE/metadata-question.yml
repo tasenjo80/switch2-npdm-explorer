@@ -1,0 +1,102 @@
+name: Metadata question or correction
+description: Ask about a title, NPDM field, service, or dataset scope.
+title: "[Metadata] "
+labels:
+  - question
+  - metadata
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This repository covers installed full `SystemProgram` NPDM metadata only.
+        Do not post NPDM/NCA/NSP/XCI/NRO/NSO files, keys, saves, game data, or
+        private Discord exports.
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind
+      options:
+        - Question
+        - Correction
+        - Scope clarification
+        - Missing title
+    validations:
+      required: true
+
+  - type: input
+    id: title-id
+    attributes:
+      label: Title ID
+      description: 16 hex characters, optionally prefixed with 0x.
+      placeholder: "040000000000085D"
+    validations:
+      required: true
+      regex: "^(0x)?[0-9a-fA-F]{16}$"
+
+  - type: input
+    id: title-name
+    attributes:
+      label: Title name
+      placeholder: "BrowserCoreDll"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: title-type
+    attributes:
+      label: Title type
+      options:
+        - SystemProgram
+        - SystemDataArchive
+        - Application
+        - Game update or DLC
+        - Unknown
+    validations:
+      required: true
+
+  - type: input
+    id: firmware
+    attributes:
+      label: Firmware
+      value: "23.0.1"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: installation
+    attributes:
+      label: Installation state
+      options:
+        - Installed full
+        - Installed update
+        - Not installed
+        - Unknown
+    validations:
+      required: true
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Question or correction
+      description: What are you trying to determine or correct?
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence or public source
+      description: Link a SwitchBrew row, public source, or describe the dump provenance. Do not link private Discord exports.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: Confirmations
+      options:
+        - label: I have not included NPDM/NCA/NSP/XCI/NRO/NSO files, keys, saves, or game data.
+          required: true
+        - label: I understand the explorer covers installed full SystemProgram NPDM metadata only.
+          required: true

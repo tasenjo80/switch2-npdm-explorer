@@ -1,0 +1,77 @@
+name: Viewer bug
+description: Report a problem with the interface, exports, or URL state.
+title: "[Viewer] "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not attach screenshots of private research channels, game data, or
+        console identifiers. A text description is enough.
+
+  - type: dropdown
+    id: view
+    attributes:
+      label: View
+      options:
+        - Modules
+        - Services
+        - Service families
+        - Insights
+        - Compare
+        - Graph
+        - Export
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Include the visible error or incorrect result.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open ...
+        2. Filter ...
+        3. Click ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Browser and OS
+      placeholder: "Firefox 145 on Windows 11"
+    validations:
+      required: true
+
+  - type: input
+    id: url
+    attributes:
+      label: URL hash
+      description: Optional. The part after # in the address bar.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: Confirmations
+      options:
+        - label: I have not included private research data, credentials, or console identifiers.
+          required: true

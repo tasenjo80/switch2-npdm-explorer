@@ -40,8 +40,8 @@ provenance appears.
 
 If you are the data owner or a maintainer and want this dataset removed:
 
-1. Open an issue titled **“Data removal request”** in this repository, or
-   contact the repository owner through GitHub.
+1. Contact the repository owner through GitHub. Do not include personal data
+   in a public issue.
 2. The data will be removed from `data/npdm-metadata.json`, `site/data.js`,
    `exports/`, and any release assets.
 3. If requested, the dataset will also be removed from repository history.
