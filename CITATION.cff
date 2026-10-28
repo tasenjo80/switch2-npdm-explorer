@@ -9,7 +9,7 @@ abstract: >-
   affiliated with Nintendo.
 authors:
   - name: "NPDM Explorer contributors"
-version: "0.1.5"
+version: "0.2.0"
 date-released: "2026-10-28"
 repository-code: "https://github.com/tasenjo80/switch2-npdm-explorer"
 url: "https://tasenjo80.github.io/switch2-npdm-explorer/"

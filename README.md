@@ -149,6 +149,7 @@ tools/       build + validation + generated-file check + beetool importer
 tests/       data, importer, policy, and accessibility checks
 docs/        methodology and parsing notes
 exports/     generated CSV exports
+assets/      social preview source + PNG
 ```
 
 ## Credits

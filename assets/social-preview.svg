@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-label="NPDM Explorer — Switch 2 system-module NPDM metadata and IPC service graph">
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0b121a"/>
+      <stop offset="1" stop-color="#070b10"/>
+    </linearGradient>
+    <radialGradient id="cyan-glow" cx="12%" cy="0%" r="72%">
+      <stop offset="0" stop-color="#56c8ff" stop-opacity="0.20"/>
+      <stop offset="1" stop-color="#56c8ff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="green-glow" cx="98%" cy="8%" r="58%">
+      <stop offset="0" stop-color="#7ee787" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#7ee787" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" fill="none" stroke="#315068" stroke-opacity="0.22" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="accent-rule" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#56c8ff"/>
+      <stop offset="1" stop-color="#7ee787"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1280" height="640" fill="url(#background)"/>
+  <rect width="1280" height="640" fill="url(#cyan-glow)"/>
+  <rect width="1280" height="640" fill="url(#green-glow)"/>
+  <rect width="1280" height="640" fill="url(#grid)"/>
+
+  <g fill="none" stroke="#315068" stroke-width="2" opacity="0.78">
+    <path d="M948 194L1054 276L1190 188"/>
+    <path d="M948 194L908 344L1018 434"/>
+    <path d="M1054 276L1018 434L1168 392"/>
+    <path d="M1190 188L1168 392"/>
+    <path d="M1018 434L908 344"/>
+    <path d="M1054 276L1168 392"/>
+  </g>
+
+  <g>
+    <circle cx="948" cy="194" r="16" fill="#101822" stroke="#56c8ff" stroke-width="3"/>
+    <circle cx="1054" cy="276" r="24" fill="#101822" stroke="#7ee787" stroke-width="3"/>
+    <circle cx="1190" cy="188" r="12" fill="#101822" stroke="#315068" stroke-width="3"/>
+    <circle cx="908" cy="344" r="12" fill="#101822" stroke="#315068" stroke-width="3"/>
+    <circle cx="1018" cy="434" r="14" fill="#101822" stroke="#56c8ff" stroke-width="3"/>
+    <circle cx="1168" cy="392" r="18" fill="#101822" stroke="#56c8ff" stroke-width="3"/>
+    <circle cx="1054" cy="276" r="7" fill="#7ee787"/>
+  </g>
+
+  <g font-family="Consolas, monospace" font-size="17" font-weight="700" letter-spacing="3.6" fill="#56c8ff">
+    <text x="88" y="164">SWITCH 2 / SYSTEM MODULES</text>
+  </g>
+
+  <g font-family="Segoe UI, Arial, sans-serif" font-weight="700" font-size="106" letter-spacing="-4">
+    <text x="84" y="296" fill="#56c8ff">NPDM</text>
+    <text x="420" y="296" fill="#e6edf3">Explorer</text>
+  </g>
+
+  <rect x="88" y="330" width="112" height="4" rx="2" fill="url(#accent-rule)"/>
+
+  <g font-family="Segoe UI, Arial, sans-serif" fill="#e6edf3">
+    <text x="88" y="398" font-size="34" font-weight="600">NPDM metadata &amp; IPC service graph</text>
+    <text x="88" y="442" font-size="28" fill="#8b9aab">for Switch 2 system modules</text>
+  </g>
+
+  <g font-family="Consolas, monospace" font-size="16" letter-spacing="2.4" fill="#8b9aab">
+    <text x="88" y="548">STATIC · OFFLINE · NO FIRMWARE OR GAME DATA</text>
+  </g>
+
+  <g font-family="Consolas, monospace" font-size="15" letter-spacing="2.2" fill="#56c8ff">
+    <text x="1192" y="548" text-anchor="end">INDEPENDENT RESEARCH</text>
+  </g>
+</svg>
