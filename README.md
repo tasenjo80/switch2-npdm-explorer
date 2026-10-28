@@ -94,6 +94,14 @@ Earlier notes: [2026-10-26](docs/status-2026-10-26.md),
 - **OunceCake** remains read-only game-file access, not system NPDM access.
   No new NPDM metadata appeared, so the dataset remains the 2026-10-24 snapshot.
 
+## Community
+
+Use [GitHub Discussions](https://github.com/tasenjo80/switch2-npdm-explorer/discussions)
+for general help, research notes, tools, and ideas. Open an issue for viewer
+bugs or metadata questions. The pinned
+[Start here](https://github.com/tasenjo80/switch2-npdm-explorer/discussions/2)
+post covers scope, current status, and posting rules.
+
 ## Development
 
 ```powershell
