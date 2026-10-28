@@ -25,6 +25,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
+      - name: Validate dataset
+        run: python tools/validate_data.py data/npdm-metadata.json
       - name: Build site
         run: python tools/build.py --data data/npdm-metadata.json --out site --exports exports
       - name: Verify generated files

@@ -13,6 +13,11 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
+try:
+    from validate_data import validate_modules
+except ImportError:  # allow `python -m tools.build`
+    from tools.validate_data import validate_modules
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SRC = REPO_ROOT / "data" / "npdm-metadata.json"
 DATA_JS = REPO_ROOT / "site" / "data.js"
@@ -742,8 +747,9 @@ def main() -> None:
     FAMILIES_CSV = exports_dir / "npdm-service-families.csv"
 
     raw = json.loads(SRC.read_text(encoding="utf-8"))
-    if not isinstance(raw, list) or not raw:
-        raise ValueError("expected a non-empty JSON array")
+    errors = validate_modules(raw)
+    if errors:
+        raise ValueError("invalid NPDM metadata:\n" + "\n".join(errors))
 
     # Two-pass so surface is normalized against the dataset maximum.
     max_surface_raw = 0.0
@@ -794,4 +800,7 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (OSError, ValueError) as exc:
+        raise SystemExit(str(exc)) from exc

@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/tasenjo80/switch2-npdm-explorer/raw/master/data/schema.json",
+  "title": "NPDM Explorer dataset",
+  "description": "Community NPDM metadata for installed full Switch 2 SystemProgram titles. This schema describes metadata only; it does not permit NPDM binaries, keys, games, or save data.",
+  "type": "array",
+  "minItems": 1,
+  "items": {
+    "$ref": "#/$defs/module"
+  },
+  "$defs": {
+    "module": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "file",
+        "name",
+        "programId",
+        "is64Bit",
+        "addressSpace",
+        "mainThreadPriority",
+        "mainThreadCore",
+        "mainThreadStackSize",
+        "systemResourceSize",
+        "version",
+        "productCode",
+        "fsPermissions",
+        "hostsServices",
+        "usesServices",
+        "acidHostsServices",
+        "kernel"
+      ],
+      "properties": {
+        "file": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "programId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{16}$"
+        },
+        "is64Bit": {
+          "type": "boolean"
+        },
+        "addressSpace": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "mainThreadPriority": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "mainThreadCore": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "mainThreadStackSize": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "systemResourceSize": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "productCode": {
+          "type": "string"
+        },
+        "fsPermissions": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{16}$"
+        },
+        "hostsServices": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "usesServices": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "acidHostsServices": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "kernel": {
+          "$ref": "#/$defs/kernel"
+        }
+      }
+    },
+    "kernel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "syscalls",
+        "maps",
+        "irqs",
+        "appletType",
+        "handleTable",
+        "debug"
+      ],
+      "properties": {
+        "syscalls": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "maps": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "irqs": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "appletType": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "handleTable": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "debug": {
+          "type": [
+            "object",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

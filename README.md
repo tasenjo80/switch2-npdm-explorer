@@ -57,6 +57,9 @@ metadata only. System data archives such as `BrowserDll` (`0x803`) and
 `BrowserCoreDll` (`0x85D`) are outside its scope; see
 [docs/scope.md](docs/scope.md).
 
+The source shape is documented in [data/schema.json](data/schema.json) and
+enforced by `tools/validate_data.py`.
+
 ### Regenerating from your own dump
 
 The metadata schema is designed to be compatible with
@@ -116,12 +119,14 @@ post covers scope, current status, and posting rules.
 ## Development
 
 ```powershell
+python tools/validate_data.py data/npdm-metadata.json
 python tools/check_generated.py
 python -m unittest discover -s tests -v
 node --check site/app.js
 ```
 
-CI runs the generated-file check, build, JS syntax check, and tests. GitHub
+CI runs dataset validation, the generated-file check, build, JS syntax check,
+and tests. GitHub
 Pages deploys `site/` on pushes to `main` or `master`.
 
 Repository layout:
