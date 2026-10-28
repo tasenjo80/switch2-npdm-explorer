@@ -3,6 +3,10 @@
 This project is an NPDM metadata explorer, not a general system-title browser,
 game dumper, key archive, or exploit guide.
 
+For firmware, entry-point, and community-tool status, see the
+[compatibility page](https://tasenjo80.github.io/switch2-npdm-explorer/compatibility.html).
+This document only covers dataset scope.
+
 ## Included
 
 - **64 installed full `SystemProgram` titles** from the 2026-10-24 community

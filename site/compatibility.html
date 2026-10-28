@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Switch 2 firmware, entry-point, and community tool compatibility status from public sources.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Compatibility and tooling &mdash; NPDM Explorer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div>
+        <p class="eyebrow">Switch 2 research &middot; compatibility</p>
+        <h1>Compatibility and tooling</h1>
+        <p class="subtitle">
+          What is public, what is private, and what each community tool can
+          actually do. This is sourced status, not a support promise or a
+          vulnerability claim.
+        </p>
+      </div>
+      <div class="header-actions">
+        <a class="btn" href="index.html">Open explorer</a>
+        <a class="btn btn-ghost" href="https://github.com/tasenjo80/switch2-npdm-explorer/discussions" target="_blank" rel="noopener">Discussions</a>
+      </div>
+    </header>
+
+    <div class="dataset-meta" aria-label="Review status">
+      <span class="dataset-badge"><strong>Reviewed</strong> 2026-10-28</span>
+      <span class="dataset-badge"><strong>Notes</strong> through 2026-10-27</span>
+      <a class="dataset-link" href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-27.md" target="_blank" rel="noopener">Latest status note</a>
+      <a class="dataset-link" href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/scope.md" target="_blank" rel="noopener">Scope &amp; provenance</a>
+      <a class="dataset-link" href="index.html">NPDM data</a>
+    </div>
+
+    <main>
+      <section class="compat-section" aria-labelledby="legend-heading">
+        <h2 id="legend-heading">How to read this page</h2>
+        <p>
+          Each claim is labelled by source. Volatile step-by-step guidance stays
+          in the latest dated status note; this page tracks capabilities, not
+          instructions.
+        </p>
+        <div class="compat-legend">
+          <span class="badge badge-builtin">Public</span>
+          <span class="badge">Private</span>
+          <span class="chip">Community report</span>
+          <span class="badge">No public path</span>
+          <span class="chip">Not re-tested</span>
+        </div>
+        <p class="compat-note">
+          <strong>Public</strong> means a source or binary is publicly available.
+          <strong>Private</strong> means work exists but is not released.
+          <strong>Community report</strong> means public channels reported it;
+          it is not independently verified here.
+          <strong>No public path</strong> means no public method is known.
+          <strong>Not re-tested</strong> means upstream documentation was used
+          but the tool was not re-run for this page.
+        </p>
+      </section>
+
+      <section class="compat-section" aria-labelledby="firmware-heading">
+        <h2 id="firmware-heading">Firmware and browser gate</h2>
+        <div class="table-wrap" role="region" aria-label="Firmware and browser gate" tabindex="0">
+          <table class="compat-table">
+            <caption>WebKit applet gate by firmware range.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Firmware</th>
+                <th scope="col">WebKit applet gate</th>
+                <th scope="col">Notes</th>
+                <th scope="col">Basis</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">20.5.0 and lower</th>
+                <td>Older access method; can avoid the newer lockout (community analysis).</td>
+                <td>Community staff advised lower-firmware consoles not to update; staying offline and/or using 90DNS was recommended.</td>
+                <td><span class="chip">Community report</span><br>2026-10-27</td>
+              </tr>
+              <tr>
+                <th scope="row">21.0.0&ndash;23.0.1</th>
+                <td>The applet can be locked after roughly 12&ndash;24 hours without a successful BVC check, or when a system update is available. BVC is the check named in community notes; its exact mechanism and interval are unconfirmed.</td>
+                <td>90DNS does not satisfy the BVC check. A normal nag can often be cleared by briefly going online, opening eShop, restarting, then restoring 90DNS. A true supernag on older firmware with a pending update cannot be cleared without updating.</td>
+                <td><span class="chip">Community report</span><br>2026-10-26/27</td>
+              </tr>
+              <tr>
+                <th scope="row">23.0.1 (current)</th>
+                <td>Same as 21.0.0 and newer.</td>
+                <td>Current as of 2026-10-28; no 23.0.2 was observed.</td>
+                <td><span class="chip">Community report</span><br>2026-10-27</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="compat-section" aria-labelledby="entry-points-heading">
+        <h2 id="entry-points-heading">Entry points</h2>
+        <div class="table-wrap" role="region" aria-label="Entry points" tabindex="0">
+          <table class="compat-table">
+            <caption>Public, private, and unavailable entry-point paths.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Entry point</th>
+                <th scope="col">What it is</th>
+                <th scope="col">Requirements</th>
+                <th scope="col">Status</th>
+                <th scope="col">Basis</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row"><code>ns2jb</code></th>
+                <td>Tethered userland/fs exploit. The public package is an FS demo, not CFW or a full homebrew environment.</td>
+                <td>Full SmileBASIC 4.4.9 on Switch 2; the SmileBASIC demo is reported not to work. Ethernet, docked mode, and a cold boot are common reliability tips.</td>
+                <td><span class="badge badge-builtin">Public</span><br>but unreliable; stage 2/4 is the usual failure point.</td>
+                <td><span class="chip">Community report</span><br>2026-10-25/27</td>
+              </tr>
+              <tr>
+                <th scope="row">Artemis Engine<br><span class="muted">Seedsow save path</span></th>
+                <td>Save-file/engine path being prepared as a possible secondary entry point.</td>
+                <td>A modded, unbanned Switch 1 to create and transfer an NSO save; the Seedsow Lullaby demo.</td>
+                <td><span class="badge">No public path</span><br>The actual Artemis entry is not public; demos can be delisted from eShop.</td>
+                <td><span class="chip">Community report</span><br>2026-10-27</td>
+              </tr>
+              <tr>
+                <th scope="row">WebKit applet</th>
+                <td>Browser-based userland path. The applet's JavaScriptCore is reported to be around Safari/WebKit 15.4 (2022).</td>
+                <td>A working WebKit/JSC exploit chain; the official port is private.</td>
+                <td><span class="badge">Private</span><br>unreleased. Independent JSC research was reported, but no public exploit.</td>
+                <td><span class="chip">Community report</span><br>2026-10-25/27</td>
+              </tr>
+              <tr>
+                <th scope="row">UFS interposer</th>
+                <td>Hardware modification to make the soldered NAND detachable for backup and restore.</td>
+                <td>Microsoldering and high-risk hardware work.</td>
+                <td><span class="badge badge-builtin">Public research</span><br>not an entry point. Recovery research only; no confirmed, widely tested solution.</td>
+                <td><span class="chip">Community report</span><br>2026-10-27</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="compat-section" aria-labelledby="tools-heading">
+        <h2 id="tools-heading">Tools</h2>
+        <p>
+          Links identify public projects; they are not endorsements. A tool can
+          be useful and still be unsafe or incomplete.
+        </p>
+        <div class="table-wrap" role="region" aria-label="Community tools" tabindex="0">
+          <table class="compat-table">
+            <caption>Community tool capabilities and limits.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Tool</th>
+                <th scope="col">Purpose</th>
+                <th scope="col">Requirements</th>
+                <th scope="col">Can do</th>
+                <th scope="col">Cannot do</th>
+                <th scope="col">Last verified</th>
+                <th scope="col">Source</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row"><code>beetool</code></th>
+                <td>hactool fork with Switch 2 ("Ounce") and NPDM JSON support.</td>
+                <td>A decrypted <code>main.npdm</code> from hardware you own.</td>
+                <td><code>beetool --intype=npdm --json=main.json main.npdm</code>; this repo's importer accepts its JSON.</td>
+                <td>Not a complete NCA4 solution; does not supply keys or game data.</td>
+                <td><span class="chip">Not re-tested</span><br>documented upstream.</td>
+                <td><a href="https://github.com/alula/beetool" target="_blank" rel="noopener">alula/beetool</a></td>
+              </tr>
+              <tr>
+                <th scope="row"><code>OunceCake</code></th>
+                <td>First public Switch 2 game dumper (GPLv2).</td>
+                <td>Jailbroken console, compatible <code>ns2jb</code> fork with persistent RPC, and an FTP client.</td>
+                <td>Read-only unencrypted romFS/exeFS for games, updates, and DLC; internal storage and game cards confirmed at release.</td>
+                <td>System titles/applets, save data, keys, and offline decryption; NSO Classics fail for ticket/entitlement reasons.</td>
+                <td>2026-10-26<br><span class="chip">Community report</span></td>
+                <td><a href="https://github.com/misshexa66/OunceCake" target="_blank" rel="noopener">misshexa66/OunceCake</a></td>
+              </tr>
+              <tr>
+                <th scope="row"><code>ns2jb</code></th>
+                <td>Tethered userland/fs exploit.</td>
+                <td>Full SmileBASIC 4.4.9; see entry points.</td>
+                <td>FS demo; system-title ExeFS dumping via a fork.</td>
+                <td>System-title ROMFS or <code>.kips</code> (not public), CFW, kernel exploit, emuNAND, a full homebrew environment, or reliable execution.</td>
+                <td>2026-10-27<br><span class="chip">Community report</span></td>
+                <td><a href="https://github.com/kurumuz/ns2jb" target="_blank" rel="noopener">kurumuz/ns2jb</a></td>
+              </tr>
+              <tr>
+                <th scope="row"><code>mac2jb</code></th>
+                <td>Desktop helper for typing/bootstrap and RPC setup.</td>
+                <td>Compatible <code>ns2jb</code> setup.</td>
+                <td>Desktop-side typing, bootstrap, and RPC convenience.</td>
+                <td>Not a standalone exploit or general-purpose tool.</td>
+                <td>2026-10-27<br><span class="chip">Community report</span></td>
+                <td><a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-27.md" target="_blank" rel="noopener">Status note</a></td>
+              </tr>
+              <tr>
+                <th scope="row"><code>NS2-Desktop</code></th>
+                <td>Desktop helper for RPC setup.</td>
+                <td>Compatible <code>ns2jb</code> setup.</td>
+                <td>Desktop-side RPC setup.</td>
+                <td>Not a standalone exploit.</td>
+                <td>2026-10-27<br><span class="chip">Community report</span></td>
+                <td><a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-27.md" target="_blank" rel="noopener">Status note</a></td>
+              </tr>
+              <tr>
+                <th scope="row"><code>GPUBrewLauncher</code></th>
+                <td>Public SmileBASIC/GPU-shader launcher for small custom apps.</td>
+                <td>SmileBASIC and a compatible entry point.</td>
+                <td>Launches small custom shader/app payloads.</td>
+                <td>No FS access; not a general homebrew launcher.</td>
+                <td>2026-10-27<br><span class="chip">Community report</span></td>
+                <td><a href="https://github.com/NiftyNova/GPUBrewLauncher" target="_blank" rel="noopener">NiftyNova/GPUBrewLauncher</a></td>
+              </tr>
+              <tr>
+                <th scope="row"><code>seedsow-lua-editor</code></th>
+                <td>Artemis save editor for Seedsow Lullaby.</td>
+                <td>Modded, unbanned Switch 1; NSO save transfer.</td>
+                <td>Creates and edits a prepared save on Switch 1.</td>
+                <td>Does not provide a Switch 2 entry point by itself.</td>
+                <td>2026-10-27<br><span class="chip">Community report</span></td>
+                <td><a href="https://github.com/DialingSpoon527/seedsow-lua-editor" target="_blank" rel="noopener">DialingSpoon527/seedsow-lua-editor</a></td>
+              </tr>
+              <tr>
+                <th scope="row"><code>UFS interposer</code></th>
+                <td>Hardware NAND backup/restore research.</td>
+                <td>Microsoldering; high-risk hardware work.</td>
+                <td>Explores a detachable NAND for backup and restore.</td>
+                <td>Not a jailbreak; no confirmed widely tested solution; high brick risk.</td>
+                <td>2026-10-27<br><span class="chip">Community report</span></td>
+                <td><a href="https://ufs-interposer.github.io/" target="_blank" rel="noopener">ufs-interposer.github.io</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="compat-section" aria-labelledby="hazards-heading">
+        <h2 id="hazards-heading">Known hazards</h2>
+        <div class="compat-warning">
+          <ul>
+            <li>There is no public kernel exploit, CFW, or emuNAND.</li>
+            <li>Community reports attribute at least two bricks to save-data/NAND experiments, not to ordinary dump runs. <strong>Do not write to NAND</strong>; treat save and NAND experiments as dangerous.</li>
+            <li><code>ns2jb</code> heap grooming has been reported to overwrite more than the intended FS process permissions; one tester reported losing a SmileBASIC save.</li>
+            <li>No confirmed bans were reported in these windows, but bans can be delayed. Staying offline while jailbroken is the cautious choice.</li>
+            <li>Community staff reported no confirmed Switch 2 emulators or recomps. Files or links claiming otherwise may be malware and should not be trusted or redistributed.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="compat-section" aria-labelledby="policy-heading">
+        <h2 id="policy-heading">Update policy</h2>
+        <ul class="compat-links">
+          <li>Review this page when a new status note is added, a firmware update appears, or a public tool or entry point is released or withdrawn.</li>
+          <li>Label every claim as public, private, community report, or no public path. Do not present Discord, Reddit, or LLM claims as confirmed facts.</li>
+          <li>Use public sources only. Do not add console identifiers, keys, dumps, save data, or private research exports.</li>
+          <li>This page does not change the NPDM dataset or its provenance. The explorer remains on the 2026-10-24 snapshot; see <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/DATA-PROVENANCE.md" target="_blank" rel="noopener">DATA-PROVENANCE.md</a>.</li>
+        </ul>
+      </section>
+
+      <section class="compat-section" aria-labelledby="related-heading">
+        <h2 id="related-heading">Related documentation</h2>
+        <ul class="compat-links">
+          <li><a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/scope.md" target="_blank" rel="noopener">Scope and provenance</a></li>
+          <li><a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/methodology.md" target="_blank" rel="noopener">Methodology</a></li>
+          <li><a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/diff.md" target="_blank" rel="noopener">Diffing snapshots</a></li>
+          <li>Status notes: <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-27.md" target="_blank" rel="noopener">2026-10-27</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-26.md" target="_blank" rel="noopener">2026-10-26</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-25.md" target="_blank" rel="noopener">2026-10-25</a></li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p><strong>Source:</strong> public community reports through 2026-10-27. Claims are labelled; verify before relying on them.</p>
+      <p><strong>Dataset:</strong> this page does not change the NPDM data, which remains the 2026-10-24 snapshot. See <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/DATA-PROVENANCE.md" target="_blank" rel="noopener">DATA-PROVENANCE.md</a>.</p>
+      <p><strong>Corrections:</strong> use <a href="https://github.com/tasenjo80/switch2-npdm-explorer/discussions" target="_blank" rel="noopener">Discussions</a> or open an issue. Do not post keys, dumps, save data, or console identifiers. Not affiliated with Nintendo.</p>
+    </footer>
+  </div>
+</body>
+</html>

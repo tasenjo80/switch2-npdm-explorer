@@ -36,6 +36,10 @@ The first public game dumper (OunceCake) targets game romFS/exeFS, not system
 NPDM metadata. Future updates will be added only when a new dataset with
 provenance appears.
 
+Firmware, entry-point, and community-tool status is tracked separately on the
+[compatibility page](https://tasenjo80.github.io/switch2-npdm-explorer/compatibility.html).
+It does not change this dataset or its provenance.
+
 ## Removal requests
 
 If you are the data owner or a maintainer and want this dataset removed:

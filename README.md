@@ -93,11 +93,24 @@ replace the existing dataset.
 Do not commit NPDM/NCA/NSP/XCI files, keys, saves, or game data. See
 [CONTRIBUTING.md](CONTRIBUTING.md).
 
+### Diffing snapshots
+
+`tools/diff_npdm.py` compares two schema-valid NPDM metadata files and reports
+module, service, and family changes. It validates both inputs, keys modules by
+program ID, and compares raw NPDM fields only. See [docs/diff.md](docs/diff.md).
+
+```powershell
+python tools/diff_npdm.py `
+  --old data/npdm-metadata.json `
+  --new path\to\new-npdm-metadata.json
+```
+
 ## Research status
 
 Latest dated community notes (2026-10-27): [docs/status-2026-10-27.md](docs/status-2026-10-27.md).
 Earlier notes: [2026-10-26](docs/status-2026-10-26.md),
 [2026-10-25](docs/status-2026-10-25.md).
+Stable compatibility and tooling page: <https://tasenjo80.github.io/switch2-npdm-explorer/compatibility.html>.
 
 - **23.0.1 remained current**; no 23.0.2 was observed. Community analysis puts
   the WebKit applet gate change at 21.0.0, with 20.5.0-and-lower consoles able
@@ -143,10 +156,10 @@ Pages deploys `site/` on pushes to `main` or `master`.
 Repository layout:
 
 ```text
-site/        static app + generated data.js
+site/        static app, compatibility page, and generated data.js
 data/        source metadata JSON + schema
-tools/       build + validation + generated-file check + beetool importer
-tests/       data, importer, policy, and accessibility checks
+tools/       build, validation, generated-file check, beetool importer, diff
+tests/       data, importer, diff, policy, accessibility, compatibility page
 docs/        methodology and parsing notes
 exports/     generated CSV exports
 assets/      social preview source + PNG

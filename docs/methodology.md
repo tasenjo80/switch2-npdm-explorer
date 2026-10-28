@@ -79,3 +79,9 @@ All insights are derived from the same metadata and inherit its limitations.
   and memory-map descriptors are not included yet.
 - The data is a single community dump; verify fields before relying on them.
 - There is no kernel exploit, and this project does not provide one.
+
+## See also
+
+- [Compatibility and tooling](https://tasenjo80.github.io/switch2-npdm-explorer/compatibility.html)
+- [Diffing snapshots](diff.md)
+- [Dataset scope](scope.md)

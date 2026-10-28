@@ -24,6 +24,8 @@ reviewable.
 - Run `node --check site/app.js`.
 - Run `python -m unittest discover -s tests -v`.
 - Keep generated `site/data.js` and `exports/` consistent with the source JSON.
+- `site/compatibility.html` is the public compatibility/tooling page. Keep
+  claims sourced and labelled; do not add private research data.
 
 ## Pull requests
 

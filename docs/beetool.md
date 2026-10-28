@@ -64,6 +64,9 @@ Rebuild the site and exports:
 python tools/build.py --data data/npdm-metadata.json --out site --exports exports
 ```
 
+To compare two metadata snapshots, use `tools/diff_npdm.py`; see
+[diff.md](diff.md).
+
 ## Rules
 
 - Use dumps from hardware you own.
