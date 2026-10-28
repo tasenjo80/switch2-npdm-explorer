@@ -23,8 +23,13 @@ build required to view it, and no network requests.
 - **Graph** — focused IPC graph for a module or service, with clickable nodes
   and capped neighborhoods.
 
-Exports: module/service/family CSVs, insights JSON, compare JSON, graph JSON,
-and module research-status JSON. Views are shareable through URL hashes.
+Exports: filtered module/service/family CSVs, the hostless-services CSV, insights
+JSON, compare JSON, graph JSON, and module research-status JSON. Views are
+shareable through URL hashes.
+
+Keyboard: use Left/Right/Home/End on the view tabs; Escape closes detail panels
+and returns focus to the selected row. Scrollable tables are focusable for
+horizontal keyboard scrolling.
 
 ## Run it
 
@@ -140,8 +145,8 @@ Repository layout:
 ```text
 site/        static app + generated data.js
 data/        source metadata JSON + schema
-tools/       build + generated-file check + beetool importer
-tests/       data, importer, and policy checks
+tools/       build + validation + generated-file check + beetool importer
+tests/       data, importer, policy, and accessibility checks
 docs/        methodology and parsing notes
 exports/     generated CSV exports
 ```

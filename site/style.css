@@ -8,7 +8,7 @@
   --border-strong: #315068;
   --text: #e6edf3;
   --muted: #8b9aab;
-  --faint: #5d6c7d;
+  --faint: #7d8e9f;
   --accent: #56c8ff;
   --accent-2: #7ee787;
   --accent-3: #f2cc60;
@@ -233,6 +233,16 @@ h1 {
   border-color: var(--border-strong);
   background: var(--panel-3);
   color: var(--accent);
+}
+
+.view-tab:focus-visible,
+.btn:focus-visible,
+.icon-btn:focus-visible,
+.chip:focus-visible,
+summary:focus-visible,
+.table-wrap:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .summary {

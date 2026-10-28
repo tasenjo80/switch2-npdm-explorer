@@ -123,6 +123,7 @@
     source: document.getElementById('source'),
     copyView: document.getElementById('copy-view'),
     exportCsv: document.getElementById('export-csv'),
+    viewTabs: document.getElementById('view-tabs'),
     viewModules: document.getElementById('view-modules'),
     viewServices: document.getElementById('view-services'),
     viewInsights: document.getElementById('view-insights'),
@@ -175,6 +176,14 @@
     familyEmpty: document.getElementById('family-empty'),
     serviceDetail: document.getElementById('service-detail'),
   };
+
+  const VIEW_TABS = [
+    els.viewModules,
+    els.viewServices,
+    els.viewInsights,
+    els.viewCompare,
+    els.viewGraph,
+  ];
 
   // ---------- persistence ----------
 
@@ -464,7 +473,7 @@
     </div>`;
   }
 
-  function breakdownHtml(module) {
+  function breakdownHtml(module, open = false) {
     const rows = module.surfaceBreakdown
       .map(
         (item) => `<div class="breakdown-row">
@@ -473,13 +482,13 @@
         </div>`,
       )
       .join('');
-    return `<details class="breakdown">
+    return `<details class="breakdown"${open ? ' open' : ''}>
       <summary>Score breakdown <span class="muted">raw ${esc(module.surfaceRaw)} / max ${esc(DATA.maxSurfaceRaw)}</span></summary>
       <div class="breakdown-list">${rows}</div>
     </details>`;
   }
 
-  function detailHtml(module) {
+  function detailHtml(module, breakdownOpen = false) {
     const statusOptions = STATUSES.map(
       (status) =>
         `<option value="${status}"${getStatus(module) === status ? ' selected' : ''}>${STATUS_LABEL[status]}</option>`,
@@ -531,7 +540,7 @@
       <div class="surface-top"><span>Surface</span><strong>${module.surface.toFixed(1)}</strong></div>
       <div class="surface-bar big"><span style="width:${Math.max(2, Math.min(100, module.surface))}%"></span></div>
       <p class="muted small">Heuristic ranking, not a vulnerability score.</p>
-      ${breakdownHtml(module)}
+      ${breakdownHtml(module, breakdownOpen)}
     </div>
 
     <dl class="kv">${kvItems}</dl>
@@ -564,10 +573,15 @@
   function renderDetail() {
     const module = state.selectedId ? BY_ID.get(state.selectedId) : null;
     if (!module) {
+      delete els.detail.dataset.moduleId;
       els.detail.innerHTML = detailPlaceholder();
       return;
     }
-    els.detail.innerHTML = detailHtml(module);
+    const previousId = els.detail.dataset.moduleId;
+    const breakdown = els.detail.querySelector('details.breakdown');
+    const breakdownOpen = previousId === module.programId && Boolean(breakdown && breakdown.open);
+    els.detail.dataset.moduleId = module.programId;
+    els.detail.innerHTML = detailHtml(module, breakdownOpen);
   }
 
   function renderModules() {
@@ -1564,16 +1578,17 @@
     els.insightsView.hidden = !insights;
     els.compareView.hidden = !compare;
     els.graphView.hidden = !graph;
-    els.viewModules.classList.toggle('active', modules);
-    els.viewServices.classList.toggle('active', services);
-    els.viewInsights.classList.toggle('active', insights);
-    els.viewCompare.classList.toggle('active', compare);
-    els.viewGraph.classList.toggle('active', graph);
-    els.viewModules.setAttribute('aria-selected', String(modules));
-    els.viewServices.setAttribute('aria-selected', String(services));
-    els.viewInsights.setAttribute('aria-selected', String(insights));
-    els.viewCompare.setAttribute('aria-selected', String(compare));
-    els.viewGraph.setAttribute('aria-selected', String(graph));
+    for (const [tab, selected] of [
+      [els.viewModules, modules],
+      [els.viewServices, services],
+      [els.viewInsights, insights],
+      [els.viewCompare, compare],
+      [els.viewGraph, graph],
+    ]) {
+      tab.classList.toggle('active', selected);
+      tab.setAttribute('aria-selected', String(selected));
+      tab.tabIndex = selected ? 0 : -1;
+    }
     els.exportCsv.textContent = insights
       ? 'Export insights JSON'
       : compare
@@ -2035,15 +2050,43 @@
 
   // ---------- interaction ----------
 
+  function scrollDetailIntoView(element) {
+    if (!window.matchMedia('(max-width: 1100px)').matches) return;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    element.scrollIntoView({
+      behavior: reducedMotion ? 'auto' : 'smooth',
+      block: 'start',
+    });
+  }
+
+  function focusModuleRow(programId) {
+    requestAnimationFrame(() => {
+      const row = Array.from(els.tbody.rows).find((tr) => tr.dataset.id === programId);
+      (row || els.search).focus();
+    });
+  }
+
+  function focusServiceRow(name) {
+    requestAnimationFrame(() => {
+      const row = Array.from(els.serviceBody.rows).find((tr) => tr.dataset.service === name);
+      (row || els.serviceSearch).focus();
+    });
+  }
+
+  function focusFamilyRow(name) {
+    requestAnimationFrame(() => {
+      const row = Array.from(els.familyBody.rows).find((tr) => tr.dataset.family === name);
+      (row || els.serviceSearch).focus();
+    });
+  }
+
   function selectModule(programId) {
     state.selectedId = programId;
     render();
     requestAnimationFrame(() => {
       const row = els.tbody.querySelector(`tr[data-id="${programId}"]`);
       if (row) row.focus({ preventScroll: true });
-      if (window.matchMedia('(max-width: 1100px)').matches) {
-        els.detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      scrollDetailIntoView(els.detail);
     });
   }
 
@@ -2093,9 +2136,7 @@
     requestAnimationFrame(() => {
       const row = Array.from(els.serviceBody.rows).find((tr) => tr.dataset.service === name);
       if (row) row.focus({ preventScroll: true });
-      if (window.matchMedia('(max-width: 1100px)').matches) {
-        els.serviceDetail.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      scrollDetailIntoView(els.serviceDetail);
     });
   }
 
@@ -2105,9 +2146,7 @@
     requestAnimationFrame(() => {
       const row = Array.from(els.familyBody.rows).find((tr) => tr.dataset.family === name);
       if (row) row.focus({ preventScroll: true });
-      if (window.matchMedia('(max-width: 1100px)').matches) {
-        els.serviceDetail.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      scrollDetailIntoView(els.serviceDetail);
     });
   }
 
@@ -2129,15 +2168,26 @@
   }
 
   function bindEvents() {
-    for (const button of [
-      els.viewModules,
-      els.viewServices,
-      els.viewInsights,
-      els.viewCompare,
-      els.viewGraph,
-    ]) {
+    for (const button of VIEW_TABS) {
       button.addEventListener('click', () => switchView(button.dataset.view));
     }
+
+    els.viewTabs.addEventListener('keydown', (event) => {
+      const current = event.target.closest('[role="tab"]');
+      if (!current) return;
+      const index = VIEW_TABS.indexOf(current);
+      if (index < 0) return;
+      let next = index;
+      if (event.key === 'ArrowRight') next = (index + 1) % VIEW_TABS.length;
+      else if (event.key === 'ArrowLeft') next = (index - 1 + VIEW_TABS.length) % VIEW_TABS.length;
+      else if (event.key === 'Home') next = 0;
+      else if (event.key === 'End') next = VIEW_TABS.length - 1;
+      else return;
+      event.preventDefault();
+      const tab = VIEW_TABS[next];
+      switchView(tab.dataset.view);
+      tab.focus();
+    });
 
     els.graphMode.addEventListener('change', () => {
       state.graphMode = els.graphMode.value;
@@ -2421,8 +2471,10 @@
 
     els.detail.addEventListener('click', (event) => {
       if (event.target.closest('#close-detail')) {
+        const programId = state.selectedId;
         state.selectedId = null;
         render();
+        focusModuleRow(programId);
         return;
       }
       const serviceButton = event.target.closest('[data-service]');
@@ -2460,13 +2512,17 @@
 
     els.serviceDetail.addEventListener('click', (event) => {
       if (event.target.closest('#close-service-detail')) {
+        const name = state.selectedService;
         state.selectedService = null;
         render();
+        focusServiceRow(name);
         return;
       }
       if (event.target.closest('#close-family-detail')) {
+        const name = state.selectedFamily;
         state.selectedFamily = null;
         render();
+        focusFamilyRow(name);
         return;
       }
       const serviceButton = event.target.closest('[data-service]');
@@ -2546,12 +2602,21 @@
           els.search.value = '';
           els.clearSearch.hidden = true;
           render();
+        } else if (state.view === 'services' && state.selectedFamily) {
+          const name = state.selectedFamily;
+          state.selectedFamily = null;
+          render();
+          focusFamilyRow(name);
         } else if (state.view === 'services' && state.selectedService) {
+          const name = state.selectedService;
           state.selectedService = null;
           render();
+          focusServiceRow(name);
         } else if (state.view === 'modules' && state.selectedId) {
+          const programId = state.selectedId;
           state.selectedId = null;
           render();
+          focusModuleRow(programId);
         }
       }
     });
