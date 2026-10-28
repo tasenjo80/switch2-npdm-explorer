@@ -71,6 +71,9 @@ All insights are derived from the same metadata and inherit its limitations.
 
 ## Limits
 
+- Scope is installed full `SystemProgram` titles only; `SystemDataArchive`
+  titles such as `BrowserCoreDll` (`0x85D`) are excluded. See
+  [scope.md](scope.md).
 - The dataset has no NPDM binaries, so service ACLs, kernel capability flags,
   and memory-map descriptors are not included yet.
 - The data is a single community dump; verify fields before relying on them.

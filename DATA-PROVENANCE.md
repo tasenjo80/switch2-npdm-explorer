@@ -8,6 +8,10 @@ system titles on firmware 23.0.1: module names, program IDs, permission masks,
 service names, syscalls, memory-map counts, IRQs, handle-table sizes, and
 thread settings.
 
+The file covers installed full `SystemProgram` titles only; system data
+archives are excluded. See [docs/scope.md](docs/scope.md) for the title-ID
+scope and the `BrowserCoreDll`/`0x85D` example.
+
 The file does **not** contain:
 
 - NPDM binaries, NCAs, NSPs, XCIs, NROs, or NSOs

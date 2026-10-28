@@ -56,6 +56,8 @@ class DataTests(unittest.TestCase):
         self.assertTrue(text.startswith("window.NPDM_DATA = "))
         payload = json.loads(text[text.index("{") : text.rindex("}") + 1])
         self.assertEqual(payload["moduleCount"], len(self.modules))
+        self.assertEqual(payload["snapshotDate"], "2026-10-24")
+        self.assertEqual(payload["reviewedDate"], "2026-10-27")
         self.assertGreater(payload["serviceCount"], 0)
         self.assertGreater(payload["familyCount"], 0)
         for key in ("builtinGaps", "builtinFamilies", "hostLeverage", "widestClients", "clusters"):

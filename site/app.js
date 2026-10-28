@@ -2393,6 +2393,14 @@
     bindEvents();
     render();
     els.source.textContent = DATA.source;
+    const scopeLabel = document.getElementById('dataset-scope');
+    if (scopeLabel) {
+      scopeLabel.textContent = `${formatNumber(MODULES.length)} full SystemPrograms · NPDM metadata only`;
+    }
+    const freshnessLabel = document.getElementById('dataset-freshness');
+    if (freshnessLabel && DATA.snapshotDate) {
+      freshnessLabel.textContent = `${DATA.snapshotDate} · reviewed ${DATA.reviewedDate || 'unknown'}`;
+    }
   }
 
   init();

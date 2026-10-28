@@ -20,6 +20,9 @@ CSV_OUT = REPO_ROOT / "exports" / "npdm-modules.csv"
 SERVICES_CSV = REPO_ROOT / "exports" / "npdm-services.csv"
 FAMILIES_CSV = REPO_ROOT / "exports" / "npdm-service-families.csv"
 
+SNAPSHOT_DATE = "2026-10-24"
+REVIEWED_DATE = "2026-10-27"
+
 SOURCE = (
     "Community NPDM metadata dump from r/switch2hacks #dev-research "
     "(Miru, 2026-10-24); see DATA-PROVENANCE.md."
@@ -613,6 +616,8 @@ def write_data_js(
     payload = {
         "generatedAt": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "source": SOURCE,
+        "snapshotDate": SNAPSHOT_DATE,
+        "reviewedDate": REVIEWED_DATE,
         "moduleCount": len(modules),
         "maxSurfaceRaw": round(max_surface_raw, 1),
         "serviceCount": len(services),

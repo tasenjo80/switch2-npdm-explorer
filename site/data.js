@@ -1,6 +1,8 @@
 window.NPDM_DATA = {
-  "generatedAt": "2026-10-25T11:58:13+00:00",
+  "generatedAt": "2026-10-28T02:40:18+00:00",
   "source": "Community NPDM metadata dump from r/switch2hacks #dev-research (Miru, 2026-10-24); see DATA-PROVENANCE.md.",
+  "snapshotDate": "2026-10-24",
+  "reviewedDate": "2026-10-27",
   "moduleCount": 64,
   "maxSurfaceRaw": 121.5,
   "serviceCount": 319,

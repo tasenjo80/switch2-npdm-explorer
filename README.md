@@ -52,6 +52,11 @@ The dataset is community-shared metadata. This project does not assert a
 license over the underlying data, and removal requests are honored. See
 [DATA-PROVENANCE.md](DATA-PROVENANCE.md).
 
+The dataset covers **64 installed full `SystemProgram` titles** and NPDM
+metadata only. System data archives such as `BrowserDll` (`0x803`) and
+`BrowserCoreDll` (`0x85D`) are outside its scope; see
+[docs/scope.md](docs/scope.md).
+
 ### Regenerating from your own dump
 
 The metadata schema is designed to be compatible with

@@ -24,6 +24,16 @@
       </div>
     </header>
 
+    <div class="dataset-meta" aria-label="Dataset scope and freshness">
+      <span class="dataset-badge" title="Only installed full SystemProgram titles are included.">
+        <strong>Scope</strong> <span id="dataset-scope">64 full SystemPrograms · NPDM metadata only</span>
+      </span>
+      <span class="dataset-badge">
+        <strong>Snapshot</strong> <span id="dataset-freshness">2026-10-24 · reviewed 2026-10-27</span>
+      </span>
+      <a class="dataset-link" href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/scope.md" target="_blank" rel="noopener">Scope &amp; provenance</a>
+    </div>
+
     <nav class="view-tabs" role="tablist" aria-label="Views">
       <button id="view-modules" class="view-tab active" type="button" role="tab" aria-selected="true" data-view="modules">Modules</button>
       <button id="view-services" class="view-tab" type="button" role="tab" aria-selected="false" data-view="services">Services</button>
@@ -222,6 +232,7 @@
 
     <footer class="footer">
       <p><strong>Source:</strong> <span id="source"></span>. Data is a community dump; verify before relying on it.</p>
+      <p><strong>Scope:</strong> 64 installed full SystemPrograms; NPDM metadata only. SystemDataArchives such as BrowserCoreDll (`0x85D`) are excluded. See <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/scope.md">scope.md</a>. Snapshot 2026-10-24; reviewed 2026-10-27.</p>
       <p>
         Surface heuristic: 3×hosts + 1×uses + 0.5×syscalls + 0.5×maps + 0.5×min(IRQs,10)
         + 5 if FS permissions + 5 if debug metadata, normalized to 0–100 across this dataset.

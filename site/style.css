@@ -117,6 +117,44 @@ h1 {
   padding-top: 6px;
 }
 
+.dataset-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: -8px 0 20px;
+}
+
+.dataset-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgba(16, 24, 34, 0.72);
+  padding: 5px 10px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.dataset-badge strong {
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.dataset-link {
+  color: var(--muted);
+  font-size: 12px;
+  text-underline-offset: 3px;
+}
+
+.dataset-link:hover {
+  color: var(--accent);
+}
+
 .btn {
   border: 1px solid var(--border-strong);
   border-radius: 999px;
