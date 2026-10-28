@@ -30,10 +30,22 @@ PAIRS = [
 ]
 
 
-def normalized(path: Path) -> str:
-    text = path.read_text(encoding="utf-8-sig")
-    text = text.replace("\r\n", "\n").replace("\r", "\n")
+def normalized_text(text: str) -> str:
+    text = text.lstrip("\ufeff").replace("\r\n", "\n").replace("\r", "\n")
     return TIMESTAMP.sub("", text)
+
+
+def committed_text(path: Path) -> str:
+    """Use HEAD content so the check still catches stale files after a build."""
+    relative = path.relative_to(ROOT).as_posix()
+    result = subprocess.run(
+        ["git", "show", f"HEAD:{relative}"],
+        cwd=ROOT,
+        capture_output=True,
+    )
+    if result.returncode == 0:
+        return result.stdout.decode("utf-8-sig", errors="replace")
+    return path.read_text(encoding="utf-8-sig")
 
 
 def main() -> int:
@@ -61,8 +73,8 @@ def main() -> int:
                 print(f"missing generated file: {actual}", file=sys.stderr)
                 failures += 1
                 continue
-            expected_text = normalized(committed)
-            actual_text = normalized(actual)
+            expected_text = normalized_text(committed_text(committed))
+            actual_text = normalized_text(actual.read_text(encoding="utf-8-sig"))
             if expected_text == actual_text:
                 continue
             failures += 1
