@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use NPDM Explorer or its dataset in research, please cite this repository."
+type: software
+title: "NPDM Explorer"
+abstract: >-
+  An offline browser for Switch 2 NPDM metadata and the IPC service graph.
+  The dataset covers 64 installed full SystemProgram titles from a community
+  firmware 23.0.1 dump. The project is independent research and is not
+  affiliated with Nintendo.
+authors:
+  - name: "NPDM Explorer contributors"
+version: "0.1.5"
+date-released: "2026-10-28"
+repository-code: "https://github.com/tasenjo80/switch2-npdm-explorer"
+url: "https://tasenjo80.github.io/switch2-npdm-explorer/"
+keywords:
+  - nintendo-switch-2
+  - npdm
+  - homebrew
+  - reverse-engineering
+  - ipc
+  - research

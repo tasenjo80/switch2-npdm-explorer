@@ -116,6 +116,12 @@ bugs or metadata questions. The pinned
 [Start here](https://github.com/tasenjo80/switch2-npdm-explorer/discussions/2)
 post covers scope, current status, and posting rules.
 
+## Citation
+
+If you use the explorer or dataset in research, cite it using
+[CITATION.cff](CITATION.cff). GitHub’s “Cite this repository” action reads the
+same file.
+
 ## Development
 
 ```powershell
