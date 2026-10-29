@@ -114,8 +114,9 @@ python tools/diff_npdm.py `
 
 ## Research status
 
-Latest dated community notes (2026-10-29): [docs/status-2026-10-29.md](docs/status-2026-10-29.md).
-Earlier notes: [2026-10-27](docs/status-2026-10-27.md),
+Latest dated community notes (2026-10-30): [docs/status-2026-10-30.md](docs/status-2026-10-30.md).
+Earlier notes: [2026-10-29](docs/status-2026-10-29.md),
+[2026-10-27](docs/status-2026-10-27.md),
 [2026-10-26](docs/status-2026-10-26.md),
 [2026-10-25](docs/status-2026-10-25.md).
 Stable compatibility and tooling page: <https://tasenjo80.github.io/switch2-npdm-explorer/compatibility.html>.
@@ -133,14 +134,16 @@ Stable compatibility and tooling page: <https://tasenjo80.github.io/switch2-npdm
   on both ends, the game on internal storage, and roughly 20% success; the
   demo cannot save programs, so the bootstrap must be re-entered with
   `SAVEV`/`LOADV` workarounds. Full 4.4.9 remains the reference path.
-- **Artemis Engine/Seedsow** is being prepared as a possible secondary entry
-  point, but the actual Switch 2 Artemis exploit/tool is not public. **Seedsow
-  Lua Editor v0.1.3** (2026-10-28) adds a ready-built save and a 23.0.1
-  preparation checkpoint; nearby demo-to-demo transfer needs Nintendo
-  connectivity but not the full game or NSO. [`ns2-savekit`](https://github.com/dougchansan/ns2-savekit)
-  reports installing the editor save through an ns2jb session without JKSV, a
-  Switch 1, or a Nintendo transfer; author-reported, with mixed community
-  results.
+- **Seedsow/Artemis entry point** was announced on 2026-10-30. A modified
+  Seedsow save can be installed from a homebrewed Switch 1 with JKSV and
+  Nintendo's official save transfer, without SmileBASIC. An `ns2jb` session
+  plus [`ns2-savekit`](https://github.com/dougchansan/ns2-savekit) is the
+  alternative save-writing route. The FS escalation is **untested** and the
+  bootstrap is **not public**; same-access and future untethered launch are
+  goals, not confirmed capabilities. Seedsow Lua Editor v0.1.3 remains the
+  reference editor and targets 23.0.1 on both consoles while current.
+- The **Japanese Seedsow Lullaby demo** was reported delisted on 2026-10-30.
+  Other regions may follow; keep the demo if you already have it.
 - The official WebKit port remained **private/unreleased**. Independent JSC
   crash/read-write research was reported but not released as an exploit.
 - A **UFS interposer** project is researching hardware NAND backup/restore.

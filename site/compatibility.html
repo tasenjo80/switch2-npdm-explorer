@@ -28,9 +28,9 @@
     </header>
 
     <div class="dataset-meta" aria-label="Review status">
-      <span class="dataset-badge"><strong>Reviewed</strong> 2026-10-29</span>
-      <span class="dataset-badge"><strong>Notes</strong> through 2026-10-29</span>
-      <a class="dataset-link" href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-29.md" target="_blank" rel="noopener">Latest status note</a>
+      <span class="dataset-badge"><strong>Reviewed</strong> 2026-10-30</span>
+      <span class="dataset-badge"><strong>Notes</strong> through 2026-10-30</span>
+      <a class="dataset-link" href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-30.md" target="_blank" rel="noopener">Latest status note</a>
       <a class="dataset-link" href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/scope.md" target="_blank" rel="noopener">Scope &amp; provenance</a>
       <a class="dataset-link" href="index.html">NPDM data</a>
     </div>
@@ -45,6 +45,7 @@
         </p>
         <div class="compat-legend">
           <span class="badge badge-builtin">Public</span>
+          <span class="badge">Announced</span>
           <span class="badge">Private</span>
           <span class="chip">Community report</span>
           <span class="badge">No public path</span>
@@ -52,6 +53,8 @@
         </div>
         <p class="compat-note">
           <strong>Public</strong> means a source or binary is publicly available.
+          <strong>Announced</strong> means a public community announcement
+          describes the path, but the bootstrap or release is not public yet.
           <strong>Private</strong> means work exists but is not released.
           <strong>Community report</strong> means public channels reported it;
           it is not independently verified here.
@@ -122,10 +125,10 @@
               </tr>
               <tr>
                 <th scope="row">Artemis Engine<br><span class="muted">Seedsow save path</span></th>
-                <td>Save-file/engine path being prepared as a possible secondary entry point. The editor is future-proofing, not an exploit.</td>
-                <td>Route A: a hacked Switch 1 with JKSV and official save transfer. Route B: an ns2jb session plus <a href="https://github.com/dougchansan/ns2-savekit" target="_blank" rel="noopener">ns2-savekit</a> installs the editor save without JKSV, a Switch 1, or a Nintendo transfer. Both need the Seedsow demo/game; preparation checkpoint is 23.0.1 on both consoles while current.</td>
-                <td><span class="badge">No public path</span><br>The console-level Artemis entry is not public. A game-level Lua launcher is author-reported via ns2-savekit; demos can be delisted from eShop.</td>
-                <td><a href="https://github.com/DialingSpoon527/seedsow-lua-editor/releases/tag/v0.1.3" target="_blank" rel="noopener">Editor v0.1.3</a><br><a href="https://github.com/dougchansan/ns2-savekit" target="_blank" rel="noopener">ns2-savekit</a><br><span class="chip">Public release</span><br>2026-10-28</td>
+                <td>Save-based entry point announced 2026-10-30. A modified Seedsow save can execute Lua; an FS escalation is expected but not yet public or tested.</td>
+                <td>Route A: a homebrewed Switch 1 with JKSV and official save transfer; no SmileBASIC required. Route B: an ns2jb session plus <a href="https://github.com/dougchansan/ns2-savekit" target="_blank" rel="noopener">ns2-savekit</a>. Both need the Seedsow demo/game; both consoles need 23.0.1 for the transfer while current.</td>
+                <td><span class="badge">Announced</span><br>entry point announced 2026-10-30. FS escalation is untested and the bootstrap is not public; same-access goal and future untethered launch. Not a working FS exploit yet.</td>
+                <td><a href="https://github.com/DialingSpoon527/seedsow-lua-editor/releases/tag/v0.1.3" target="_blank" rel="noopener">Editor v0.1.3</a><br><a href="https://github.com/dougchansan/ns2-savekit" target="_blank" rel="noopener">ns2-savekit</a><br><span class="chip">Community announcement</span><br>2026-10-30</td>
               </tr>
               <tr>
                 <th scope="row">WebKit applet</th>
@@ -281,8 +284,18 @@
           less reliable.
         </p>
         <p class="compat-note">
-          ns2-savekit installs the Seedsow editor save through an ns2jb session,
-          but still requires ns2jb. It is not a no-SmileBASIC path.
+          Seedsow entry-point update (2026-10-30): a save-based entry point has
+          been announced. The FS escalation is untested and the bootstrap is not
+          public; do not treat this as a working jailbreak yet.
+        </p>
+        <p class="compat-note">
+          The Japanese Seedsow demo was delisted on 2026-10-30. Other regions may
+          follow; keep the demo if you already have it.
+        </p>
+        <p class="compat-note">
+          ns2-savekit installs the Seedsow editor save through an ns2jb session.
+          It is an alternative to the Switch 1/JKSV transfer, not a no-SmileBASIC
+          path for that route.
         </p>
         <p class="compat-note">
           The HTTP OunceCake fork reports dumping system firmware titles and
@@ -329,13 +342,13 @@
           <li><a href="https://gitlab.com/BermTheSequel/ns2jb2" target="_blank" rel="noopener">ns2jb2 demo fork</a></li>
           <li><a href="https://github.com/dougchansan/ns2-savekit" target="_blank" rel="noopener">ns2-savekit</a></li>
           <li><a href="https://github.com/DialingSpoon527/seedsow-lua-editor/releases/tag/v0.1.3" target="_blank" rel="noopener">Seedsow Lua Editor v0.1.3 release</a></li>
-          <li>Status notes: <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-29.md" target="_blank" rel="noopener">2026-10-29</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-27.md" target="_blank" rel="noopener">2026-10-27</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-26.md" target="_blank" rel="noopener">2026-10-26</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-25.md" target="_blank" rel="noopener">2026-10-25</a></li>
+          <li>Status notes: <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-30.md" target="_blank" rel="noopener">2026-10-30</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-29.md" target="_blank" rel="noopener">2026-10-29</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-27.md" target="_blank" rel="noopener">2026-10-27</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-26.md" target="_blank" rel="noopener">2026-10-26</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-25.md" target="_blank" rel="noopener">2026-10-25</a></li>
         </ul>
       </section>
     </main>
 
     <footer class="footer">
-      <p><strong>Source:</strong> public community reports and releases through 2026-10-29. Claims are labelled; verify before relying on them.</p>
+      <p><strong>Source:</strong> public community reports and releases through 2026-10-30. Claims are labelled; verify before relying on them.</p>
       <p><strong>Dataset:</strong> this page does not change the NPDM data, which remains the 2026-10-24 snapshot. See <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/DATA-PROVENANCE.md" target="_blank" rel="noopener">DATA-PROVENANCE.md</a>.</p>
       <p><strong>Corrections:</strong> use <a href="https://github.com/tasenjo80/switch2-npdm-explorer/discussions" target="_blank" rel="noopener">Discussions</a> or open an issue. Do not post keys, dumps, save data, or console identifiers. Not affiliated with Nintendo.</p>
     </footer>
