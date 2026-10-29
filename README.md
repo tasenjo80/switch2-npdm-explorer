@@ -7,6 +7,13 @@ build required to view it, and no network requests.
 > **Status:** early research tool. The dataset is community-shared metadata;
 > see [DATA-PROVENANCE.md](DATA-PROVENANCE.md). Removal requests are honored.
 
+> **Start here:** [Open the live viewer](https://tasenjo80.github.io/switch2-npdm-explorer/) ·
+> [Compatibility and tooling](https://tasenjo80.github.io/switch2-npdm-explorer/compatibility.html) ·
+> [Discussions](https://github.com/tasenjo80/switch2-npdm-explorer/discussions)
+>
+> New here? The compatibility page covers firmware, entry points, and tools;
+> the viewer opens the NPDM metadata directly.
+
 ## Views
 
 - **Modules** — NPDM permissions, syscalls, memory maps, IRQs, handle table,
