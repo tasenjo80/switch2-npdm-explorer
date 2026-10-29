@@ -32,9 +32,11 @@ The app can also be used with a dataset generated from your own console dump.
 
 The current dataset is the 2026-10-24 snapshot. An incremental review of the
 source Discord channels through 2026-10-27 found no newer NPDM metadata dump.
-The first public game dumper (OunceCake) targets game romFS/exeFS, not system
-NPDM metadata. Future updates will be added only when a new dataset with
-provenance appears.
+The original game dumper (OunceCake) targets game romFS/exeFS, not system NPDM
+metadata. A community HTTP/WebDAV fork reports dumping full system firmware
+titles and system data archives; if that produces a complete new metadata
+snapshot, it will be added only with provenance. Future updates will be added
+only when a new dataset with provenance appears.
 
 Firmware, entry-point, and community-tool status is tracked separately on the
 [compatibility page](https://tasenjo80.github.io/switch2-npdm-explorer/compatibility.html).

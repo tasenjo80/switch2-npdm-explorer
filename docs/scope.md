@@ -107,7 +107,9 @@ provenance first; do not attach binaries or dumps.
 
 Not sufficient:
 
-- new game dumps or OunceCake output
+- new game dumps or game-only OunceCake output
+- system-title ExeFS dumps without documented `main.npdm` extraction and
+  provenance
 - `SystemDataArchive` files
 - firmware dumps without NPDM metadata
 - unverified Discord/Reddit claims
