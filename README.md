@@ -114,8 +114,9 @@ python tools/diff_npdm.py `
 
 ## Research status
 
-Latest dated community notes (2026-10-30): [docs/status-2026-10-30.md](docs/status-2026-10-30.md).
-Earlier notes: [2026-10-29](docs/status-2026-10-29.md),
+Latest dated community notes (2026-11-01): [docs/status-2026-11-01.md](docs/status-2026-11-01.md).
+Earlier notes: [2026-10-30](docs/status-2026-10-30.md),
+[2026-10-29](docs/status-2026-10-29.md),
 [2026-10-27](docs/status-2026-10-27.md),
 [2026-10-26](docs/status-2026-10-26.md),
 [2026-10-25](docs/status-2026-10-25.md).
@@ -144,10 +145,17 @@ Stable compatibility and tooling page: <https://tasenjo80.github.io/switch2-npdm
   NSO Cloud transfer is user-reported and needs the full game on the target
   plus NSO; the demo has no cloud save. Seedsow Lua Editor v0.1.3 remains the
   reference editor and targets 23.0.1 on both consoles while current.
+- [`ns2-savekit`](https://github.com/dougchansan/ns2-savekit) received
+  save-enumeration, title-name, and SD/game-card listing updates on 2026-10-31.
+  It remains a save tool, not an entry point.
 - The **Japanese Seedsow Lullaby demo** was reported delisted on 2026-10-30.
   Other regions may follow; keep the demo if you already have it.
-- The official WebKit port remained **private/unreleased**. Independent JSC
-  crash/read-write research was reported but not released as an exploit.
+- The official WebKit port remained **private/unreleased**. A public
+  [browser/captive-portal research bench](https://github.com/Jmesmykil/switch2-captive-portal-research)
+  appeared on 2026-10-28; its author claims hardware-confirmed UAF/read
+  primitives, but the repo says no verified takeover or Switch support and warns
+  some success labels are unreliable. FS/23.0.1 claims are unverified; no public
+  exploit.
 - A **UFS interposer** project is researching hardware NAND backup/restore.
   It is high-risk and not a jailbreak.
 - **OunceCake** remains read-only game-file access. A community HTTP/WebDAV

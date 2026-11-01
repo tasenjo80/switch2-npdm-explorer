@@ -87,4 +87,4 @@ are found; invalid input or an I/O error returns `1`.
 
 - [Compatibility and tooling](https://tasenjo80.github.io/switch2-npdm-explorer/compatibility.html)
 - [Methodology](methodology.md)
-- [Latest status note](status-2026-10-27.md)
+- [Latest status note](status-2026-11-01.md)
