@@ -154,8 +154,10 @@ Stable compatibility and tooling page: <https://tasenjo80.github.io/switch2-npdm
   [browser/captive-portal research bench](https://github.com/Jmesmykil/switch2-captive-portal-research)
   appeared on 2026-10-28; its author claims hardware-confirmed UAF/read
   primitives, but the repo says no verified takeover or Switch support and warns
-  some success labels are unreliable. FS/23.0.1 claims are unverified; no public
-  exploit.
+  some success labels are unreliable. On 2026-11-01 it added a public
+  CVE-2026-43715 CSSFontFace trigger page; it is trigger-only, with no
+  read/write, escalation, or verified Switch support. FS/23.0.1 claims are
+  unverified; no public exploit.
 - A **UFS interposer** project is researching hardware NAND backup/restore.
   It is high-risk and not a jailbreak.
 - **OunceCake** remains read-only game-file access. A community HTTP/WebDAV

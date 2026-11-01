@@ -54,6 +54,7 @@ class CompatibilityPageTests(unittest.TestCase):
         self.assertIn("ns2jb2", self.text)
         self.assertIn("ns2-savekit", self.text)
         self.assertIn("MintBrew", self.text)
+        self.assertIn("CVE-2026-43715", self.text)
 
     def test_ids_are_unique(self):
         ids = [attrs["id"] for _, attrs in self.tags if "id" in attrs]
