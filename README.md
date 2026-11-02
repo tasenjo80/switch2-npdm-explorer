@@ -9,6 +9,7 @@ build required to view it, and no network requests.
 
 > **Start here:** [Open the live viewer](https://tasenjo80.github.io/switch2-npdm-explorer/) ·
 > [Compatibility and tooling](https://tasenjo80.github.io/switch2-npdm-explorer/compatibility.html) ·
+> [Data dictionary](https://tasenjo80.github.io/switch2-npdm-explorer/dictionary.html) ·
 > [Discussions](https://github.com/tasenjo80/switch2-npdm-explorer/discussions)
 >
 > New here? The compatibility page covers firmware, entry points, and tools;
@@ -32,7 +33,8 @@ build required to view it, and no network requests.
 
 Exports: filtered module/service/family CSVs, the hostless-services CSV, insights
 JSON, compare JSON, graph JSON, and module research-status JSON. Views are
-shareable through URL hashes.
+shareable through URL hashes. The [data dictionary](https://tasenjo80.github.io/switch2-npdm-explorer/dictionary.html)
+explains every field, the service graph, and the derived surface/focus values.
 
 Keyboard: use Left/Right/Home/End on the view tabs; Escape closes detail panels
 and returns focus to the selected row. Scrollable tables are focusable for

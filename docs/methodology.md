@@ -83,5 +83,6 @@ All insights are derived from the same metadata and inherit its limitations.
 ## See also
 
 - [Compatibility and tooling](https://tasenjo80.github.io/switch2-npdm-explorer/compatibility.html)
+- [Data dictionary](https://tasenjo80.github.io/switch2-npdm-explorer/dictionary.html)
 - [Diffing snapshots](diff.md)
 - [Dataset scope](scope.md)

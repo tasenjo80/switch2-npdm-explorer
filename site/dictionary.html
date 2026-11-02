@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Field definitions for the NPDM Explorer dataset, service graph, and derived research values.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Data dictionary &mdash; NPDM Explorer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div>
+        <p class="eyebrow">Switch 2 research &middot; reference</p>
+        <h1>Data dictionary</h1>
+        <p class="subtitle">
+          What each field in the NPDM Explorer dataset means, how the service
+          graph is assembled, and which values are derived heuristics.
+        </p>
+      </div>
+      <div class="header-actions">
+        <a class="btn" href="index.html">Open explorer</a>
+        <a class="btn btn-ghost" href="compatibility.html">Compatibility</a>
+      </div>
+    </header>
+
+    <div class="dataset-meta" aria-label="Dataset scope">
+      <span class="dataset-badge"><strong>Snapshot</strong> 2026-10-24 &middot; reviewed 2026-10-27</span>
+      <span class="dataset-badge"><strong>Scope</strong> 64 full SystemPrograms</span>
+      <a class="dataset-link" href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/scope.md" target="_blank" rel="noopener">Scope &amp; provenance</a>
+      <a class="dataset-link" href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/methodology.md" target="_blank" rel="noopener">Methodology</a>
+      <a class="dataset-link" href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/data/schema.json" target="_blank" rel="noopener">Schema</a>
+    </div>
+
+    <main>
+      <section class="compat-section" aria-labelledby="overview-heading">
+        <h2 id="overview-heading">Overview</h2>
+        <p>
+          NPDM is the metadata header of a Switch executable. This project stores
+          a small, normalized subset of that metadata for installed full
+          <code>SystemProgram</code> titles. It does not include NPDM binaries,
+          NCAs, keys, saves, or game content.
+        </p>
+        <div class="compat-warning">
+          <ul>
+            <li><strong>Metadata only.</strong> Field presence does not establish a vulnerability or an exploit path.</li>
+            <li><strong>One snapshot.</strong> The dataset is a single community dump; fields can be incomplete or mislabeled.</li>
+            <li><strong>Not decoded.</strong> Raw bitmasks, syscall numbers, and handle-table values are recorded, not interpreted.</li>
+            <li><strong>Scope.</strong> Installed full <code>SystemProgram</code> titles only; <code>SystemDataArchive</code> titles are excluded.</li>
+          </ul>
+        </div>
+        <div class="compat-legend" aria-label="Contents">
+          <a class="chip" href="#module-fields">Module fields</a>
+          <a class="chip" href="#fs-permissions">FS permissions</a>
+          <a class="chip" href="#kernel-fields">Kernel fields</a>
+          <a class="chip" href="#service-graph">Service graph</a>
+          <a class="chip" href="#derived-fields">Derived values</a>
+          <a class="chip" href="#limits">Limits</a>
+        </div>
+      </section>
+
+      <section class="compat-section" aria-labelledby="module-fields">
+        <h2 id="module-fields">Module fields</h2>
+        <div class="table-wrap" role="region" aria-label="Module fields" tabindex="0">
+          <table class="compat-table">
+            <caption>Top-level fields on each module entry.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Field</th>
+                <th scope="col">Type</th>
+                <th scope="col">Meaning</th>
+                <th scope="col">Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row"><code>file</code></th>
+                <td>string</td>
+                <td>Source path recorded for the module in the community dump.</td>
+                <td>Metadata only; no file is included or downloadable here.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>name</code></th>
+                <td>string</td>
+                <td>Module display name, such as <code>chat</code> or <code>fsp-srv</code>.</td>
+                <td>Used for display and sorting.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>programId</code></th>
+                <td>string</td>
+                <td>16-character lowercase hexadecimal program ID.</td>
+                <td>Primary module key in the explorer.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>is64Bit</code></th>
+                <td>boolean</td>
+                <td>Whether the module is recorded as a 64-bit image.</td>
+                <td>Raw NPDM field.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>addressSpace</code></th>
+                <td>integer</td>
+                <td>Recorded address-space value.</td>
+                <td>Not decoded into an address range by this project.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>mainThreadPriority</code></th>
+                <td>integer</td>
+                <td>Main-thread priority value.</td>
+                <td>Raw NPDM field.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>mainThreadCore</code></th>
+                <td>integer</td>
+                <td>Main-thread core affinity value.</td>
+                <td>Raw NPDM field.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>mainThreadStackSize</code></th>
+                <td>integer</td>
+                <td>Main-thread stack size in bytes.</td>
+                <td>Raw NPDM field.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>systemResourceSize</code></th>
+                <td>integer</td>
+                <td>Recorded system-resource size.</td>
+                <td>Raw NPDM field; meaning depends on the system version.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>version</code></th>
+                <td>integer</td>
+                <td>Raw version value.</td>
+                <td>The viewer also exposes a hexadecimal convenience value.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>productCode</code></th>
+                <td>string</td>
+                <td>Recorded product code, when present.</td>
+                <td>Often empty for system modules.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>hostsServices</code></th>
+                <td>string[]</td>
+                <td>Exact service names this module provides.</td>
+                <td>Drives the service graph's host edges.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>usesServices</code></th>
+                <td>string[]</td>
+                <td>Exact service names this module consumes.</td>
+                <td>Drives the service graph's user edges.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>acidHostsServices</code></th>
+                <td>string[]</td>
+                <td>Services recorded through the ACID host list.</td>
+                <td>Preserved separately; not currently used by the focus graph.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>kernel</code></th>
+                <td>object</td>
+                <td>Kernel metadata block.</td>
+                <td>See <a href="#kernel-fields">Kernel fields</a>.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="compat-note">
+          The viewer adds convenience fields such as <code>versionHex</code>,
+          counts, and <code>surface</code>. Those are documented under
+          <a href="#derived-fields">Derived values</a>.
+        </p>
+      </section>
+
+      <section class="compat-section" aria-labelledby="fs-permissions">
+        <h2 id="fs-permissions">FS permissions</h2>
+        <div class="table-wrap" role="region" aria-label="FS permission fields" tabindex="0">
+          <table class="compat-table">
+            <caption>Filesystem permission fields.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Field</th>
+                <th scope="col">Meaning</th>
+                <th scope="col">How the viewer uses it</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row"><code>fsPermissions</code></th>
+                <td>A 16-hex-digit filesystem permission mask from the NPDM.</td>
+                <td>Displayed as a compact mask. The viewer does not decode individual bits.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>fsPermissionsHex</code></th>
+                <td>The same value with a <code>0x</code> prefix.</td>
+                <td>Convenience display only.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>fsPermNonzero</code></th>
+                <td>Whether the permission mask is nonzero.</td>
+                <td>Used as a filter and as a surface-score bonus. It is not a claim about which mounts or operations are allowed.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="compat-note">
+          Treat the mask as a research lead. The dataset does not include the
+          bit-level FS permission table or the service ACLs needed to interpret
+          each bit.
+        </p>
+      </section>
+
+      <section class="compat-section" aria-labelledby="kernel-fields">
+        <h2 id="kernel-fields">Kernel fields</h2>
+        <div class="table-wrap" role="region" aria-label="Kernel fields" tabindex="0">
+          <table class="compat-table">
+            <caption>Fields under each module's <code>kernel</code> object.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Field</th>
+                <th scope="col">Type</th>
+                <th scope="col">Meaning</th>
+                <th scope="col">Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row"><code>syscalls</code></th>
+                <td>integer[]</td>
+                <td>Syscall numbers recorded for the module.</td>
+                <td>Numbers only; this dataset does not include syscall names or signatures.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>maps</code></th>
+                <td>integer</td>
+                <td>Count of recorded memory-map entries.</td>
+                <td>The entries themselves are not included.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>irqs</code></th>
+                <td>integer[]</td>
+                <td>IRQ numbers recorded for the module.</td>
+                <td>Raw values; no interrupt-controller mapping is provided.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>appletType</code></th>
+                <td>integer or null</td>
+                <td>Recorded applet type value.</td>
+                <td>The enum mapping is not decoded here.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>handleTable</code></th>
+                <td>integer or null</td>
+                <td>Recorded handle-table size/value.</td>
+                <td>Not a list of handles; meaning is not decoded here.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>debug</code></th>
+                <td>object or null</td>
+                <td>Raw debug metadata block.</td>
+                <td>The viewer uses presence as a filter, not as a vulnerability signal.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="compat-section" aria-labelledby="service-graph">
+        <h2 id="service-graph">Service graph</h2>
+        <p>
+          The graph is assembled from the exact service names listed by each
+          module. Names are not case-folded and are not merged; <code>ldr:ro</code>
+          and <code>ldr:cmpt</code> are separate services. Families are a display
+          grouping only.
+        </p>
+        <div class="table-wrap" role="region" aria-label="Service graph fields" tabindex="0">
+          <table class="compat-table">
+            <caption>Service, family, and derived graph fields.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Field</th>
+                <th scope="col">Meaning</th>
+                <th scope="col">Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row"><code>hostsServices</code> / <code>hosted by</code></th>
+                <td>A module provides a service; the service lists that module as a host.</td>
+                <td>The focus graph's left side for a module or the host side for a service.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>usesServices</code> / <code>used by</code></th>
+                <td>A module consumes a service; the service lists that module as a user.</td>
+                <td>The focus graph's other side.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>acidHosts</code></th>
+                <td>Modules recorded through <code>acidHostsServices</code>.</td>
+                <td>Preserved in the service entry; not used by the focus graph or path finder.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>name</code></th>
+                <td>Exact service name.</td>
+                <td>Primary service key.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>family</code></th>
+                <td>Text before the first colon, or the whole name when there is no colon.</td>
+                <td>Example: <code>spl:mig</code> belongs to family <code>spl</code>; <code>fsp-srv</code> is its own family.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>hostCount</code> / <code>useCount</code></th>
+                <td>Number of distinct modules that host or use the service.</td>
+                <td>Counts are based on the exact names in the dump.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>noHost</code></th>
+                <td>True when a service has users but no recorded host.</td>
+                <td>Usually a built-in sysmodule/KIP or a provider missing from the dump; not a confirmed classification.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>key</code></th>
+                <td>Curated high-interest service marker.</td>
+                <td>A research priority, not a vulnerability rating.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>likelyBuiltin</code></th>
+                <td>Family-level heuristic for families whose services all lack hosts and match a known built-in set.</td>
+                <td>Heuristic only.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="compat-section" aria-labelledby="derived-fields">
+        <h2 id="derived-fields">Derived values</h2>
+        <div class="table-wrap" role="region" aria-label="Derived fields" tabindex="0">
+          <table class="compat-table">
+            <caption>Values computed by the build or viewer, not raw NPDM fields.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Value</th>
+                <th scope="col">Definition</th>
+                <th scope="col">Use</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row"><code>hostCount</code>, <code>useCount</code></th>
+                <td>Length of the module's hosted or used service lists.</td>
+                <td>Sorting, summaries, and surface scoring.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>syscallCount</code>, <code>mapCount</code>, <code>irqCount</code></th>
+                <td>Counts derived from the corresponding kernel fields.</td>
+                <td>Table columns and surface scoring.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>surfaceRaw</code></th>
+                <td>
+                  <code>3&nbsp;&times;&nbsp;hosts + uses + 0.5&nbsp;&times;&nbsp;syscalls +
+                  0.5&nbsp;&times;&nbsp;maps + 0.5&nbsp;&times;&nbsp;min(irqs,&nbsp;10) +
+                  5&nbsp;if&nbsp;FS&nbsp;permissions + 5&nbsp;if&nbsp;debug</code>.
+                </td>
+                <td>Research-attention heuristic.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>surface</code></th>
+                <td><code>surfaceRaw</code> normalized to 0&ndash;100 across this dataset.</td>
+                <td>Sorting and comparison; not an exploitability score.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>focus</code></th>
+                <td>Curated research-priority flag from the source discussion.</td>
+                <td>Highlighting and filtering; not a vulnerability claim.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>tags</code></th>
+                <td>Descriptive labels such as filesystem, network, GPU, or input.</td>
+                <td>Filtering and grouping.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>note</code>, <code>noteSource</code></th>
+                <td>Short research note and its source label.</td>
+                <td>Context only; verify before relying on it.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="compat-section" aria-labelledby="limits">
+        <h2 id="limits">Limits and provenance</h2>
+        <ul class="compat-links">
+          <li>Single community snapshot: 2026-10-24, reviewed 2026-10-27. No newer NPDM metadata is included.</li>
+          <li>Installed full <code>SystemProgram</code> titles only. <code>SystemDataArchive</code> titles such as <code>BrowserCoreDll</code> (<code>0x85D</code>) are out of scope.</li>
+          <li>No NPDM binaries, NCAs, service ACLs, memory descriptors, keys, saves, or game data.</li>
+          <li>The service graph is derived from names in the dump. It is not a runtime IPC trace.</li>
+          <li>See <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/DATA-PROVENANCE.md" target="_blank" rel="noopener">DATA-PROVENANCE.md</a> and <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/methodology.md" target="_blank" rel="noopener">methodology.md</a>.</li>
+        </ul>
+      </section>
+
+      <section class="compat-section" aria-labelledby="related-heading">
+        <h2 id="related-heading">Related</h2>
+        <ul class="compat-links">
+          <li><a href="index.html">NPDM Explorer</a></li>
+          <li><a href="compatibility.html">Compatibility and tooling</a></li>
+          <li><a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/data/schema.json" target="_blank" rel="noopener">Dataset schema</a></li>
+          <li><a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/scope.md" target="_blank" rel="noopener">Dataset scope</a></li>
+          <li><a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/methodology.md" target="_blank" rel="noopener">Methodology</a></li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p><strong>Source:</strong> community NPDM metadata snapshot 2026-10-24, reviewed 2026-10-27. Field definitions describe this viewer, not a vulnerability claim.</p>
+      <p><strong>Dataset:</strong> metadata only. <a href="index.html">Back to the explorer</a>.</p>
+      <p><strong>Corrections:</strong> use <a href="https://github.com/tasenjo80/switch2-npdm-explorer/discussions" target="_blank" rel="noopener">Discussions</a> or open an issue. Do not post keys, dumps, save data, or console identifiers. Not affiliated with Nintendo.</p>
+    </footer>
+  </div>
+</body>
+</html>
