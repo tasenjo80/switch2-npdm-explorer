@@ -1503,6 +1503,151 @@ button.chip:hover {
   gap: 6px;
 }
 
+.path-finder {
+  margin-bottom: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--panel);
+  padding: 14px;
+  box-shadow: var(--shadow);
+}
+
+.path-finder-head {
+  margin-bottom: 12px;
+}
+
+.path-finder-head h3 {
+  margin: 0 0 4px;
+  font-size: 18px;
+}
+
+.path-finder-head .insight-sub {
+  margin: 0;
+}
+
+.path-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 12px;
+}
+
+.path-controls .select-label {
+  gap: 8px;
+}
+
+.path-controls select {
+  min-width: 240px;
+  max-width: 100%;
+  font-family: var(--mono);
+}
+
+.path-result {
+  margin-top: 14px;
+}
+
+.path-result:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.path-summary-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 12px;
+  margin-bottom: 10px;
+}
+
+.path-status {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.path-empty {
+  margin: 0;
+  color: var(--muted);
+}
+
+.path-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.path-step {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.path-edge {
+  color: var(--faint);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.path-node {
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: var(--panel-2);
+  color: var(--text);
+  padding: 7px 10px;
+  font-family: var(--mono);
+  font-size: 12px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.path-node:hover,
+.path-node:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: #1a2634;
+}
+
+.path-node.module {
+  border-color: var(--purple);
+}
+
+.path-node.service {
+  border-color: #2d9fd0;
+}
+
+.path-node .path-sub {
+  display: block;
+  margin-top: 2px;
+  color: var(--faint);
+  font-size: 9px;
+}
+
+@media (max-width: 700px) {
+  .path-controls {
+    align-items: stretch;
+  }
+
+  .path-controls .select-label {
+    flex: 1 1 100%;
+  }
+
+  .path-controls select {
+    width: 100%;
+  }
+
+  .path-controls .btn {
+    flex: 1 1 auto;
+  }
+}
+
 .legend-box {
   width: 10px;
   height: 10px;

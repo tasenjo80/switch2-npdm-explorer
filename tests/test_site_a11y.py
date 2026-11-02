@@ -97,6 +97,26 @@ class SiteAccessibilityTests(unittest.TestCase):
         for _, attrs in headers:
             self.assertEqual(attrs.get("scope"), "col")
 
+    def test_path_finder_controls_are_accessible(self):
+        self.assertEqual(len(self.tags_with("select", id="path-from")), 1)
+        self.assertEqual(len(self.tags_with("select", id="path-to")), 1)
+        self.assertEqual(len(self.tags_with("button", id="path-find")), 1)
+        self.assertEqual(len(self.tags_with("button", id="path-swap")), 1)
+        self.assertEqual(len(self.tags_with("button", id="path-clear")), 1)
+
+        results = self.tags_with("div", id="path-result")
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0][1].get("aria-live"), "polite")
+        self.assertEqual(results[0][1].get("tabindex"), "-1")
+
+        scripts = [
+            attrs.get("src", "")
+            for tag, attrs in self.tags
+            if tag == "script" and attrs.get("src")
+        ]
+        self.assertIn("pathfinder.js", scripts)
+        self.assertLess(scripts.index("pathfinder.js"), scripts.index("app.js"))
+
     def test_text_tokens_have_aa_contrast(self):
         text = STYLE.read_text(encoding="utf-8")
         colors = {

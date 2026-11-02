@@ -26,5 +26,9 @@ jobs:
         run: python tools/check_generated.py
       - name: Check app syntax
         run: node --check site/app.js
+      - name: Check path finder syntax
+        run: node --check site/pathfinder.js
+      - name: Test path finder
+        run: node --test tests/test_pathfinder.js
       - name: Run tests
         run: python -m unittest discover -s tests -v

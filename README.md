@@ -29,7 +29,8 @@ build required to view it, and no network requests.
 - **Compare** — module-vs-module diff of permissions, services, syscalls, maps,
   IRQs, and thread settings.
 - **Graph** — focused IPC graph for a module or service, with clickable nodes
-  and capped neighborhoods.
+  and capped neighborhoods, plus a shortest-path finder between any module and
+  service.
 
 Exports: filtered module/service/family CSVs, the hostless-services CSV, insights
 JSON, compare JSON, graph JSON, and module research-status JSON. Views are
@@ -199,19 +200,21 @@ python tools/validate_data.py data/npdm-metadata.json
 python tools/check_generated.py
 python -m unittest discover -s tests -v
 node --check site/app.js
+node --check site/pathfinder.js
+node --test tests/test_pathfinder.js
 ```
 
-CI runs dataset validation, the generated-file check, build, JS syntax check,
-and tests. GitHub
-Pages deploys `site/` on pushes to `main` or `master`.
+CI runs dataset validation, the generated-file check, build, JS syntax checks,
+Node path-finder tests, and Python tests. GitHub Pages deploys `site/` on pushes
+to `main` or `master`.
 
 Repository layout:
 
 ```text
-site/        static app, compatibility page, and generated data.js
+site/        static app, compatibility page, data dictionary, and generated data.js
 data/        source metadata JSON + schema
 tools/       build, validation, generated-file check, beetool importer, diff
-tests/       data, importer, diff, policy, accessibility, compatibility page
+tests/       data, importer, diff, policy, accessibility, docs, path finder
 docs/        methodology and parsing notes
 exports/     generated CSV exports
 assets/      social preview source + PNG

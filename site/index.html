@@ -262,6 +262,32 @@
           keep the graph readable; the detail views show the full lists.
         </p>
       </header>
+      <section class="path-finder" aria-labelledby="path-finder-title">
+        <div class="path-finder-head">
+          <div>
+            <p class="eyebrow">Shortest path</p>
+            <h3 id="path-finder-title">Find a connection</h3>
+            <p class="insight-sub">
+              Shortest route between any module and service, using hosted and
+              used services. The result is a research lead, not a vulnerability
+              claim.
+            </p>
+          </div>
+        </div>
+        <div class="path-controls">
+          <label class="select-label">From
+            <select id="path-from"></select>
+          </label>
+          <button id="path-swap" class="btn btn-ghost" type="button" aria-label="Swap path endpoints">Swap</button>
+          <label class="select-label">To
+            <select id="path-to"></select>
+          </label>
+          <button id="path-find" class="btn" type="button">Find path</button>
+          <button id="path-clear" class="btn btn-ghost" type="button">Clear</button>
+        </div>
+        <div id="path-result" class="path-result" aria-live="polite" tabindex="-1"></div>
+      </section>
+
       <div class="compare-controls">
         <label class="select-label">Mode
           <select id="graph-mode">
@@ -296,6 +322,7 @@
   </div>
 
   <script src="data.js"></script>
+  <script src="pathfinder.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

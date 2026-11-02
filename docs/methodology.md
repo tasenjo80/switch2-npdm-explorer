@@ -69,6 +69,10 @@ All insights are derived from the same metadata and inherit its limitations.
 - **Graph** shows direct neighbors only. It caps displayed nodes (12 left, 16
   right) and reports the remainder with `+N more`; the detail views show full
   lists.
+- **Shortest path** uses the full module/service adjacency, not the capped
+  display lists. It runs BFS over hosted and used service edges and labels each
+  hop with the relation (`hosts`, `uses`, `hosted by`, `used by`). Ties are
+  broken deterministically by node name and relation.
 
 ## Limits
 

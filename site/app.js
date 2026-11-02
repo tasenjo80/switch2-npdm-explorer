@@ -18,6 +18,8 @@
   const GAP_FAMILIES = [...new Set(GAP_SERVICES.map((service) => service.family))].sort((a, b) =>
     a.localeCompare(b),
   );
+  const PATH_FINDER = window.NPDMPath || null;
+  const PATH_GRAPH = PATH_FINDER ? PATH_FINDER.build(MODULES) : null;
   const STATUS_KEY = 'npdm-explorer-status-v1';
   const STATUSES = ['untriaged', 'watching', 'reviewed', 'blocked'];
   const STATUS_LABEL = {
@@ -97,6 +99,10 @@
     graphMode: 'module',
     graphEntity: '040000000000004a',
     graphData: null,
+    pathFrom: '',
+    pathTo: '',
+    pathResult: null,
+    pathError: '',
   };
 
   const els = {
@@ -151,6 +157,12 @@
     graphMode: document.getElementById('graph-mode'),
     graphEntity: document.getElementById('graph-entity'),
     graphCanvas: document.getElementById('graph-canvas'),
+    pathFrom: document.getElementById('path-from'),
+    pathTo: document.getElementById('path-to'),
+    pathSwap: document.getElementById('path-swap'),
+    pathFind: document.getElementById('path-find'),
+    pathClear: document.getElementById('path-clear'),
+    pathResult: document.getElementById('path-result'),
     serviceSummary: document.getElementById('service-summary'),
     serviceSearch: document.getElementById('service-search'),
     clearServiceSearch: document.getElementById('clear-service-search'),
@@ -659,6 +671,7 @@
 
   function setupGraph() {
     populateGraphEntities();
+    populatePathEntities();
   }
 
   function renderServiceSummary() {
@@ -1382,6 +1395,120 @@
     return value.length > max ? `${value.slice(0, max - 1)}\u2026` : value;
   }
 
+  function isPathKey(value) {
+    if (!value) return false;
+    if (value.startsWith('m:')) return BY_ID.has(value.slice(2));
+    if (value.startsWith('s:')) return SERVICE_BY_NAME.has(value.slice(2));
+    return false;
+  }
+
+  function populatePathEntities() {
+    if (!els.pathFrom || !els.pathTo) return;
+
+    const modules = [...MODULES].sort((a, b) => a.name.localeCompare(b.name));
+    const services = [...SERVICES].sort((a, b) => a.name.localeCompare(b.name));
+
+    function fill(select, selected) {
+      select.innerHTML = '';
+      const blank = document.createElement('option');
+      blank.value = '';
+      blank.textContent = 'Choose a node';
+      select.append(blank);
+
+      const moduleGroup = document.createElement('optgroup');
+      moduleGroup.label = 'Modules';
+      for (const module of modules) {
+        const option = document.createElement('option');
+        option.value = `m:${module.programId}`;
+        option.textContent = `${module.name} (${module.programId})`;
+        moduleGroup.append(option);
+      }
+      select.append(moduleGroup);
+
+      const serviceGroup = document.createElement('optgroup');
+      serviceGroup.label = 'Services';
+      for (const service of services) {
+        const option = document.createElement('option');
+        option.value = `s:${service.name}`;
+        option.textContent = service.name;
+        serviceGroup.append(option);
+      }
+      select.append(serviceGroup);
+      select.value = isPathKey(selected) ? selected : '';
+    }
+
+    fill(els.pathFrom, state.pathFrom);
+    fill(els.pathTo, state.pathTo);
+    if (!isPathKey(state.pathFrom)) state.pathFrom = '';
+    if (!isPathKey(state.pathTo)) state.pathTo = '';
+  }
+
+  function computePath() {
+    state.pathResult = null;
+    state.pathError = '';
+    if (!state.pathFrom || !state.pathTo) return;
+    if (!PATH_FINDER || !PATH_GRAPH) {
+      state.pathError = 'Path finder is unavailable.';
+      return;
+    }
+    const result = PATH_FINDER.find(PATH_GRAPH, state.pathFrom, state.pathTo);
+    if (result) {
+      state.pathResult = result;
+    } else {
+      state.pathError = 'No path found in this dump.';
+    }
+  }
+
+  function pathToText(result) {
+    return result.nodes
+      .map((node, index) => {
+        const edge = index ? ` --${result.edges[index - 1]}--> ` : '';
+        const id = node.kind === 'module' ? ` (${node.id})` : '';
+        return `${edge}${node.kind}:${node.name}${id}`;
+      })
+      .join('');
+  }
+
+  function renderPathResult() {
+    if (!els.pathResult) return;
+    if (!state.pathFrom || !state.pathTo) {
+      els.pathResult.innerHTML =
+        '<p class="path-empty">Choose a module or service for both endpoints.</p>';
+      return;
+    }
+    if (!state.pathResult && !state.pathError) computePath();
+    if (state.pathError) {
+      els.pathResult.innerHTML = `<p class="path-empty">${esc(state.pathError)}</p>`;
+      return;
+    }
+
+    const result = state.pathResult;
+    if (!result) return;
+    const hopLabel = result.length === 1 ? 'hop' : 'hops';
+    const status =
+      result.length === 0
+        ? 'Same node; no hops.'
+        : `Shortest path: ${result.length} ${hopLabel} across ${result.nodes.length} nodes.`;
+    let html = `<div class="path-summary-row"><p class="path-status" role="status">${esc(status)}</p><button class="btn btn-ghost" type="button" data-path-copy>Copy path</button></div><ol class="path-list" aria-label="Shortest path">`;
+
+    result.nodes.forEach((node, index) => {
+      const edge = index
+        ? `<span class="path-edge">${esc(result.edges[index - 1])}</span>`
+        : '';
+      const attr =
+        node.kind === 'module'
+          ? `data-path-module="${esc(node.id)}"`
+          : `data-path-service="${esc(node.id)}"`;
+      const sub =
+        node.kind === 'module'
+          ? `<span class="path-sub">${esc(node.id)}</span>`
+          : `<span class="path-sub">${esc(SERVICE_BY_NAME.get(node.id)?.family || 'service')}</span>`;
+      html += `<li class="path-step">${edge}<button class="path-node ${node.kind}" type="button" ${attr} aria-label="Open ${node.kind} ${esc(node.name)}">${esc(node.name)}${sub}</button></li>`;
+    });
+    html += '</ol>';
+    els.pathResult.innerHTML = html;
+  }
+
   function serviceGraphNode(name) {
     const service = SERVICE_BY_NAME.get(name);
     return service
@@ -1564,6 +1691,7 @@
       state.graphData.moreLeft,
       state.graphData.moreRight,
     );
+    renderPathResult();
   }
 
   function updateViewTabs() {
@@ -1694,6 +1822,13 @@
     state.graphMode = params.get('gmode') === 'service' ? 'service' : 'module';
     const graphEntity = params.get('gentity');
     if (graphEntity) state.graphEntity = graphEntity;
+    const pathFrom = params.get('gfrom');
+    const pathTo = params.get('gto');
+    state.pathFrom = isPathKey(pathFrom) ? pathFrom : '';
+    state.pathTo = isPathKey(pathTo) ? pathTo : '';
+    state.pathResult = null;
+    state.pathError = '';
+    if (state.pathFrom && state.pathTo) computePath();
     syncControls();
   }
 
@@ -1743,6 +1878,8 @@
     if (state.view === 'graph') {
       params.set('gmode', state.graphMode);
       params.set('gentity', state.graphEntity);
+      if (state.pathFrom) params.set('gfrom', state.pathFrom);
+      if (state.pathTo) params.set('gto', state.pathTo);
     }
     const hash = params.toString();
     const target = hash ? `#${hash}` : `${location.pathname}${location.search}`;
@@ -1778,6 +1915,7 @@
     els.compareB.value = state.compareB;
     syncGapControls();
     populateGraphEntities();
+    populatePathEntities();
   }
 
   // ---------- clipboard / csv ----------
@@ -2219,6 +2357,65 @@
       event.preventDefault();
       if (moduleNode) openModule(moduleNode.getAttribute('data-module-id'), true);
       else openService(serviceNode.getAttribute('data-service'));
+    });
+
+    els.pathFrom.addEventListener('change', () => {
+      state.pathFrom = els.pathFrom.value;
+      state.pathResult = null;
+      state.pathError = '';
+      render();
+    });
+
+    els.pathTo.addEventListener('change', () => {
+      state.pathTo = els.pathTo.value;
+      state.pathResult = null;
+      state.pathError = '';
+      render();
+    });
+
+    els.pathSwap.addEventListener('click', () => {
+      const swap = state.pathFrom;
+      state.pathFrom = state.pathTo;
+      state.pathTo = swap;
+      state.pathResult = null;
+      state.pathError = '';
+      populatePathEntities();
+      if (state.pathFrom && state.pathTo) computePath();
+      render();
+      els.pathFind.focus();
+    });
+
+    els.pathFind.addEventListener('click', () => {
+      state.pathFrom = els.pathFrom.value;
+      state.pathTo = els.pathTo.value;
+      computePath();
+      render();
+      els.pathResult.focus();
+    });
+
+    els.pathClear.addEventListener('click', () => {
+      state.pathFrom = '';
+      state.pathTo = '';
+      state.pathResult = null;
+      state.pathError = '';
+      populatePathEntities();
+      render();
+      els.pathFrom.focus();
+    });
+
+    els.pathResult.addEventListener('click', (event) => {
+      const copyButton = event.target.closest('[data-path-copy]');
+      if (copyButton) {
+        if (state.pathResult) copyText(pathToText(state.pathResult), copyButton);
+        return;
+      }
+      const moduleNode = event.target.closest('[data-path-module]');
+      if (moduleNode) {
+        openModule(moduleNode.getAttribute('data-path-module'), true);
+        return;
+      }
+      const serviceNode = event.target.closest('[data-path-service]');
+      if (serviceNode) openService(serviceNode.getAttribute('data-path-service'));
     });
 
     els.compareA.addEventListener('change', () => {
