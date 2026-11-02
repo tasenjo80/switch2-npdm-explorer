@@ -57,6 +57,7 @@ class CompatibilityPageTests(unittest.TestCase):
         self.assertIn("switch-artemis-launcher", self.text)
         self.assertIn("semi-tethered", self.text)
         self.assertIn("MintBrew", self.text)
+        self.assertIn("v0.7.0", self.text)
         self.assertIn("payload pack", self.text)
         self.assertIn("weaponized chain", self.text)
         self.assertIn("CivSwitch", self.text)
