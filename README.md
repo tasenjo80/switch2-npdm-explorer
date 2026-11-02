@@ -114,18 +114,19 @@ python tools/diff_npdm.py `
 
 ## Research status
 
-Latest dated community notes (2026-11-01): [docs/status-2026-11-01.md](docs/status-2026-11-01.md).
-Earlier notes: [2026-10-30](docs/status-2026-10-30.md),
+Latest dated community notes (2026-11-02): [docs/status-2026-11-02.md](docs/status-2026-11-02.md).
+Earlier notes: [2026-11-01](docs/status-2026-11-01.md),
+[2026-10-30](docs/status-2026-10-30.md),
 [2026-10-29](docs/status-2026-10-29.md),
 [2026-10-27](docs/status-2026-10-27.md),
 [2026-10-26](docs/status-2026-10-26.md),
 [2026-10-25](docs/status-2026-10-25.md).
 Stable compatibility and tooling page: <https://tasenjo80.github.io/switch2-npdm-explorer/compatibility.html>.
 
-- **23.0.1 remained current**; no 23.0.2 was observed. Community analysis puts
-  the WebKit applet gate change at 21.0.0, with 20.5.0-and-lower consoles able
-  to use the older access method. Staff advised lower-firmware users not to
-  update.
+- **23.0.1 remained current at review time**; no 23.0.2 was observed.
+  Community analysis puts the WebKit applet gate change at 21.0.0, with
+  20.5.0-and-lower consoles able to use the older access method. Staff advised
+  lower-firmware users not to update.
 - **ns2jb** requires full SmileBASIC 4.4.9, which was delisted from the eShop
   on 2026-10-22; existing owners are the practical audience. The author
   reports FS access, native code as ordinary sysmodules, save backup, game
@@ -135,6 +136,15 @@ Stable compatibility and tooling page: <https://tasenjo80.github.io/switch2-npdm
   on both ends, the game on internal storage, and roughly 20% success; the
   demo cannot save programs, so the bootstrap must be re-entered with
   `SAVEV`/`LOADV` workarounds. Full 4.4.9 remains the reference path.
+- [**CivSwitch**](https://github.com/Gezine/CivSwitch) was published on
+  2026-11-01 as a public XSS toolchain for the **Switch 1 edition of
+  Civilization 7**. It supports only the physical 1.0.0
+  cartridge, recommends a Pico 2, and the author reports testing on Switch 2
+  20.4.0 and 23.0.1. It is **userland/JavaScript only**: it starts a JS loader
+  and can install a save-persistent trigger, but provides no FS, native code,
+  kernel, CFW, or console persistence. It does not replace SmileBASIC/`ns2jb`
+  or the Seedsow/Artemis FS path; if you already have one of those entry
+  points, it adds no FS capability.
 - **Seedsow/Artemis entry point** was announced on 2026-10-30. A modified
   Seedsow save can be installed from a homebrewed Switch 1 with JKSV and
   Nintendo's official save transfer, without SmileBASIC. An `ns2jb` session
@@ -149,7 +159,8 @@ Stable compatibility and tooling page: <https://tasenjo80.github.io/switch2-npdm
   save-enumeration, title-name, and SD/game-card listing updates on 2026-10-31.
   It remains a save tool, not an entry point.
 - The **Japanese Seedsow Lullaby demo** was reported delisted on 2026-10-30.
-  Other regions may follow; keep the demo if you already have it.
+  A Korean takedown was reported on 2026-11-02; it is not independently
+  confirmed. Other regions may follow; keep the demo if you already have it.
 - The official WebKit port remained **private/unreleased**. A public
   [browser/captive-portal research bench](https://github.com/Jmesmykil/switch2-captive-portal-research)
   appeared on 2026-10-28; its author claims hardware-confirmed UAF/read

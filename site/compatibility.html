@@ -28,9 +28,9 @@
     </header>
 
     <div class="dataset-meta" aria-label="Review status">
-      <span class="dataset-badge"><strong>Reviewed</strong> 2026-11-01</span>
-      <span class="dataset-badge"><strong>Notes</strong> through 2026-11-01</span>
-      <a class="dataset-link" href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-11-01.md" target="_blank" rel="noopener">Latest status note</a>
+      <span class="dataset-badge"><strong>Reviewed</strong> 2026-11-02</span>
+      <span class="dataset-badge"><strong>Notes</strong> through 2026-11-02</span>
+      <a class="dataset-link" href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-11-02.md" target="_blank" rel="noopener">Latest status note</a>
       <a class="dataset-link" href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/scope.md" target="_blank" rel="noopener">Scope &amp; provenance</a>
       <a class="dataset-link" href="index.html">NPDM data</a>
     </div>
@@ -93,7 +93,7 @@
               <tr>
                 <th scope="row">23.0.1 (current)</th>
                 <td>Same as 21.0.0 and newer.</td>
-                <td>Current as of 2026-11-01; no 23.0.2 was observed.</td>
+                <td>Current as of 2026-11-02; no 23.0.2 was observed.</td>
                 <td><span class="chip">Community report</span><br>2026-10-27</td>
               </tr>
             </tbody>
@@ -122,6 +122,13 @@
                 <td>Full SmileBASIC 4.4.9 is the reference path; the game was delisted on 2026-10-22. A community fork (<a href="https://gitlab.com/BermTheSequel/ns2jb2" target="_blank" rel="noopener">ns2jb2</a>) supports the 4.4.6 demo with Ethernet and internal storage, but the demo cannot save programs and is less reliable. Ethernet, docked mode, and a cold boot are common reliability tips.</td>
                 <td><span class="badge badge-builtin">Public</span><br>but unreliable; stage 2/4 is the usual failure point.</td>
                 <td><a href="https://pepsipu.com/blog/2026-10-switch2-jailbreak-ns2jb/" target="_blank" rel="noopener">Author write-up</a><br><span class="chip">Public release</span><br>2026-10-22</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>CivSwitch</code></th>
+                <td>XSS toolchain for the Switch 1 edition of Civilization 7. A Pico HID macro types a chat payload; the console runs a JavaScript loader and can install a save-persistent trigger inside the game. Userland/JS only.</td>
+                <td>Physical Switch 1 edition of Civilization 7 at version 1.0.0. Digital, updated, reprint, and MIG/flashcart copies are not documented as supported. Pi Pico 2 (RP2350) recommended; Pico 1 is untested by the author. A PC runs the installer and payload sender. Author reports testing on Switch 2 20.4.0 and 23.0.1.</td>
+                <td><span class="badge badge-builtin">Public</span><br>userland/JS only; no FS, native code, kernel, CFW, or console persistence. It does not replace the Seedsow/Artemis FS path.</td>
+                <td><a href="https://github.com/Gezine/CivSwitch" target="_blank" rel="noopener">Gezine/CivSwitch</a><br><span class="chip">Public release</span><br>2026-11-01</td>
               </tr>
               <tr>
                 <th scope="row">Artemis Engine<br><span class="muted">Seedsow save path</span></th>
@@ -220,6 +227,15 @@
                 <td><a href="https://gitlab.com/BermTheSequel/ns2jb2" target="_blank" rel="noopener">BermTheSequel/ns2jb2</a></td>
               </tr>
               <tr>
+                <th scope="row"><code>CivSwitch</code></th>
+                <td>XSS/JS loader and installer for the Switch 1 edition of Civilization 7.</td>
+                <td>Physical Civ 7 Switch 1 v1.0.0; Pico 2 (RP2350) recommended; PC for the installer and payload sender.</td>
+                <td>Types the chat payload, starts a JavaScript loader on TCP :9026, installs a save-persistent trigger, and runs JavaScript payloads.</td>
+                <td>FS, native code, kernel, CFW, console persistence, or a Seedsow FS port; no digital or updated-cart support. MIG/flashcart use is not documented.</td>
+                <td>2026-11-01<br><span class="chip">Public release</span></td>
+                <td><a href="https://github.com/Gezine/CivSwitch" target="_blank" rel="noopener">Gezine/CivSwitch</a></td>
+              </tr>
+              <tr>
                 <th scope="row"><code>mac2jb</code></th>
                 <td>Desktop helper with the MintBrew homebrew library and RPC setup.</td>
                 <td>Compatible <code>ns2jb</code> setup; MintBrew apps use the held RPC session.</td>
@@ -277,6 +293,14 @@
           </table>
         </div>
         <p class="compat-note">
+          CivSwitch (2026-11-01) is a public userland/XSS path, not an FS
+          chain. The project documents only the physical Switch 1 edition of
+          Civilization 7 at version 1.0.0; its trigger is stored inside the
+          game save, not the console. Digital, updated/reprint, and
+          MIG/flashcart use is not documented. It does not replace
+          SmileBASIC/ns2jb or the Seedsow/Artemis FS path.
+        </p>
+        <p class="compat-note">
           SmileBASIC 4.4.9 was delisted from the eShop on 2026-10-22
           (<a href="https://www.nintendo.com/us/store/products/smilebasic-4-switch/" target="_blank" rel="noopener">store page</a>),
           so ns2jb is not a practical entry point for new users without an
@@ -293,8 +317,9 @@
           public; do not treat this as a working jailbreak yet.
         </p>
         <p class="compat-note">
-          The Japanese Seedsow demo was delisted on 2026-10-30. Other regions may
-          follow; keep the demo if you already have it.
+          The Japanese Seedsow demo was delisted on 2026-10-30; a Korean
+          takedown was reported on 2026-11-02. Other regions may follow; keep
+          the demo if you already have it.
         </p>
         <p class="compat-note">
           Remote NSO Cloud transfer is user-reported. It requires the full game
@@ -350,14 +375,15 @@
           <li><a href="https://pepsipu.com/blog/2026-10-switch2-jailbreak-ns2jb/" target="_blank" rel="noopener">ns2jb author write-up</a></li>
           <li><a href="https://gitlab.com/BermTheSequel/ns2jb2" target="_blank" rel="noopener">ns2jb2 demo fork</a></li>
           <li><a href="https://github.com/dougchansan/ns2-savekit" target="_blank" rel="noopener">ns2-savekit</a></li>
+          <li><a href="https://github.com/Gezine/CivSwitch" target="_blank" rel="noopener">CivSwitch public release</a></li>
           <li><a href="https://github.com/DialingSpoon527/seedsow-lua-editor/releases/tag/v0.1.3" target="_blank" rel="noopener">Seedsow Lua Editor v0.1.3 release</a></li>
-          <li>Status notes: <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-11-01.md" target="_blank" rel="noopener">2026-11-01</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-30.md" target="_blank" rel="noopener">2026-10-30</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-29.md" target="_blank" rel="noopener">2026-10-29</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-27.md" target="_blank" rel="noopener">2026-10-27</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-26.md" target="_blank" rel="noopener">2026-10-26</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-25.md" target="_blank" rel="noopener">2026-10-25</a></li>
+          <li>Status notes: <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-11-02.md" target="_blank" rel="noopener">2026-11-02</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-11-01.md" target="_blank" rel="noopener">2026-11-01</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-30.md" target="_blank" rel="noopener">2026-10-30</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-29.md" target="_blank" rel="noopener">2026-10-29</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-27.md" target="_blank" rel="noopener">2026-10-27</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-26.md" target="_blank" rel="noopener">2026-10-26</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-25.md" target="_blank" rel="noopener">2026-10-25</a></li>
         </ul>
       </section>
     </main>
 
     <footer class="footer">
-      <p><strong>Source:</strong> public community reports and releases through 2026-11-01. Claims are labelled; verify before relying on them.</p>
+      <p><strong>Source:</strong> public community reports and releases through 2026-11-02. Claims are labelled; verify before relying on them.</p>
       <p><strong>Dataset:</strong> this page does not change the NPDM data, which remains the 2026-10-24 snapshot. See <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/DATA-PROVENANCE.md" target="_blank" rel="noopener">DATA-PROVENANCE.md</a>.</p>
       <p><strong>Corrections:</strong> use <a href="https://github.com/tasenjo80/switch2-npdm-explorer/discussions" target="_blank" rel="noopener">Discussions</a> or open an issue. Do not post keys, dumps, save data, or console identifiers. Not affiliated with Nintendo.</p>
     </footer>
