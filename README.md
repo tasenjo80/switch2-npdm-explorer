@@ -152,12 +152,16 @@ Stable compatibility and tooling page: <https://tasenjo80.github.io/switch2-npdm
   Seedsow save can be installed from a homebrewed Switch 1 with JKSV and
   Nintendo's official save transfer, without SmileBASIC. An `ns2jb` session
   plus [`ns2-savekit`](https://github.com/dougchansan/ns2-savekit) is the
-  alternative save-writing route. The path is **currently tethered**; the FS
-  escalation is **untested** and the bootstrap is **not public**. Same-access
-  and future untethered launch are goals, not confirmed capabilities. A remote
-  NSO Cloud transfer is user-reported and needs the full game on the target
-  plus NSO; the demo has no cloud save. Seedsow Lua Editor v0.1.3 remains the
-  reference editor and targets 23.0.1 on both consoles while current.
+  alternative save-writing route. On 2026-11-02 Alula published
+  [`switch-artemis-launcher`](https://github.com/alula/switch-artemis-launcher)
+  v1 for the Nora 2 and Seedsow demos: a save-persistent userland Lua/native
+  launcher with an HTTP eval/save API. It is **semi-tethered**, supports demos
+  only, and is **not an entry point or an FS chain**. The `ns2jb` RPC install
+  route is not yet tested. The FS escalation is **unconfirmed** and the FS
+  bootstrap is **not public**. A remote NSO Cloud transfer is user-reported
+  and needs the full game on the target plus NSO; the demo has no cloud save.
+  Seedsow Lua Editor v0.1.3 remains the reference editor and targets 23.0.1 on
+  both consoles while current.
 - [`ns2-savekit`](https://github.com/dougchansan/ns2-savekit) received
   save-enumeration, title-name, and SD/game-card listing updates on 2026-10-31.
   It remains a save tool, not an entry point.

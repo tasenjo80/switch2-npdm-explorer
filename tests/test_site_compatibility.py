@@ -54,6 +54,8 @@ class CompatibilityPageTests(unittest.TestCase):
         self.assertIn("Community report", self.text)
         self.assertIn("ns2jb2", self.text)
         self.assertIn("ns2-savekit", self.text)
+        self.assertIn("switch-artemis-launcher", self.text)
+        self.assertIn("semi-tethered", self.text)
         self.assertIn("MintBrew", self.text)
         self.assertIn("payload pack", self.text)
         self.assertIn("weaponized chain", self.text)
