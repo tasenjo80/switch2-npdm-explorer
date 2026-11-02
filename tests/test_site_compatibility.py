@@ -62,6 +62,7 @@ class CompatibilityPageTests(unittest.TestCase):
         self.assertIn("CivSwitch", self.text)
         self.assertIn("Gezine/CivSwitch", self.text)
         self.assertIn("version 1.0.0", self.text)
+        self.assertIn("needs porting", self.text)
 
     def test_ids_are_unique(self):
         ids = [attrs["id"] for _, attrs in self.tags if "id" in attrs]

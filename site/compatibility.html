@@ -127,7 +127,7 @@
                 <th scope="row"><code>CivSwitch</code></th>
                 <td>XSS toolchain for the Switch 1 edition of Civilization 7. A Pico HID macro types a chat payload; the console runs a JavaScript loader and can install a save-persistent trigger inside the game. Userland/JS only.</td>
                 <td>Physical Switch 1 edition of Civilization 7 at version 1.0.0. Digital, updated, reprint, and MIG/flashcart copies are not documented as supported. Pi Pico 2 (RP2350) recommended; Pico 1 is untested by the author. A PC runs the installer and payload sender. Author reports testing on Switch 2 20.4.0 and 23.0.1.</td>
-                <td><span class="badge badge-builtin">Public</span><br>userland/JS only; no FS, native code, kernel, CFW, or console persistence. It does not replace the Seedsow/Artemis FS path.</td>
+                <td><span class="badge badge-builtin">Public</span><br>userland/JS only; no FS, native code, kernel, CFW, or console persistence. It does not replace the Seedsow/Artemis FS path. Gezine stated on 2026-11-02 that the fs bug works from CivSwitch but needs porting; this is unverified and not a current FS path.</td>
                 <td><a href="https://github.com/Gezine/CivSwitch" target="_blank" rel="noopener">Gezine/CivSwitch</a><br><span class="chip">Public release</span><br>2026-11-01</td>
               </tr>
               <tr>
@@ -235,7 +235,7 @@
                 <td>XSS/JS loader and installer for the Switch 1 edition of Civilization 7.</td>
                 <td>Physical Civ 7 Switch 1 v1.0.0; Pico 2 (RP2350) recommended; PC for the installer and payload sender.</td>
                 <td>Types the chat payload, starts a JavaScript loader on TCP :9026, installs a save-persistent trigger, and runs JavaScript payloads.</td>
-                <td>FS, native code, kernel, CFW, console persistence, or a Seedsow FS port; no digital or updated-cart support. MIG/flashcart use is not documented.</td>
+                <td>FS, native code, kernel, CFW, console persistence, or a Seedsow FS port; no digital or updated-cart support. MIG/flashcart use is not documented. Gezine's fs-bug claim still needs porting.</td>
                 <td>2026-11-01<br><span class="chip">Public release</span></td>
                 <td><a href="https://github.com/Gezine/CivSwitch" target="_blank" rel="noopener">Gezine/CivSwitch</a></td>
               </tr>
@@ -311,7 +311,9 @@
           Civilization 7 at version 1.0.0; its trigger is stored inside the
           game save, not the console. Digital, updated/reprint, and
           MIG/flashcart use is not documented. It does not replace
-          SmileBASIC/ns2jb or the Seedsow/Artemis FS path.
+          SmileBASIC/ns2jb or the Seedsow/Artemis FS path. Gezine's
+          2026-11-02 statement that the fs bug works from CivSwitch is
+          unverified and still needs a port.
         </p>
         <p class="compat-note">
           SmileBASIC 4.4.9 was delisted from the eShop on 2026-10-22

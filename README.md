@@ -147,7 +147,9 @@ Stable compatibility and tooling page: <https://tasenjo80.github.io/switch2-npdm
   and can install a save-persistent trigger, but provides no FS, native code,
   kernel, CFW, or console persistence. It does not replace SmileBASIC/`ns2jb`
   or the Seedsow/Artemis FS path; if you already have one of those entry
-  points, it adds no FS capability.
+  points, it adds no FS capability. Gezine stated on 2026-11-02 that the fs bug
+  works from CivSwitch but needs porting; this is unverified and not a current
+  FS path.
 - **Seedsow/Artemis entry point** was announced on 2026-10-30. A modified
   Seedsow save can be installed from a homebrewed Switch 1 with JKSV and
   Nintendo's official save transfer, without SmileBASIC. An `ns2jb` session
