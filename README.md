@@ -150,12 +150,12 @@ Stable compatibility and tooling page: <https://tasenjo80.github.io/switch2-npdm
   points, it adds no FS capability. Gezine stated on 2026-11-02 that the fs bug
   works from CivSwitch but needs porting; this is unverified and not a current
   FS path.
-- [`mac2jb`](https://github.com/cpypwn/mac2jb) v0.7.0 was published on
-  2026-11-02 for Apple Silicon macOS. It adds CivSwitch typing/loader setup,
-  Artemis launcher saves for the Seedsow and Nora demos, SaveKit, native
-  HBLauncher/MintNES, and browser research scripts. It is a helper, not an
-  exploit or CFW; the CivSwitch flow does not expose held RPC, and the Artemis
-  RPC install path is still untested.
+- [`mac2jb`](https://github.com/cpypwn/mac2jb) v0.7.1 was published on
+  2026-11-02 for Apple Silicon macOS. It adds CivSwitch typing/loader setup and
+  a CivSwitch Control Center, Artemis launcher saves for the Seedsow and Nora
+  demos, SaveKit, native HBLauncher/MintNES, and browser research scripts. It is
+  a helper, not an exploit or CFW; the CivSwitch flow does not expose held RPC,
+  and the Artemis RPC install path is still untested.
 - **Seedsow/Artemis entry point** was announced on 2026-10-30. A modified
   Seedsow save can be installed from a homebrewed Switch 1 with JKSV and
   Nintendo's official save transfer, without SmileBASIC. An `ns2jb` session
@@ -172,7 +172,10 @@ Stable compatibility and tooling page: <https://tasenjo80.github.io/switch2-npdm
   both consoles while current.
 - [`ns2-savekit`](https://github.com/dougchansan/ns2-savekit) received
   save-enumeration, title-name, and SD/game-card listing updates on 2026-10-31.
-  It remains a save tool, not an entry point.
+  On 2026-11-02 it added an Artemis HTTP transport for save access without an
+  `ns2jb` session: unauthenticated port 8080, LAN-only, limited to the
+  launcher's own save, and explicit-file backups rather than a complete restore.
+  It remains a save tool, not an entry point or FS path.
 - The **Japanese Seedsow Lullaby demo** was reported delisted on 2026-10-30.
   A Korean takedown was reported on 2026-11-02; it is not independently
   confirmed. Other regions may follow; keep the demo if you already have it.

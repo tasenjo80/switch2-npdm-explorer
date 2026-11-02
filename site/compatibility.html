@@ -243,10 +243,10 @@
                 <th scope="row"><code>mac2jb</code></th>
                 <td>All-in-one Apple Silicon macOS helper for <code>ns2jb</code> and CivSwitch, with MintBrew, SaveKit, and Artemis launcher installation.</td>
                 <td>Apple Silicon Mac, macOS 14+, and an unsigned USB driver with reduced security/SIP changes; <code>ns2jb</code> with SmileBASIC full/demo, or a physical CivSwitch 1.0.0 cartridge.</td>
-                <td>Types the <code>ns2jb</code> bootstrap (full/demo) and CivSwitch payload; installs Seedsow/Nora Artemis launcher saves with backups; SaveKit; MintBrew/HBLauncher/MintNES; OunceCake WebDAV; browser research scripts.</td>
+                <td>Types the <code>ns2jb</code> bootstrap (full/demo) and CivSwitch payload; installs Seedsow/Nora Artemis launcher saves with backups; SaveKit; CivSwitch Control Center (read-only save exports, controller input monitoring, JavaScript staging); MintBrew/HBLauncher/MintNES; OunceCake WebDAV; browser research scripts.</td>
                 <td>Not a standalone exploit; no FS, kernel, CFW, or console persistence; Mac-only. The CivSwitch flow does not expose <code>ns2jb</code>'s held RPC, and the Artemis RPC install path is still untested.</td>
                 <td>2026-11-02<br><span class="chip">Public release</span></td>
-                <td><a href="https://github.com/cpypwn/mac2jb/releases/tag/v0.7.0" target="_blank" rel="noopener">v0.7.0 release</a></td>
+                <td><a href="https://github.com/cpypwn/mac2jb/releases/tag/v0.7.1" target="_blank" rel="noopener">v0.7.1 release</a></td>
               </tr>
               <tr>
                 <th scope="row"><code>NS2-Desktop</code></th>
@@ -286,11 +286,11 @@
               </tr>
               <tr>
                 <th scope="row"><code>ns2-savekit</code></th>
-                <td>Save read/write and Seedsow editor installer over an ns2jb session.</td>
-                <td>Held ns2jb session; target save exists; writable title.</td>
-                <td>Back up, restore, and modify saves; install the Seedsow Lua Editor save without JKSV, a Switch 1, or a Nintendo transfer. Author reports Artemis save-data Lua.</td>
-                <td>Does not provide a broader Artemis native/FS entry or bypass ns2jb; compatibility varies.</td>
-                <td>2026-10-28<br><span class="chip">Public release</span></td>
+                <td>Save tools and Artemis launcher installer, with RPC and Artemis HTTP transports.</td>
+                <td>Held <code>ns2jb</code> session for the RPC path, or the Artemis launcher's HTTP server on port 8080 for the HTTP path; target save exists; writable title.</td>
+                <td>Back up, restore, and modify saves; install the Seedsow Lua Editor or Artemis launcher save; Artemis HTTP health/eval/stat/get/put/rm and explicit-file backups without an <code>ns2jb</code> session. Hardware-tested 4/16/64 KiB transfers.</td>
+                <td>No FS, kernel, CFW, or broader native entry. HTTP is unauthenticated, LAN-only, limited to the launcher's own save, and has no directory listing or complete restore. RPC compatibility varies.</td>
+                <td>2026-11-02<br><span class="chip">Public release</span></td>
                 <td><a href="https://github.com/dougchansan/ns2-savekit" target="_blank" rel="noopener">dougchansan/ns2-savekit</a></td>
               </tr>
               <tr>
@@ -352,9 +352,11 @@
           save.
         </p>
         <p class="compat-note">
-          ns2-savekit installs the Seedsow editor save through an ns2jb session.
-          It is an alternative to the Switch 1/JKSV transfer, not a no-SmileBASIC
-          path for that route.
+          ns2-savekit now also includes an Artemis HTTP transport: it can read
+          and write the launcher's own save through the unauthenticated port
+          8080 server without an ns2jb session. It is LAN-only, cannot enumerate
+          the save directory, and its explicit-file backups are not complete
+          restore archives. It does not provide FS or access to other titles.
         </p>
         <p class="compat-note">
           The HTTP OunceCake fork reports dumping system firmware titles and
