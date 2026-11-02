@@ -164,14 +164,14 @@ Stable compatibility and tooling page: <https://tasenjo80.github.io/switch2-npdm
 - The **Japanese Seedsow Lullaby demo** was reported delisted on 2026-10-30.
   A Korean takedown was reported on 2026-11-02; it is not independently
   confirmed. Other regions may follow; keep the demo if you already have it.
-- The official WebKit port remained **private/unreleased**. A public
-  [browser/captive-portal research bench](https://github.com/Jmesmykil/switch2-captive-portal-research)
-  appeared on 2026-10-28; its author claims hardware-confirmed UAF/read
-  primitives, but the repo says no verified takeover or Switch support and warns
-  some success labels are unreliable. On 2026-11-01 it added a public
-  CVE-2026-43715 CSSFontFace trigger page; it is trigger-only, with no
-  read/write, escalation, or verified Switch support. FS/23.0.1 claims are
-  unverified; no public exploit.
+- The official WebKit port remained **private/unreleased**. The public
+  [Jmesmykil research repo](https://github.com/Jmesmykil/switch2-captive-portal-research)
+  was replaced on 2026-11-02 with a payload pack containing CSSFontFace
+  UAF/ARW/JOP files and a launcher. Its README calls the release a
+  reachability/diagnostic payload and says it does not provide code execution;
+  the commit message claims a weaponized chain. These claims conflict, have not
+  been independently verified, and do not establish FS or 23.0.1 support. The
+  old CVE-2026-43715 trigger page was removed.
 - A **UFS interposer** project is researching hardware NAND backup/restore.
   It is high-risk and not a jailbreak.
 - **OunceCake** remains read-only game-file access. A community HTTP/WebDAV
