@@ -57,7 +57,7 @@ class CompatibilityPageTests(unittest.TestCase):
         self.assertIn("switch-artemis-launcher", self.text)
         self.assertIn("semi-tethered", self.text)
         self.assertIn("MintBrew", self.text)
-        self.assertIn("v0.7.2", self.text)
+        self.assertIn("v0.7.3", self.text)
         self.assertIn("Elden Ring", self.text)
         self.assertIn("Artemis HTTP", self.text)
         self.assertIn("payload pack", self.text)
