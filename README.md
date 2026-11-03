@@ -117,8 +117,9 @@ python tools/diff_npdm.py `
 
 ## Research status
 
-Latest dated community notes (2026-11-02): [docs/status-2026-11-02.md](docs/status-2026-11-02.md).
-Earlier notes: [2026-11-01](docs/status-2026-11-01.md),
+Latest dated community notes (2026-11-03): [docs/status-2026-11-03.md](docs/status-2026-11-03.md).
+Earlier notes: [2026-11-02](docs/status-2026-11-02.md),
+[2026-11-01](docs/status-2026-11-01.md),
 [2026-10-30](docs/status-2026-10-30.md),
 [2026-10-29](docs/status-2026-10-29.md),
 [2026-10-27](docs/status-2026-10-27.md),
@@ -150,12 +151,13 @@ Stable compatibility and tooling page: <https://tasenjo80.github.io/switch2-npdm
   points, it adds no FS capability. Gezine stated on 2026-11-02 that the fs bug
   works from CivSwitch but needs porting; this is unverified and not a current
   FS path.
-- [`mac2jb`](https://github.com/cpypwn/mac2jb) v0.7.1 was published on
-  2026-11-02 for Apple Silicon macOS. It adds CivSwitch typing/loader setup and
+- [`mac2jb`](https://github.com/cpypwn/mac2jb) v0.7.2 was published on
+  2026-11-03 for Apple Silicon macOS. It adds CivSwitch typing/loader setup and
   a CivSwitch Control Center, Artemis launcher saves for the Seedsow and Nora
-  demos, SaveKit, native HBLauncher/MintNES, and browser research scripts. It is
-  a helper, not an exploit or CFW; the CivSwitch flow does not expose held RPC,
-  and the Artemis RPC install path is still untested.
+  demos, SaveKit with accessible-save writes and Elden Ring PC save conversion,
+  native HBLauncher/MintNES, and browser research scripts. It is a helper, not
+  an exploit or CFW; the CivSwitch flow does not expose held RPC, and the Artemis
+  RPC install path is still untested.
 - **Seedsow/Artemis entry point** was announced on 2026-10-30. A modified
   Seedsow save can be installed from a homebrewed Switch 1 with JKSV and
   Nintendo's official save transfer, without SmileBASIC. An `ns2jb` session
