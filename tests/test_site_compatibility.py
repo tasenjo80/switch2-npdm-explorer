@@ -1,3 +1,4 @@
+import re
 import unittest
 from html.parser import HTMLParser
 from pathlib import Path
@@ -49,8 +50,14 @@ class CompatibilityPageTests(unittest.TestCase):
             attrs for tag, attrs in self.tags if tag == "h2" and attrs.get("id")
         ]
         self.assertGreaterEqual(len(headings), 6)
-        self.assertIn("2026-11-03", self.text)
-        self.assertIn("status-2026-11-03.md", self.text)
+        self.assertIn("2026-11-10", self.text)
+        self.assertIn("status-2026-11-10.md", self.text)
+        self.assertIn("23.5.0", self.text)
+        self.assertIn("patched", self.text)
+        self.assertIn("Ozone", self.text)
+        self.assertIn("libnx-ounce", self.text)
+        self.assertIn("ns2jb-modloader", self.text)
+        self.assertIn("balatro-switch-rce", self.text)
         self.assertIn("Community report", self.text)
         self.assertIn("ns2jb2", self.text)
         self.assertIn("ns2-savekit", self.text)
@@ -66,6 +73,16 @@ class CompatibilityPageTests(unittest.TestCase):
         self.assertIn("Gezine/CivSwitch", self.text)
         self.assertIn("version 1.0.0", self.text)
         self.assertIn("needs porting", self.text)
+
+    def test_linked_status_notes_exist(self):
+        notes = set(
+            re.findall(
+                r"/blob/master/(docs/status-\d{4}-\d{2}-\d{2}\.md)", self.text
+            )
+        )
+        self.assertTrue(notes)
+        for relative in sorted(notes):
+            self.assertTrue((ROOT / relative).is_file(), relative)
 
     def test_ids_are_unique(self):
         ids = [attrs["id"] for _, attrs in self.tags if "id" in attrs]

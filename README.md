@@ -117,8 +117,10 @@ python tools/diff_npdm.py `
 
 ## Research status
 
-Latest dated community notes (2026-11-03): [docs/status-2026-11-03.md](docs/status-2026-11-03.md).
-Earlier notes: [2026-11-02](docs/status-2026-11-02.md),
+Latest dated community notes (2026-11-10): [docs/status-2026-11-10.md](docs/status-2026-11-10.md).
+Earlier notes: [2026-11-04](docs/status-2026-11-04.md),
+[2026-11-03](docs/status-2026-11-03.md),
+[2026-11-02](docs/status-2026-11-02.md),
 [2026-11-01](docs/status-2026-11-01.md),
 [2026-10-30](docs/status-2026-10-30.md),
 [2026-10-29](docs/status-2026-10-29.md),
@@ -127,10 +129,17 @@ Earlier notes: [2026-11-02](docs/status-2026-11-02.md),
 [2026-10-25](docs/status-2026-10-25.md).
 Stable compatibility and tooling page: <https://tasenjo80.github.io/switch2-npdm-explorer/compatibility.html>.
 
-- **23.0.1 remained current at review time**; no 23.0.2 was observed.
-  Community analysis puts the WebKit applet gate change at 21.0.0, with
-  20.5.0-and-lower consoles able to use the older access method. Staff advised
-  lower-firmware users not to update.
+- **23.5.0 was released on 2026-11-09** and is current. The public
+  [SwitchBrew 23.5.0 page](https://switchbrew.org/wiki/23.5.0) lists `FS` among
+  the rebuilt KIPs. Community staff report it patched the FS bug used by the
+  current public FS/userland paths and advise staying on **23.0.1 or lower**;
+  this report is not independently verified here.
+  The current FS-based entry points should be treated as broken on 23.5.0 until
+  tested. The save-based CivSwitch and Balatro paths do not use ns2jb's FS bug,
+  but their 23.5.0 compatibility is also untested. Do not update if keeping the
+  current entry points matters. Community analysis puts the WebKit applet
+  gate change at 21.0.0, with 20.5.0-and-lower consoles able to use the older
+  access method.
 - **ns2jb** requires full SmileBASIC 4.4.9, which was delisted from the eShop
   on 2026-10-22; existing owners are the practical audience. The author
   reports FS access, native code as ordinary sysmodules, save backup, game
@@ -159,26 +168,51 @@ Stable compatibility and tooling page: <https://tasenjo80.github.io/switch2-npdm
   deletion, native HBLauncher/MintNES, and browser research scripts. It is a
   helper, not an exploit or CFW; the CivSwitch flow does not expose held RPC,
   and the Artemis RPC install path is still untested.
+- [`alula/Ozone`](https://github.com/alula/Ozone) and
+  [`alula/libnx-ounce`](https://github.com/alula/libnx-ounce) are early,
+  source-only groundwork for Switch 2 homebrew: Ozone ports selected Atmosphere
+  components, and libnx-ounce is a native-homebrew library fork. Ozone's README
+  explicitly says it is **not a full CFW and likely never will be**. There is no
+  release, installer, persistence, or public FS chain.
 - **Seedsow/Artemis entry point** was announced on 2026-10-30. A modified
   Seedsow save can be installed from a homebrewed Switch 1 with JKSV and
   Nintendo's official save transfer, without SmileBASIC. An `ns2jb` session
   plus [`ns2-savekit`](https://github.com/dougchansan/ns2-savekit) is the
-  alternative save-writing route. On 2026-11-02 Alula published
+  alternative save-writing route. Alula published
   [`switch-artemis-launcher`](https://github.com/alula/switch-artemis-launcher)
-  v1 for the Nora 2 and Seedsow demos: a save-persistent userland Lua/native
-  launcher with an HTTP eval/save API. It is **semi-tethered**, supports demos
-  only, and is **not an entry point or an FS chain**. The `ns2jb` RPC install
-  route is not yet tested. The FS escalation is **unconfirmed** and the FS
-  bootstrap is **not public**. A remote NSO Cloud transfer is user-reported
-  and needs the full game on the target plus NSO; the demo has no cloud save.
-  Seedsow Lua Editor v0.1.3 remains the reference editor and targets 23.0.1 on
-  both consoles while current.
+  **v2** on 2026-11-05 for the Nora 2, Seedsow, and Hamidashi Creative demos. It
+  fixes saves not being committed to internal storage and raises the HTTP
+  request cap; it remains a save-persistent userland Lua/native launcher with an
+  HTTP eval/save API. It is **semi-tethered**, supports demos only, and is **not
+  an entry point or an FS chain**. The `ns2jb` RPC install route is not yet
+  tested. The FS escalation is **unconfirmed** and the FS bootstrap is **not
+  public**. A remote NSO Cloud transfer is user-reported and needs the full game
+  on the target plus NSO; the demo has no cloud save. Seedsow Lua Editor v0.1.3
+  remains the reference editor and targets 23.0.1 on both consoles; 23.5.0 has
+  not been publicly verified.
 - [`ns2-savekit`](https://github.com/dougchansan/ns2-savekit) received
   save-enumeration, title-name, and SD/game-card listing updates on 2026-10-31.
   On 2026-11-02 it added an Artemis HTTP transport for save access without an
   `ns2jb` session: unauthenticated port 8080, LAN-only, limited to the
   launcher's own save, and explicit-file backups rather than a complete restore.
   It remains a save tool, not an entry point or FS path.
+- [`ns2jb-modloader`](https://github.com/SebaaMG/ns2jb-modloader) is a public
+  RomFS/ExeFS mod loader for Switch 1 and Switch 2 games. It needs an existing
+  `ns2jb`-compatible FS/RPC session and a microSD or microSD Express card;
+  regular microSD is tested, while microSD Express still needs hardware testing.
+  It loads RomFS/ExeFS replacements and IPS patches, stays active until reboot,
+  and does not support plugins, cheats, or overlays yet. It is a modding tool,
+  not an entry point or FS escalation.
+- [`balatro-switch-rce`](https://github.com/Luminger/balatro-switch-rce) is a
+  public save-based userland proof of concept for the physical Switch 1 Balatro
+  cartridge. A crafted save replaces the game with a Lua REPL and an
+  unauthenticated FTP server inside the title's process; Nintendo's official
+  save transfer carries it to the Switch 2, where it runs in backward
+  compatibility without CFW on the target. It does **not** use `ns2jb`'s FS bug,
+  but it is not a kernel exploit, sysmodule, console-wide FS path, or standalone
+  entry point. It targets exact 1.0.1f/1.0.1o images; the native Switch 2 Balatro
+  binary is rejected. RPC/FTP are LAN-only, unauthenticated, and unencrypted;
+  compatibility with 23.5.0 is untested.
 - The **Japanese Seedsow Lullaby demo** was reported delisted on 2026-10-30.
   A Korean takedown was reported on 2026-11-02; it is not independently
   confirmed. Other regions may follow; keep the demo if you already have it.
