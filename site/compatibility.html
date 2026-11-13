@@ -28,9 +28,9 @@
     </header>
 
     <div class="dataset-meta" aria-label="Review status">
-      <span class="dataset-badge"><strong>Reviewed</strong> 2026-11-10</span>
-      <span class="dataset-badge"><strong>Notes</strong> through 2026-11-10</span>
-      <a class="dataset-link" href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-11-10.md" target="_blank" rel="noopener">Latest status note</a>
+      <span class="dataset-badge"><strong>Reviewed</strong> 2026-11-13</span>
+      <span class="dataset-badge"><strong>Notes</strong> through 2026-11-13</span>
+      <a class="dataset-link" href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-11-13.md" target="_blank" rel="noopener">Latest status note</a>
       <a class="dataset-link" href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/scope.md" target="_blank" rel="noopener">Scope &amp; provenance</a>
       <a class="dataset-link" href="index.html">NPDM data</a>
     </div>
@@ -93,7 +93,7 @@
               <tr>
                 <th scope="row">23.5.0 (current)</th>
                 <td>Not publicly re-tested. Community staff report the FS bug used by the current FS/userland paths was patched; no public 23.5.0 support is known.</td>
-                <td>Official release on 2026-11-09; <a href="https://switchbrew.org/wiki/23.5.0" target="_blank" rel="noopener">SwitchBrew</a> lists <code>FS</code> among the rebuilt KIPs. Community staff posted on 2026-11-10 that the FS bug used by current public entry points was patched and advised staying on 23.0.1 or lower. This is a community report, not independently verified here. Treat the FS-based entry points as broken on 23.5.0 until tested; the save-based CivSwitch and Balatro paths are also untested.</td>
+                <td>Official release on 2026-11-09; <a href="https://switchbrew.org/wiki/23.5.0" target="_blank" rel="noopener">SwitchBrew</a> lists <code>FS</code> among the rebuilt KIPs. Community staff posted on 2026-11-10 that the FS bug used by current public entry points was patched and advised staying on 23.0.1 or lower. This is a community report, not independently verified here. Treat the FS-based entry points as broken on 23.5.0 until tested. One user report says an installed CivSwitch save trigger still starts its JavaScript loader on 23.5.0, but the FS escalation remains blocked; this is unverified. The save-based Balatro path is also untested.</td>
                 <td><span class="chip">Official release</span><br>2026-11-09<br><span class="chip">Community report</span><br>2026-11-10</td>
               </tr>
             </tbody>
@@ -104,9 +104,17 @@
           patched the FS bug used by the current public FS-based paths; no public
           tool has documented 23.5.0 support. That report is not independently
           verified here, but <strong>do not update if you want to keep the current
-          entry points</strong>. Stay on 23.0.1 or lower and offline. The
-          save-based CivSwitch and Balatro paths are separate, but their 23.5.0
-          compatibility is also untested.
+          entry points</strong>. Stay on 23.0.1 or lower and offline. One user
+          reports CivSwitch's JS side still runs on 23.5.0, but the FS escalation
+          remains blocked; Balatro's 23.5.0 compatibility is untested.
+        </p>
+        <p class="compat-note">
+          <strong>23.0.1 supernag report (2026-11-12):</strong> community staff
+          report multiple users are being forced to update before SmileBASIC 4
+          or Civilization VII will launch, and that Maintenance Mode does not
+          clear it. No Seedsow Lullaby reports had appeared. This is a community
+          report, not independently verified here. Stay offline and/or keep
+          90DNS active, disable IPv6, and do not test it online.
         </p>
       </section>
 
@@ -129,21 +137,21 @@
                 <th scope="row"><code>ns2jb</code></th>
                 <td>Tethered userland/fs exploit. The author reports native code as ordinary sysmodules, save backup, game modding, and MMIO access; the public package is an FS demo, not CFW or a full homebrew environment.</td>
                 <td>Full SmileBASIC 4.4.9 is the reference path; the game was delisted on 2026-10-22. A community fork (<a href="https://gitlab.com/BermTheSequel/ns2jb2" target="_blank" rel="noopener">ns2jb2</a>) supports the 4.4.6 demo with Ethernet and internal storage, but the demo cannot save programs and is less reliable. Ethernet, docked mode, and a cold boot are common reliability tips.</td>
-                <td><span class="badge badge-builtin">Public</span><br>but unreliable; stage 2/4 is the usual failure point.</td>
+                <td><span class="badge badge-builtin">Public</span><br>but unreliable; stage 2/4 is the usual failure point. On 23.0.1, community reports a forced update before SmileBASIC will launch; stay offline.</td>
                 <td><a href="https://pepsipu.com/blog/2026-10-switch2-jailbreak-ns2jb/" target="_blank" rel="noopener">Author write-up</a><br><span class="chip">Public release</span><br>2026-10-22</td>
               </tr>
               <tr>
                 <th scope="row"><code>CivSwitch</code></th>
                 <td>XSS toolchain for the Switch 1 edition of Civilization 7. A Pico HID macro types a chat payload; the console runs a JavaScript loader and can install a save-persistent trigger inside the game. Userland/JS only.</td>
                 <td>Physical Switch 1 edition of Civilization 7 at version 1.0.0. Digital, updated, reprint, and MIG/flashcart copies are not documented as supported. Pi Pico 2 (RP2350) recommended; Pico 1 is untested by the author. A PC runs the installer and payload sender. Author reports testing on Switch 2 20.4.0 and 23.0.1.</td>
-                <td><span class="badge badge-builtin">Public</span><br>userland/JS only; no FS, native code, kernel, CFW, or console persistence. It does not replace the Seedsow/Artemis FS path. Gezine stated on 2026-11-02 that the fs bug works from CivSwitch but needs porting; this is unverified and not a current FS path.</td>
+                <td><span class="badge badge-builtin">Public</span><br>base toolchain is userland/JS only; no FS, native code, kernel, CFW, or console persistence. It does not replace the Seedsow/Artemis FS path. One user reports the JS loader still runs after updating to 23.5.0, while the FS escalation remains blocked; unverified. Separate public CivSwitch FS ports exist for <strong>23.0.1 only</strong>, but are experimental and not 23.5.0 paths. On 23.0.1, community reports a forced update before Civ 7 will launch; stay offline.</td>
                 <td><a href="https://github.com/Gezine/CivSwitch" target="_blank" rel="noopener">Gezine/CivSwitch</a><br><span class="chip">Public release</span><br>2026-11-01</td>
               </tr>
               <tr>
                 <th scope="row">Artemis Engine<br><span class="muted">Seedsow / Nora launcher</span></th>
                 <td>Save-based path announced 2026-10-30. Alula's public launcher now supports the Nora 2, Seedsow, and Hamidashi Creative demos; it provides on-device Lua/native userland execution, an HTTP eval/save API, and fail-safe updates.</td>
                 <td>Route A: a homebrewed Switch 1 with JKSV and official save transfer; no SmileBASIC required. Route B: an ns2jb session plus <a href="https://github.com/dougchansan/ns2-savekit" target="_blank" rel="noopener">ns2-savekit</a>; the launcher README says this RPC route is not yet tested. The launcher supports demos only. A remote NSO Cloud transfer is user-reported and needs the full game on the target plus NSO.</td>
-                <td><span class="badge badge-builtin">Public launcher</span><br>save-persistent, semi-tethered; not an entry point. FS escalation is still unconfirmed and not public; full-game support is not available.</td>
+                <td><span class="badge badge-builtin">Public launcher</span><br>save-persistent, semi-tethered; not an entry point. Artemis FS implementations remain experimental; Alula warns they can lose the entry point. Full-game support is not available.</td>
                 <td><a href="https://github.com/alula/switch-artemis-launcher/releases/tag/v2" target="_blank" rel="noopener">Launcher v2</a><br><a href="https://github.com/DialingSpoon527/seedsow-lua-editor/releases/tag/v0.1.3" target="_blank" rel="noopener">Editor v0.1.3</a><br><a href="https://github.com/dougchansan/ns2-savekit" target="_blank" rel="noopener">ns2-savekit</a><br><span class="chip">Public release</span><br>2026-11-05</td>
               </tr>
               <tr>
@@ -250,12 +258,30 @@
               </tr>
               <tr>
                 <th scope="row"><code>mac2jb</code></th>
-                <td>All-in-one Apple Silicon macOS helper for <code>ns2jb</code> and CivSwitch, with MintBrew, SaveKit, and Artemis launcher installation.</td>
+                <td>All-in-one Apple Silicon macOS helper for <code>ns2jb</code>, CivSwitch, SaveKit, Artemis launcher, and modloader installation.</td>
                 <td>Apple Silicon Mac, macOS 14+, and an unsigned USB driver with reduced security/SIP changes; <code>ns2jb</code> with SmileBASIC full/demo, or a physical CivSwitch 1.0.0 cartridge.</td>
-                <td>Types the <code>ns2jb</code> bootstrap (full/demo) and CivSwitch payload; installs Seedsow/Nora Artemis launcher saves with backups; SaveKit, including accessible-save writes, Elden Ring PC <code>.sl2</code> conversion, upstream-compatible manifests, and verified backup requirements before deletion; CivSwitch Control Center (read-only save exports, controller input monitoring, JavaScript staging); MintBrew/HBLauncher/MintNES; OunceCake WebDAV; browser research scripts.</td>
-                <td>Not a standalone exploit; no FS, kernel, CFW, or console persistence; Mac-only. The CivSwitch flow does not expose <code>ns2jb</code>'s held RPC, and the Artemis RPC install path is still untested.</td>
-                <td>2026-11-03<br><span class="chip">Public release</span></td>
-                <td><a href="https://github.com/cpypwn/mac2jb/releases/tag/v0.7.3" target="_blank" rel="noopener">v0.7.3 release</a></td>
+                <td>Types the <code>ns2jb</code> bootstrap (full/demo) and CivSwitch payload; installs Seedsow/Nora Artemis launcher saves with backups; SaveKit, including accessible-save writes, Elden Ring PC <code>.sl2</code> conversion, upstream-compatible manifests, and verified backup requirements before deletion; CivSwitch Control Center; MintBrew/HBLauncher/MintNES; OunceCake WebDAV; browser research scripts. v0.8.2 adds CivHomebrew app browsing and Moonlight/SW2NES/Jellyfin installation, plus a CivSwitch FS path that the author reports reaching 4/4 for SaveKit/OunceCake/modloader.</td>
+                <td>Not a standalone exploit; no kernel, CFW, or console persistence; Mac-only. The CivSwitch FS path is experimental and 23.0.1-only. It does not bypass the 23.0.1 supernag. The CivSwitch flow does not expose <code>ns2jb</code>'s held RPC, and the Artemis RPC install path is still untested.</td>
+                <td>2026-11-12<br><span class="chip">Public release</span></td>
+                <td><a href="https://github.com/cpypwn/mac2jb/releases/tag/v0.8.2" target="_blank" rel="noopener">v0.8.2 release</a></td>
+              </tr>
+              <tr>
+                <th scope="row"><code>CivHomebrew</code></th>
+                <td>CivSwitch JavaScript app launcher with an FTP-installed <code>.civapp</code> library.</td>
+                <td>Physical Switch 1 Civilization VII 1.0.0 and a working CivSwitch loader; a PC on the same LAN for installation.</td>
+                <td>Browses and installs <code>.civapp</code> packages, keeps apps in save data, and launches Moonlight, SW2NES, and Jellyfin.</td>
+                <td>No <code>.nro</code> homebrew, FS, kernel, CFW, standalone entry point, or verified 23.5.0 support.</td>
+                <td>2026-11-13<br><span class="chip">Public release</span></td>
+                <td><a href="https://github.com/XITRIX/CivHomebrew" target="_blank" rel="noopener">XITRIX/CivHomebrew</a></td>
+              </tr>
+              <tr>
+                <th scope="row"><code>Moonlight-CivSwitch</code></th>
+                <td>Moonlight/Sunshine streaming client running as a CivHomebrew app inside Civ 7.</td>
+                <td>CivHomebrew, CivSwitch, the physical Switch 1 Civilization VII 1.0.0 cartridge, and Sunshine on a PC on the same network.</td>
+                <td>Pairs with Sunshine, lists and launches games, and streams H.264 video with stereo audio, controller/touch/keyboard input, and rumble; 1080p output and short 1080p60 streams are reported.</td>
+                <td>Not a native app outside Civ 7, native OS, FS, kernel, or CFW. Sustained 60 FPS is not qualified, and 23.5.0 is untested.</td>
+                <td>2026-11-10<br><span class="chip">Public release</span></td>
+                <td><a href="https://github.com/XITRIX/Moonlight-CivSwitch" target="_blank" rel="noopener">XITRIX/Moonlight-CivSwitch</a></td>
               </tr>
               <tr>
                 <th scope="row"><code>Ozone</code></th>
@@ -383,6 +409,21 @@
           unverified and still needs a port.
         </p>
         <p class="compat-note">
+          CivSwitch variants (2026-11-02 to 11-11): <code>CivSwitchLDN</code> changes
+          the delivery to local wireless and requires Linux, a physical
+          compatible cartridge, and the user's own <code>prod.keys</code>;
+          <code>CivSwitch-ControlCenter</code> is a controller interface over an
+          existing loader. Neither adds FS or a new entry point. A third-party
+          Gitee <code>civswitch-kit</code> packages CivSwitch with the existing
+          <code>ns2jb</code> FS chain for <strong>23.0.1 only</strong> and claims
+          FS read/write plus a firmware dump; it is unreleased, unverified here,
+          and not a 23.5.0 path. <code>HerXayah/civ7-fs</code> is another
+          23.0.1-only port with mixed 2/4 results, and
+          <code>OunceCake-Civ7</code> uses that FS path to dump a user's own game
+          content. These are unstable research tools, not a 23.5.0 FS or NPDM
+          source.
+        </p>
+        <p class="compat-note">
           SmileBASIC 4.4.9 was delisted from the eShop on 2026-10-22
           (<a href="https://www.nintendo.com/us/store/products/smilebasic-4-switch/" target="_blank" rel="noopener">store page</a>),
           so ns2jb is not a practical entry point for new users without an
@@ -399,10 +440,17 @@
           Hamidashi Creative demos. It fixes save commits, raises the HTTP
           request cap, and provides save-persistent userland Lua/native
           execution and an HTTP eval/save API. It is a semi-tethered launcher,
-          not an entry point or an FS chain. The FS escalation remains
-          unconfirmed and not public; full-game support is not available. 23.5.0
-          has not been publicly verified, and if it closes the 23.0.1 window,
-          another FS exploit is still needed to install the launcher save.
+          not an entry point or a stable FS chain. Artemis FS implementations
+          remain experimental; full-game support is not available. 23.5.0 has
+          not been publicly verified, and the current FS experiments are
+          23.0.1-only.
+        </p>
+        <p class="compat-note">
+          <strong>Alula warning (2026-11-12):</strong> do not use the current
+          Artemis-game FS exploit implementations yet. Corrupting the save or
+          especially the game can lose the entry point. Alula is working on a
+          safer implementation; the Artemis launcher itself is a separate
+          userland path. <a href="https://x.com/__alula/status/2120954659485475243" target="_blank" rel="noopener">Source</a>.
         </p>
         <p class="compat-note">
           Seedsow entry-point update (2026-10-30): the save-based path was
@@ -447,6 +495,8 @@
             <li>Community reports attribute at least two bricks to save-data/NAND experiments, not to ordinary dump runs. <strong>Do not write to NAND</strong>; treat save and NAND experiments as dangerous.</li>
             <li><code>ns2jb</code> heap grooming has been reported to overwrite more than the intended FS process permissions; one tester reported losing a SmileBASIC save.</li>
             <li>Artemis HTTP and Balatro RPC/FTP are unauthenticated and unencrypted. Keep them on a trusted LAN; do not expose them to the internet.</li>
+            <li>Experimental CivSwitch FS ports and Artemis FS implementations are unstable. A corrupt save or game can lose the entry point; back up first and do not use the current Artemis FS implementations until Alula's safer version is available.</li>
+            <li>Moonlight/CivHomebrew run inside Civ 7; this is not a native OS or CFW, and the 23.5.0 path is untested.</li>
             <li>No confirmed bans were reported in these windows, but bans can be delayed. Staying offline while jailbroken is the cautious choice.</li>
             <li>Community staff reported no confirmed Switch 2 emulators or recomps. Files or links claiming otherwise may be malware and should not be trusted or redistributed.</li>
           </ul>
@@ -476,15 +526,21 @@
           <li><a href="https://github.com/SebaaMG/ns2jb-modloader" target="_blank" rel="noopener">ns2jb-modloader</a></li>
           <li><a href="https://github.com/Luminger/balatro-switch-rce" target="_blank" rel="noopener">balatro-switch-rce</a></li>
           <li><a href="https://github.com/Gezine/CivSwitch" target="_blank" rel="noopener">CivSwitch public release</a></li>
+          <li><a href="https://github.com/ItsNerisma/CivSwitchLDN" target="_blank" rel="noopener">CivSwitchLDN</a></li>
+          <li><a href="https://github.com/MatthewKuKanich/CivSwitch-ControlCenter" target="_blank" rel="noopener">CivSwitch-ControlCenter</a></li>
+          <li><a href="https://github.com/XITRIX/CivHomebrew" target="_blank" rel="noopener">CivHomebrew</a></li>
+          <li><a href="https://github.com/XITRIX/Moonlight-CivSwitch" target="_blank" rel="noopener">Moonlight-CivSwitch</a></li>
+          <li><a href="https://gitee.com/mza1010/civswitch-kit" target="_blank" rel="noopener">civswitch-kit (Gitee)</a></li>
+          <li><a href="https://github.com/HerXayah/civ7-fs" target="_blank" rel="noopener">civ7-fs</a></li>
           <li><a href="https://github.com/alula/switch-artemis-launcher/releases/tag/v2" target="_blank" rel="noopener">switch-artemis-launcher v2</a></li>
           <li><a href="https://github.com/DialingSpoon527/seedsow-lua-editor/releases/tag/v0.1.3" target="_blank" rel="noopener">Seedsow Lua Editor v0.1.3 release</a></li>
-          <li>Status notes: <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-11-10.md" target="_blank" rel="noopener">2026-11-10</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-11-04.md" target="_blank" rel="noopener">2026-11-04</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-11-03.md" target="_blank" rel="noopener">2026-11-03</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-11-02.md" target="_blank" rel="noopener">2026-11-02</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-11-01.md" target="_blank" rel="noopener">2026-11-01</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-30.md" target="_blank" rel="noopener">2026-10-30</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-29.md" target="_blank" rel="noopener">2026-10-29</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-27.md" target="_blank" rel="noopener">2026-10-27</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-26.md" target="_blank" rel="noopener">2026-10-26</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-25.md" target="_blank" rel="noopener">2026-10-25</a></li>
+          <li>Status notes: <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-11-13.md" target="_blank" rel="noopener">2026-11-13</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-11-12.md" target="_blank" rel="noopener">2026-11-12</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-11-11.md" target="_blank" rel="noopener">2026-11-11</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-11-10.md" target="_blank" rel="noopener">2026-11-10</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-11-04.md" target="_blank" rel="noopener">2026-11-04</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-11-03.md" target="_blank" rel="noopener">2026-11-03</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-11-02.md" target="_blank" rel="noopener">2026-11-02</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-11-01.md" target="_blank" rel="noopener">2026-11-01</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-30.md" target="_blank" rel="noopener">2026-10-30</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-29.md" target="_blank" rel="noopener">2026-10-29</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-27.md" target="_blank" rel="noopener">2026-10-27</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-26.md" target="_blank" rel="noopener">2026-10-26</a>, <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/docs/status-2026-10-25.md" target="_blank" rel="noopener">2026-10-25</a></li>
         </ul>
       </section>
     </main>
 
     <footer class="footer">
-      <p><strong>Source:</strong> public community reports and releases through 2026-11-10. Claims are labelled; verify before relying on them.</p>
+      <p><strong>Source:</strong> public community reports and releases through 2026-11-13. Claims are labelled; verify before relying on them.</p>
       <p><strong>Dataset:</strong> this page does not change the NPDM data, which remains the 2026-10-24 snapshot. See <a href="https://github.com/tasenjo80/switch2-npdm-explorer/blob/master/DATA-PROVENANCE.md" target="_blank" rel="noopener">DATA-PROVENANCE.md</a>.</p>
       <p><strong>Corrections:</strong> use <a href="https://github.com/tasenjo80/switch2-npdm-explorer/discussions" target="_blank" rel="noopener">Discussions</a> or open an issue. Do not post keys, dumps, save data, or console identifiers. Not affiliated with Nintendo.</p>
     </footer>

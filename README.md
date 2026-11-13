@@ -117,8 +117,11 @@ python tools/diff_npdm.py `
 
 ## Research status
 
-Latest dated community notes (2026-11-10): [docs/status-2026-11-10.md](docs/status-2026-11-10.md).
-Earlier notes: [2026-11-04](docs/status-2026-11-04.md),
+Latest dated community notes (2026-11-13): [docs/status-2026-11-13.md](docs/status-2026-11-13.md).
+Earlier notes: [2026-11-12](docs/status-2026-11-12.md),
+[2026-11-11](docs/status-2026-11-11.md),
+[2026-11-10](docs/status-2026-11-10.md),
+[2026-11-04](docs/status-2026-11-04.md),
 [2026-11-03](docs/status-2026-11-03.md),
 [2026-11-02](docs/status-2026-11-02.md),
 [2026-11-01](docs/status-2026-11-01.md),
@@ -135,11 +138,17 @@ Stable compatibility and tooling page: <https://tasenjo80.github.io/switch2-npdm
   current public FS/userland paths and advise staying on **23.0.1 or lower**;
   this report is not independently verified here.
   The current FS-based entry points should be treated as broken on 23.5.0 until
-  tested. The save-based CivSwitch and Balatro paths do not use ns2jb's FS bug,
-  but their 23.5.0 compatibility is also untested. Do not update if keeping the
-  current entry points matters. Community analysis puts the WebKit applet
-  gate change at 21.0.0, with 20.5.0-and-lower consoles able to use the older
-  access method.
+  tested. One user reports CivSwitch's JS side still runs on 23.5.0, but the FS
+  escalation remains blocked; Balatro's 23.5.0 compatibility is untested. Do not
+  update if keeping the current entry points matters. Community analysis puts
+  the WebKit applet gate change at 21.0.0, with 20.5.0-and-lower consoles able
+  to use the older access method.
+- **23.0.1 supernag alert (2026-11-12):** community staff report multiple users
+  are forced to update before **SmileBASIC 4** or **Civilization VII** will
+  launch, and that Maintenance Mode does not clear it. No Seedsow Lullaby
+  reports had appeared. This is a community report, not independently verified
+  here. Stay offline and/or keep 90DNS active, disable IPv6 per network, and do
+  not test it online.
 - **ns2jb** requires full SmileBASIC 4.4.9, which was delisted from the eShop
   on 2026-10-22; existing owners are the practical audience. The author
   reports FS access, native code as ordinary sysmodules, save backup, game
@@ -159,21 +168,53 @@ Stable compatibility and tooling page: <https://tasenjo80.github.io/switch2-npdm
   or the Seedsow/Artemis FS path; if you already have one of those entry
   points, it adds no FS capability. Gezine stated on 2026-11-02 that the fs bug
   works from CivSwitch but needs porting; this is unverified and not a current
-  FS path.
-- [`mac2jb`](https://github.com/cpypwn/mac2jb) v0.7.3 was published on
-  2026-11-03 for Apple Silicon macOS. It adds CivSwitch typing/loader setup and
-  a CivSwitch Control Center, Artemis launcher saves for the Seedsow and Nora
-  demos, SaveKit with accessible-save writes, Elden Ring PC save conversion,
-  upstream-compatible manifests, and verified backup requirements before
-  deletion, native HBLauncher/MintNES, and browser research scripts. It is a
-  helper, not an exploit or CFW; the CivSwitch flow does not expose held RPC,
-  and the Artemis RPC install path is still untested.
+  FS path. A Reddit user reports an installed trigger still starts the JS loader
+  after updating to 23.5.0; the FS escalation remains blocked. This is a single
+  unverified report, not a reason to update. On 23.0.1, community reports a
+  forced update before Civ 7 will launch; stay offline.
+- **CivSwitch variants:** [`CivSwitchLDN`](https://github.com/ItsNerisma/CivSwitchLDN)
+  changes delivery to local wireless and requires Linux, a physical compatible
+  cartridge, and the user's own `prod.keys`;
+  [`CivSwitch-ControlCenter`](https://github.com/MatthewKuKanich/CivSwitch-ControlCenter)
+  is a controller interface over an existing loader. Neither adds FS or a new
+  entry point. A third-party Gitee
+  [`civswitch-kit`](https://gitee.com/mza1010/civswitch-kit) packages CivSwitch
+  with the existing `ns2jb` FS chain for **23.0.1 only** and claims FS read/write
+  plus a 90-title firmware dump; it is unreleased, unverified here, and not a
+  23.5.0 path.
+- [`mac2jb`](https://github.com/cpypwn/mac2jb) **v0.8.2** was published on
+  2026-11-12 for Apple Silicon macOS. It adds CivHomebrew app browsing and
+  installation for Moonlight, SW2NES, and Jellyfin, and documents a CivSwitch FS
+  path that the author reports reaching 4/4 for SaveKit, OunceCake, and
+  modloader. It retains the earlier typing/loader setup, modloader installation,
+  Control Center, Artemis launcher saves, SaveKit, and MintBrew/HBLauncher. It is
+  a helper, not an exploit or CFW; the FS path is experimental and 23.0.1-only,
+  and it does not bypass the 23.0.1 supernag.
+- **Moonlight and CivHomebrew:** [`Moonlight-CivSwitch`](https://github.com/XITRIX/Moonlight-CivSwitch)
+  **v0.1.3** is a public Moonlight/Sunshine streaming client running inside
+  CivSwitch through [`CivHomebrew`](https://github.com/XITRIX/CivHomebrew). It
+  needs the physical Switch 1 Civilization VII 1.0.0 cartridge, a working
+  CivSwitch loader, and Sunshine on a PC. It is a userland `.civapp`, not a
+  native app outside Civ 7, native OS, FS, or CFW. The author reports short
+  1080p60 streams; sustained 60 FPS is not qualified, and 23.5.0 is untested.
+  CivHomebrew installs `.civapp` packages over FTP and does not support `.nro`,
+  FS, or native homebrew.
+- **CivSwitch FS ports:** [`HerXayah/civ7-fs`](https://github.com/HerXayah/civ7-fs)
+  and the Gitee [`civswitch-kit`](https://gitee.com/mza1010/civswitch-kit) are
+  public **23.0.1-only** CivSwitch FS ports. `civ7-fs` claims a higher success
+  rate but public reports still fail at 2/4; `civswitch-kit` claims FS read/write
+  and a firmware dump. Neither is stable or a 23.5.0 path.
+  [`OunceCake-Civ7`](https://github.com/BlafKing/OunceCake-Civ7) dumps a user's
+  own game content through that FS path; it supplies no keys and no system NPDM
+  metadata. **Alula warns against current Artemis-game FS implementations**:
+  corrupting the save or game can lose the entry point, and a safer version is
+  in progress.
 - [`alula/Ozone`](https://github.com/alula/Ozone) and
   [`alula/libnx-ounce`](https://github.com/alula/libnx-ounce) are early,
   source-only groundwork for Switch 2 homebrew: Ozone ports selected Atmosphere
   components, and libnx-ounce is a native-homebrew library fork. Ozone's README
-  explicitly says it is **not a full CFW and likely never will be**. There is no
-  release, installer, persistence, or public FS chain.
+  explicitly says it is **not a full CFW and likely never will be**. Ozone itself
+  has no release, installer, persistence, or FS path.
 - **Seedsow/Artemis entry point** was announced on 2026-10-30. A modified
   Seedsow save can be installed from a homebrewed Switch 1 with JKSV and
   Nintendo's official save transfer, without SmileBASIC. An `ns2jb` session
@@ -185,11 +226,12 @@ Stable compatibility and tooling page: <https://tasenjo80.github.io/switch2-npdm
   request cap; it remains a save-persistent userland Lua/native launcher with an
   HTTP eval/save API. It is **semi-tethered**, supports demos only, and is **not
   an entry point or an FS chain**. The `ns2jb` RPC install route is not yet
-  tested. The FS escalation is **unconfirmed** and the FS bootstrap is **not
-  public**. A remote NSO Cloud transfer is user-reported and needs the full game
-  on the target plus NSO; the demo has no cloud save. Seedsow Lua Editor v0.1.3
-  remains the reference editor and targets 23.0.1 on both consoles; 23.5.0 has
-  not been publicly verified.
+  tested. Experimental Artemis FS implementations exist, but Alula warns that
+  they can corrupt the save or game and lose the entry point; a safer version is
+  in progress. A remote NSO Cloud transfer is user-reported and needs the full
+  game on the target plus NSO; the demo has no cloud save. Seedsow Lua Editor
+  v0.1.3 remains the reference editor and targets 23.0.1 on both consoles;
+  23.5.0 has not been publicly verified.
 - [`ns2-savekit`](https://github.com/dougchansan/ns2-savekit) received
   save-enumeration, title-name, and SD/game-card listing updates on 2026-10-31.
   On 2026-11-02 it added an Artemis HTTP transport for save access without an
