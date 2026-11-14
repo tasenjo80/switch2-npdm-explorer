@@ -117,8 +117,9 @@ python tools/diff_npdm.py `
 
 ## Research status
 
-Latest dated community notes (2026-11-13): [docs/status-2026-11-13.md](docs/status-2026-11-13.md).
-Earlier notes: [2026-11-12](docs/status-2026-11-12.md),
+Latest dated community notes (2026-11-14): [docs/status-2026-11-14.md](docs/status-2026-11-14.md).
+Earlier notes: [2026-11-13](docs/status-2026-11-13.md),
+[2026-11-12](docs/status-2026-11-12.md),
 [2026-11-11](docs/status-2026-11-11.md),
 [2026-11-10](docs/status-2026-11-10.md),
 [2026-11-04](docs/status-2026-11-04.md),
@@ -198,12 +199,25 @@ Stable compatibility and tooling page: <https://tasenjo80.github.io/switch2-npdm
   native app outside Civ 7, native OS, FS, or CFW. The author reports short
   1080p60 streams; sustained 60 FPS is not qualified, and 23.5.0 is untested.
   CivHomebrew installs `.civapp` packages over FTP and does not support `.nro`,
-  FS, or native homebrew.
+  FS, or native homebrew. kaiHEN now enables native homebrew, but no native
+  Moonlight release is public yet.
+- **kaiHEN (2026-11-14):** [`ouncebrew/kaihen`](https://github.com/ouncebrew/kaihen)
+  is a public homebrew enabler/minimal CFW with native hbmenu, a
+  libnx-compatible devkit, OpenGL/Vulkan support, JIT, OunceShell/FTP, and
+  native mGBA. It is **not a kernel exploit, full CFW, or emuNAND**: it gets the
+  access available to the `fs` modules, including system NAND, so brick risk is
+  real. It is 23.0.1-only, tethered, lost on restart, requires an SD card and a
+  native Switch 2 game opened with R held, and does not launch from Seedsow.
+  Launch routes are `ns2jb` or
+  [`s8n/civ7-fs-kaihen`](https://github.com/s8n/civ7-fs-kaihen) (physical Civ 7
+  1.0.0 + CivSwitch). Testers report full-speed native mGBA.
 - **CivSwitch FS ports:** [`HerXayah/civ7-fs`](https://github.com/HerXayah/civ7-fs)
   and the Gitee [`civswitch-kit`](https://gitee.com/mza1010/civswitch-kit) are
   public **23.0.1-only** CivSwitch FS ports. `civ7-fs` claims a higher success
   rate but public reports still fail at 2/4; `civswitch-kit` claims FS read/write
   and a firmware dump. Neither is stable or a 23.5.0 path.
+  [`s8n/civ7-fs-kaihen`](https://github.com/s8n/civ7-fs-kaihen) uses this path to
+  boot kaiHEN from Civ 7.
   [`OunceCake-Civ7`](https://github.com/BlafKing/OunceCake-Civ7) dumps a user's
   own game content through that FS path; it supplies no keys and no system NPDM
   metadata. **Alula warns against current Artemis-game FS implementations**:
