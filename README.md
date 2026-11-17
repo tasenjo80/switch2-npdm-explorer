@@ -117,8 +117,9 @@ python tools/diff_npdm.py `
 
 ## Research status
 
-Latest dated community notes (2026-11-14): [docs/status-2026-11-14.md](docs/status-2026-11-14.md).
-Earlier notes: [2026-11-13](docs/status-2026-11-13.md),
+Latest dated community notes (2026-11-17): [docs/status-2026-11-17.md](docs/status-2026-11-17.md).
+Earlier notes: [2026-11-14](docs/status-2026-11-14.md),
+[2026-11-13](docs/status-2026-11-13.md),
 [2026-11-12](docs/status-2026-11-12.md),
 [2026-11-11](docs/status-2026-11-11.md),
 [2026-11-10](docs/status-2026-11-10.md),
@@ -188,29 +189,38 @@ Stable compatibility and tooling page: <https://tasenjo80.github.io/switch2-npdm
   installation for Moonlight, SW2NES, and Jellyfin, and documents a CivSwitch FS
   path that the author reports reaching 4/4 for SaveKit, OunceCake, and
   modloader. It retains the earlier typing/loader setup, modloader installation,
-  Control Center, Artemis launcher saves, SaveKit, and MintBrew/HBLauncher. It is
+  Artemis launcher saves, SaveKit, and MintBrew/HBLauncher. It is
   a helper, not an exploit or CFW; the FS path is experimental and 23.0.1-only,
   and it does not bypass the 23.0.1 supernag.
 - **Moonlight and CivHomebrew:** [`Moonlight-CivSwitch`](https://github.com/XITRIX/Moonlight-CivSwitch)
-  **v0.1.3** is a public Moonlight/Sunshine streaming client running inside
-  CivSwitch through [`CivHomebrew`](https://github.com/XITRIX/CivHomebrew). It
-  needs the physical Switch 1 Civilization VII 1.0.0 cartridge, a working
-  CivSwitch loader, and Sunshine on a PC. It is a userland `.civapp`, not a
-  native app outside Civ 7, native OS, FS, or CFW. The author reports short
-  1080p60 streams; sustained 60 FPS is not qualified, and 23.5.0 is untested.
-  CivHomebrew installs `.civapp` packages over FTP and does not support `.nro`,
-  FS, or native homebrew. kaiHEN now enables native homebrew, but no native
-  Moonlight release is public yet.
-- **kaiHEN (2026-11-14):** [`ouncebrew/kaihen`](https://github.com/ouncebrew/kaihen)
-  is a public homebrew enabler/minimal CFW with native hbmenu, a
+  **v0.1.4** is a public Moonlight/Sunshine streaming client running inside
+  CivSwitch through [`CivHomebrew`](https://github.com/XITRIX/CivHomebrew)
+  **v1.3.8**. It needs the physical Switch 1 Civilization VII 1.0.0 cartridge,
+  a working CivSwitch loader, and Sunshine on a PC. It is a userland
+  `.civapp`, not a native app outside Civ 7, native OS, FS, or CFW. The author
+  reports short 1080p60 streams; sustained 60 FPS is not qualified, and 23.5.0
+  is untested. CivHomebrew installs `.civapp` packages over FTP and does not
+  support `.nro`, FS, or native homebrew. kaiHEN now enables native homebrew,
+  but no native Moonlight release is public yet.
+- **kaiHEN (2026-11-17):** [`ouncebrew/kaihen`](https://github.com/ouncebrew/kaihen)
+  **20261117.1** is a public homebrew enabler/minimal CFW with native hbmenu, a
   libnx-compatible devkit, OpenGL/Vulkan support, JIT, OunceShell/FTP, and
-  native mGBA. It is **not a kernel exploit, full CFW, or emuNAND**: it gets the
-  access available to the `fs` modules, including system NAND, so brick risk is
-  real. It is 23.0.1-only, tethered, lost on restart, requires an SD card and a
-  native Switch 2 game opened with R held, and does not launch from Seedsow.
-  Launch routes are `ns2jb` or
-  [`s8n/civ7-fs-kaihen`](https://github.com/s8n/civ7-fs-kaihen) (physical Civ 7
-  1.0.0 + CivSwitch). Testers report full-speed native mGBA.
+  native mGBA, plus ports such as Sphaira and KaiPlayer. It is **not a kernel
+  exploit, full CFW, or emuNAND**: it gets the access available to the `fs`
+  modules, including system NAND, so brick risk is real. It is 23.0.1-only,
+  tethered, lost on restart, requires an SD card and a native Switch 2 game
+  opened with R held, and does not launch from Seedsow directly. Launch routes
+  are `ns2jb`, [`s8n/civ7-fs-kaihen`](https://github.com/s8n/civ7-fs-kaihen)
+  (physical Civ 7 1.0.0 + CivSwitch), or
+  [`Malev0/seedsow-fs-kaihen`](https://github.com/Malev0/seedsow-fs-kaihen) with
+  alula's Seedsow launcher save.
+- **Seedsow FS (2026-11-17):** [`Malev0/seedsow-fs-kaihen`](https://github.com/Malev0/seedsow-fs-kaihen)
+  is a public, PC-driven **23.0.1-only** FS port that boots kaiHEN from a
+  Seedsow Lullaby demo/full save. It requires alula's launcher save, an SD
+  card, a controller bridge, and a native Switch 2 game for hbmenu. The demo
+  alone is not enough; it cannot create an entry from nothing. It is a race,
+  can wedge, and Alula's warning against current Artemis FS implementations
+  still applies. There is no 23.5.0 support.
 - **CivSwitch FS ports:** [`HerXayah/civ7-fs`](https://github.com/HerXayah/civ7-fs)
   and the Gitee [`civswitch-kit`](https://gitee.com/mza1010/civswitch-kit) are
   public **23.0.1-only** CivSwitch FS ports. `civ7-fs` claims a higher success
@@ -252,8 +262,8 @@ Stable compatibility and tooling page: <https://tasenjo80.github.io/switch2-npdm
   `ns2jb` session: unauthenticated port 8080, LAN-only, limited to the
   launcher's own save, and explicit-file backups rather than a complete restore.
   It remains a save tool, not an entry point or FS path.
-- [`ns2jb-modloader`](https://github.com/SebaaMG/ns2jb-modloader) is a public
-  RomFS/ExeFS mod loader for Switch 1 and Switch 2 games. It needs an existing
+- [`ns2jb-modloader`](https://github.com/SebaaMG/ns2jb-modloader) **v0.3.5** is
+  a public RomFS/ExeFS mod loader for Switch 1 and Switch 2 games. It needs an existing
   `ns2jb`-compatible FS/RPC session and a microSD or microSD Express card;
   regular microSD is tested, while microSD Express still needs hardware testing.
   It loads RomFS/ExeFS replacements and IPS patches, stays active until reboot,
